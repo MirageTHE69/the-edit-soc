@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Edit Society — Landing page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Human-edited reels, shorts and YouTube videos for creators, brands and agencies. Delivered in 48–72 hours at a flat price per video.">
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0B0C}
+a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
+*{box-sizing:border-box}
+.disp{font-family:'Inter Tight',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-0.045em}
+.sans{font-family:'Inter Tight',sans-serif;letter-spacing:-0.03em}
+.serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;letter-spacing:-0.01em;text-transform:none}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.045;background-image:url(./assets/d62b53dfdf56072f71b27a215dbd355c.png);mix-blend-mode:overlay}
+.spin{animation:spin 24s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.marq{display:flex;width:max-content;animation:marq 38s linear infinite}
+@keyframes marq{to{transform:translateX(-50%)}}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 18px;border-radius:999px;font:500 13px/1 Inter,sans-serif;color:#C9C7C2;border:1px solid transparent;transition:border-color .3s,color .3s,background .3s}
+.pill:hover{border-color:#2C2C31;color:#FFFFFF}
+.pill.on{border-color:#34343A;color:#FFFFFF;background:#141416}
+.btn{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 10px 0 24px;border-radius:999px;font:500 15px/1 Inter,sans-serif;color:#0B0B0C;background:#F2F0EC;transition:transform .3s,background .3s}
+.btn:hover{color:#0B0B0C;background:#FFFFFF;transform:translateY(-2px)}
+.btn .dot{width:34px;height:34px;border-radius:50%;background:#0B0B0C;color:#F2F0EC;display:grid;place-items:center;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.btn:hover .dot{transform:rotate(-45deg)}
+.btn2{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;font:500 15px/1 Inter,sans-serif;color:#F2F0EC;border:1px solid #2C2C31;transition:border-color .3s,background .3s}
+.btn2:hover{border-color:#F2F0EC;background:#F2F0EC0D}
+.btn2 .dot{width:34px;height:34px;margin-right:-14px;border-radius:50%;border:1px solid #34343A;display:grid;place-items:center;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.btn2:hover .dot{transform:rotate(-45deg)}
+.glass{background:linear-gradient(180deg,#161618,#0F0F10);border:1px solid #222226;box-shadow:inset 0 1px 0 #FFFFFF0A}
+.media{position:relative;overflow:hidden}
+.media img{transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
+.media:hover img{transform:scale(1.05)}
+.ghostplay{opacity:0;transform:scale(.7);transition:all .5s cubic-bezier(.2,.8,.2,1)}
+.media:hover .ghostplay{opacity:1;transform:none}
+.tile{transition:transform .5s cubic-bezier(.2,.8,.2,1),filter .5s}
+.tile:hover{transform:scale(1.04);filter:brightness(1.12)}
+.ulink{display:inline-flex;align-items:center;gap:12px;font:500 17px Inter,sans-serif;color:#F2F0EC;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1px}
+.ulink .dot{width:34px;height:34px;border-radius:50%;background:#F2F0EC;color:#0B0B0C;display:grid;place-items:center;transition:transform .4s}
+.ulink:hover .dot{transform:translateX(4px)}
+.arrow{width:48px;height:48px;border-radius:50%;border:1px solid #34343A;background:transparent;color:#F2F0EC;display:grid;place-items:center;cursor:pointer;transition:background .3s,color .3s}
+.arrow:hover{background:#F2F0EC;color:#0B0B0C}
+.track{transition:transform 1s cubic-bezier(.7,0,.2,1)}
+.fadein{animation:fadein .7s ease both}
+@keyframes fadein{from{opacity:0;transform:translateY(10px)}}
+.rise{animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{transform:translateY(105%)}}
+.pulse{animation:pulse 2.4s ease-in-out infinite}
+.sealdraw{animation:sealdraw 1.4s cubic-bezier(.65,0,.35,1) .05s forwards}
+@keyframes sealdraw{to{stroke-dashoffset:0}}
+@keyframes pulse{50%{opacity:.35}}
+.glowc{animation:glowc 6s ease-in-out infinite alternate}
+@keyframes glowc{to{opacity:.55;transform:scale(1.15)}}
+@supports (animation-timeline: view()) {
+  .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% entry 85%}
+  @keyframes rv{from{opacity:0;transform:translateY(60px);filter:blur(8px)}}
+  .rv2{animation:rv linear both;animation-timeline:view();animation-range:entry 20% entry 100%}
+  .up{display:inline-block;animation:up linear both;animation-timeline:view();animation-range:entry 25% entry 100%}
+  @keyframes up{from{transform:translateY(110%)}}
+  .heroout{animation:heroout linear both;animation-timeline:view();animation-range:exit 0% exit 90%}
+  @keyframes heroout{to{transform:scale(.9);opacity:.35;border-radius:44px}}
+  .titlepar{animation:titlepar linear both;animation-timeline:view();animation-range:exit 0% exit 100%}
+  @keyframes titlepar{to{transform:translateY(-140px);opacity:0}}
+  .par{animation:par linear both;animation-timeline:view()}
+  @keyframes par{from{transform:translateY(-6%) scale(1.14)}to{transform:translateY(6%) scale(1.14)}}
+  .scalein{animation:scalein linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
+  @keyframes scalein{from{transform:scale(.86);opacity:.2}}
+  .introp{view-timeline-name:--intro}
+  .wd{animation:wd linear both;animation-timeline:--intro}
+  @keyframes wd{from{color:#2E2E33}}
+  .wallsec{view-timeline-name:--wall}
+  .rowl{animation:rowl linear both;animation-timeline:--wall}
+  @keyframes rowl{from{transform:translateX(4%)}to{transform:translateX(-14%)}}
+  .rowr{animation:rowr linear both;animation-timeline:--wall}
+  @keyframes rowr{from{transform:translateX(-16%)}to{transform:translateX(2%)}}
+  .ctaline{animation:ctaline linear both;animation-timeline:view();animation-range:entry 10% cover 45%}
+  .fanl{animation:fanl linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
+  @keyframes fanl{from{transform:translateX(-140px) translateY(80px) rotate(-7deg) scale(.88);opacity:0}}
+  .fanr{animation:fanr linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
+  @keyframes fanr{from{transform:translateX(140px) translateY(80px) rotate(7deg) scale(.88);opacity:0}}
+  .fanc{animation:fanc linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
+  @keyframes fanc{from{transform:translateY(160px) scale(.9);opacity:0}}
+  .bigline{animation:bigline linear both;animation-timeline:view();animation-range:cover 0% cover 100%}
+  @keyframes bigline{from{transform:translateX(30vw)}to{transform:translateX(calc(-100% + 40vw))}}
+  .cliprev{animation:cliprev linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
+  @keyframes cliprev{from{clip-path:inset(12% 22% 12% 22% round 48px);transform:scale(.96)}to{clip-path:inset(0 0 0 0 round 0px)}}
+  .tilt{animation:tilt linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
+  @keyframes tilt{from{transform:perspective(1400px) rotateX(32deg) translateY(140px) scale(.94);opacity:0}}
+  .d1{animation-range:entry 10% cover 46%}
+  .d2{animation-range:entry 20% cover 52%}
+  .numslide{animation:numslide linear both;animation-timeline:view();animation-range:entry 20% cover 45%}
+  @keyframes numslide{from{transform:translateX(-80px);opacity:0}}
+  .statsin{animation:statsin linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
+  @keyframes statsin{from{transform:scale(.88);opacity:0;border-radius:80px}}
+  .sealscroll{animation:sealscroll linear both;animation-timeline:view()}
+  @keyframes sealscroll{from{transform:rotate(-200deg) scale(.7)}to{transform:rotate(120deg) scale(1)}}
+  @keyframes ctaline{from{transform:translateX(12%);opacity:0}}
+}
+@media (max-width:860px){.navlinks{display:none !important}.hidesm{display:none !important}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+<div style="position: relative; background: #0B0B0C; color: #F2F0EC; font-family: Inter, sans-serif; font-size: 17px; line-height: 1.6; overflow-x: clip">
+<div class="grain" aria-hidden="true"></div>
+
+<sc-if value="{{showSplash}}" hint-placeholder-val="{{ false }}">
+<div aria-label="Intro" style="position: fixed; inset: 0; z-index: 100; overflow: hidden; pointer-events: auto">
+<div style="{{spBg}}"></div>
+<div style="{{spBrand}}">
+<div style="position: relative; width: 120px; height: 120px">
+<svg class="spin" viewBox="0 0 120 120" width="120" height="120" aria-hidden="true" style="position: absolute; inset: 0"><defs><path id="ringS" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"></path></defs><circle class="sealdraw" cx="60" cy="60" r="59" fill="none" stroke="#3A3A40" stroke-dasharray="371" stroke-dashoffset="371"></circle><text class="fadein" style="animation-delay: .4s" font-family="Inter" font-size="8.6" fill="#8C8A86" letter-spacing="2.6"><textPath href="#ringS">A MEMBERS’ CLUB FOR GREAT EDITS · EST. 2026 ·</textPath></text></svg>
+<span class="serif fadein" style="animation-delay: .25s; position: absolute; inset: 0; display: grid; place-items: center; font-size: 38px; color: #F2F0EC">tes</span>
+</div>
+<div style="display: flex; gap: .25em; font-size: clamp(44px, 5.6vw, 88px); line-height: 1.05">
+<span style="overflow: hidden; display: inline-block; padding-bottom: .08em"><span class="sans rise" style="display: inline-block; font-weight: 600; animation-delay: .1s">The</span></span>
+<span style="overflow: hidden; display: inline-block; padding-bottom: .08em"><span class="serif rise" style="display: inline-block; animation-delay: .2s">Edit</span></span>
+<span style="overflow: hidden; display: inline-block; padding-bottom: .08em"><span class="sans rise" style="display: inline-block; font-weight: 600; animation-delay: .3s">Society</span></span>
+</div>
+<span class="fadein" style="animation-delay: .7s; font-size: 13px; color: #8C8A86; letter-spacing: .14em; text-transform: uppercase">Join the cut</span>
+</div>
+<div style="{{spFrame}}">
+<img src="{{spImg}}" alt="" style="{{spImgStyle}}">
+<div style="{{spShade}}"></div>
+</div>
+<div style="{{spHud}}">
+<span style="font-size: 13px; color: #6E6C68">A Marca Creatives studio</span>
+<span class="sans" style="font-size: 56px; font-weight: 500; line-height: 1; color: #F2F0EC; font-variant-numeric: tabular-nums">{{pct}}</span>
+</div>
+<div style="{{spLineWrap}}"><div style="{{spLine}}"></div></div>
+<button type="button" onClick="{{skip}}" style="{{spSkip}}">Skip intro</button>
+</div>
+</sc-if>
+
+<header style="{{navStyle}}">
+<nav aria-label="Main" style="max-width: 1440px; margin: 0 auto; padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px">
+<a href="#top" style="font-size: 24px; line-height: 1; white-space: nowrap"><span class="sans" style="font-weight: 600">the</span><span class="serif" style="font-size: 27px"> edit </span><span class="sans" style="font-weight: 600">society</span></a>
+<div class="navlinks" style="display: flex; gap: 2px; padding: 4px; border-radius: 999px">
+<a class="pill on" href="#top">Home</a>
+<a class="pill" href="#work">Work</a>
+<a class="pill" href="#services">Services</a>
+<a class="pill" href="#pricing">Memberships</a>
+<a class="pill" href="#faq">FAQ</a>
+</div>
+<a class="pill" href="#book" style="border-color: #34343A; color: #F2F0EC">Book a call</a>
+</nav>
+</header>
+
+<section id="top" style="padding: 8px 20px 0">
+<div class="heroout media" ref="{{heroRef}}" style="position: relative; max-width: 1600px; margin: 0 auto; height: min(88vh, 900px); min-height: 560px; border-radius: 28px; overflow: hidden; background: #000">
+<img src="./assets/a1e3b07bbda96993863432f2eccfa315.jpg" alt="Showreel still — replace with looping showreel video" style="{{heroImg}}">
+<div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, #0B0B0C33, #0B0B0CB3 80%)"></div>
+<div class="titlepar" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 28px; padding: 0 24px">
+<span class="pill" style="{{heroPill}}">Video editing for creators</span>
+<h1 class="disp" style="margin: 0; font-size: clamp(56px, 9vw, 156px); line-height: .86; color: #FFFFFF"><span style="display: block; overflow: hidden; padding-bottom: .04em"><span style="{{heroL1}}">The Edit Society<sup style="font-size: .3em; vertical-align: top; position: relative; top: .25em; margin-left: .05em">®</sup></span></span><span style="display: block; overflow: hidden; padding-bottom: .06em"><span style="{{heroL2}}">We cut <span class="serif" style="font-size: 1.08em; letter-spacing: -.02em">scroll-stoppers</span></span></span></h1>
+</div>
+<div style="{{heroFoot}}">
+<span style="display: flex; align-items: center; gap: 10px"><span style="width: 7px; height: 7px; border-radius: 50%; background: #F2F0EC"></span>Reels · Shorts · YouTube</span>
+<span class="hidesm">Delivered in 48–72 hrs</span>
+<span style="display: flex; align-items: center; gap: 10px">Scroll<span style="width: 7px; height: 7px; border-radius: 50%; background: #F2F0EC"></span></span>
+</div>
+</div>
+</section>
+
+<section aria-label="About" style="padding: 200px 40px 160px">
+<div style="max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px">
+<p class="{{introCls}}" style="margin: 0; font-size: clamp(30px, 3.4vw, 52px); font-weight: 300; line-height: 1.18; letter-spacing: -.025em; color: #F2F0EC">
+<sc-for list="{{introWords}}" as="w" hint-placeholder-count="40"><span class="{{w.cls}}" style="{{w.style}}">{{w.t}} </span></sc-for>
+</p>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap">
+<span style="font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #6E6C68; max-width: 260px; line-height: 1.5">Human editors · Flat price per video · Based in India, editing worldwide</span>
+<a class="ulink rv" href="#book">Book a free call <span class="dot" aria-hidden="true">→</span></a>
+</div>
+</div>
+</section>
+
+<section aria-label="Highlights" style="padding: 0 20px">
+<div style="max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 14px">
+<div class="media fanl" style="aspect-ratio: 4 / 5; border-radius: 22px; background: #141416">
+<img class="par" src="./assets/c0a00075517f2d379025e986b90f3617.jpg" alt="Creator reel — replace with video" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<span style="position: absolute; left: 20px; bottom: 18px; font-size: 13px; color: #E8E6E1">Lifestyle reel · 0:42</span>
+</div>
+<div class="glass fanc" style="aspect-ratio: 4 / 5; border-radius: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; padding: 32px; position: relative; overflow: hidden">
+<div aria-hidden="true" class="glowc" style="position: absolute; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, #FF5A1F24, transparent); opacity: .9"></div>
+<h2 class="disp" style="position: relative; margin: 0; font-size: clamp(38px, 3.6vw, 58px); line-height: .9">Edits that<br><span class="serif" style="font-size: 1.1em">keep them</span><br>watching</h2>
+<span style="position: relative; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #6E6C68">The Edit Society</span>
+</div>
+<div class="media fanr" style="aspect-ratio: 4 / 5; border-radius: 22px; background: #141416">
+<img class="par" src="./assets/af56380b5550d32bc75f27aaca7c6a6d.jpg" alt="Podcast clip — replace with video" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<span style="position: absolute; left: 20px; bottom: 18px; font-size: 13px; color: #E8E6E1">Podcast clip · 0:58</span>
+</div>
+</div>
+</section>
+
+<section aria-label="Services list" style="padding: 40px 0 0; overflow: hidden">
+<div style="border-top: 1px solid #1A1A1D; border-bottom: 1px solid #1A1A1D; padding: 22px 0; overflow: hidden">
+<div class="marq" style="gap: 36px; align-items: center">
+<sc-for list="{{marq}}" as="m" hint-placeholder-count="16"><span class="disp" style="font-size: 18px; letter-spacing: -.01em; white-space: nowrap">{{m}}</span><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: #FF5A1F; flex-shrink: 0"></span></sc-for>
+</div>
+</div>
+</section>
+
+<section aria-hidden="true" style="padding: 180px 0 0; overflow: hidden">
+<div class="bigline" style="display: flex; gap: 56px; width: max-content; white-space: nowrap; align-items: center; font-size: clamp(90px, 13vw, 220px); line-height: 1">
+<span class="disp">Raw footage in</span><span class="serif" style="color: #FF5A1F">—</span><span class="serif" style="color: #4A4A50">scroll-stopping edits out</span><span class="serif" style="color: #FF5A1F">—</span><span class="disp">in 72 hours</span>
+</div>
+</section>
+
+<section id="work" style="padding: 160px 40px 80px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap">
+<h2 class="disp" style="margin: 0; font-size: clamp(48px, 6vw, 96px); line-height: .88"><span style="display: block; overflow: hidden"><span class="up">A creative</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif" style="font-size: 1.08em">editing</span> studio</span></span></h2>
+<div style="display: flex; align-items: center; gap: 16px">
+<span class="sans" style="font-size: 15px; color: #8C8A86; font-variant-numeric: tabular-nums">{{slideNo}} / 05</span>
+<button type="button" class="arrow" onClick="{{prev}}" aria-label="Previous project"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<button type="button" class="arrow" onClick="{{next}}" aria-label="Next project"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
+<div class="cliprev" style="position: relative">
+<div class="track" style="{{trackStyle}}">
+<sc-for list="{{slides}}" as="s" hint-placeholder-count="5">
+<a href="#work" style="flex: 0 0 86%; display: flex; flex-direction: column; gap: 20px; color: #F2F0EC">
+<div class="media" style="aspect-ratio: 16 / 9; border-radius: 24px; background: #141416">
+<img src="{{s.img}}" alt="{{s.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<div class="ghostplay" style="position: absolute; top: 50%; left: 50%; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; background: #F2F0EC; color: #0B0B0C; display: grid; place-items: center; font-size: 13px; font-weight: 600">Play</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px">
+<span class="sans" style="font-size: 26px; font-weight: 600">{{s.title}}</span>
+<span style="font-size: 14px; color: #8C8A86">{{s.client}} — {{s.cat}}</span>
+</div>
+</a>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="wall-h" class="{{wallCls}}" style="padding: 160px 0 180px; overflow: hidden">
+<div style="max-width: 900px; margin: 0 auto 80px; padding: 0 40px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px">
+<span class="pill rv" style="border-color: #2C2C31">The reel wall</span>
+<h2 id="wall-h" class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Cut by <span class="serif">the best</span></span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif">editors</span> in the game</span></span></h2>
+<p class="rv" style="margin: 0; max-width: 460px; color: #8C8A86">Every tile here is a real edit we’ve shipped — reels, shorts, ads and podcast moments.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent)">
+<sc-for list="{{wall}}" as="row" hint-placeholder-count="3">
+<div class="{{row.cls}}" style="display: flex; gap: 14px; width: max-content; margin-left: -120px">
+<sc-for list="{{row.tiles}}" as="tl" hint-placeholder-count="10">
+<div class="tile" style="position: relative; width: 210px; height: 210px; flex-shrink: 0; border-radius: 20px; overflow: hidden; background: #141416">
+<img src="{{tl.img}}" alt="" style="{{tl.style}}">
+</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section id="services" style="padding: 80px 40px 200px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 72px">
+<div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px">
+<span class="pill rv" style="border-color: #2C2C31">Services</span>
+<h2 class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">One team, <span class="serif">every</span></span></span><span style="display: block; overflow: hidden"><span class="up">format you post</span></span></h2>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 16px; align-items: stretch">
+<sc-for list="{{svc}}" as="s" hint-placeholder-count="3">
+<div class="{{s.cls}}" style="{{s.card}}">
+<div aria-hidden="true" style="{{s.glow}}"></div>
+<div style="position: relative; display: flex; gap: 8px; flex-wrap: wrap">
+<sc-for list="{{s.chips}}" as="c" hint-placeholder-count="3"><span style="min-height: 32px; padding: 0 12px; display: inline-flex; align-items: center; border-radius: 999px; border: 1px solid #2C2C31; font-size: 12px; color: #C9C7C2">{{c}}</span></sc-for>
+</div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 6px; text-align: center; align-items: center; padding: 18px 0 6px">
+<span class="serif" style="font-size: 18px; color: #8C8A86">{{s.kicker}}</span>
+<h3 class="sans" style="margin: 0; font-size: 34px; font-weight: 600">{{s.title}}</h3>
+<p style="margin: 0; font-size: 15px; color: #8C8A86; max-width: 300px">{{s.desc}}</p>
+</div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 10px; margin-top: auto">
+<sc-for list="{{s.items}}" as="i" hint-placeholder-count="5"><span style="display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid #1E1E21; font-size: 15px; color: #C9C7C2">{{i}}<span aria-hidden="true" style="color: #4A4A50">↗</span></span></sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="process" style="padding: 0 40px 200px">
+<div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 64px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<span class="pill rv" style="align-self: flex-start; border-color: #2C2C31">How it works</span>
+<h2 class="disp" style="margin: 0; font-size: clamp(44px, 4.8vw, 76px); line-height: .9"><span style="display: block; overflow: hidden"><span class="up">Upload.</span></span><span style="display: block; overflow: hidden"><span class="up">Brief.</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif" style="font-size: 1.1em">Approve.</span></span></span></h2>
+</div>
+<sc-for list="{{steps}}" as="st" hint-placeholder-count="3">
+<div class="{{st.cls}}" style="display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 1px solid #1E1E21">
+<span class="serif numslide" style="display: inline-block; font-size: 64px; line-height: 1; color: #FF5A1F">{{st.n}}</span>
+<h3 class="sans" style="margin: 0; font-size: 28px; font-weight: 600">{{st.t}}</h3>
+<p style="margin: 0; color: #8C8A86; font-size: 16px">{{st.d}}</p>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section aria-label="Numbers" ref="{{statsRef}}" style="padding: 0 20px">
+<div class="glass statsin" style="max-width: 1600px; margin: 0 auto; border-radius: 28px; padding: 72px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 40px; text-align: center">
+<sc-for list="{{stats}}" as="s" hint-placeholder-count="4">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span class="sans" style="font-size: clamp(56px, 5.6vw, 92px); font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums">{{s.n}}<span class="serif" style="color: #FF5A1F">{{s.suf}}</span></span>
+<span style="font-size: 14px; color: #8C8A86">{{s.label}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section id="pricing" style="padding: 200px 40px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px">
+<div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px">
+<span class="pill rv" style="border-color: #2C2C31">Memberships</span>
+<h2 class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Flat price. <span class="serif">Per video.</span></span></span></h2>
+<p class="rv" style="margin: 0; color: #8C8A86">No hourly billing. Pause or cancel anytime.</p>
+<div role="tablist" aria-label="Pack size" class="rv" style="display: flex; padding: 4px; border-radius: 999px; border: 1px solid #222226; background: #111113">
+<sc-for list="{{packs}}" as="p" hint-placeholder-count="2"><button type="button" role="tab" aria-selected="{{p.sel}}" onClick="{{p.pick}}" style="{{p.style}}">{{p.label}}</button></sc-for>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 16px; align-items: stretch">
+<sc-for list="{{plans}}" as="pl" hint-placeholder-count="3">
+<div class="{{pl.cls}}" style="{{pl.card}}">
+<div aria-hidden="true" style="{{pl.glow}}"></div>
+<div style="position: relative; display: flex; justify-content: space-between; align-items: center">
+<span class="sans" style="font-size: 20px; font-weight: 600">{{pl.name}}</span>
+<sc-if value="{{pl.pop}}" hint-placeholder-val="{{ false }}"><span style="min-height: 30px; padding: 0 12px; display: inline-flex; align-items: center; border-radius: 999px; background: #F2F0EC; color: #0B0B0C; font-size: 12px; font-weight: 500">Most popular</span></sc-if>
+</div>
+<span style="position: relative; font-size: 15px; color: #8C8A86">{{pl.for}}</span>
+<div style="position: relative; display: flex; align-items: baseline; gap: 8px; padding: 10px 0"><span class="serif" style="font-size: 20px; color: #8C8A86">{{pl.pre}}</span><span class="sans" style="font-size: 64px; font-weight: 500; line-height: 1">{{pl.price}}</span><span style="color: #6E6C68; font-size: 15px">{{pl.unit}}</span></div>
+<div style="position: relative; display: flex; flex-direction: column">
+<sc-for list="{{pl.items}}" as="i" hint-placeholder-count="5"><span style="padding: 11px 0; border-top: 1px solid #1E1E21; font-size: 15px; color: #C9C7C2">{{i}}</span></sc-for>
+</div>
+<a class="{{pl.btnCls}}" href="#book" style="position: relative; margin-top: auto; justify-content: space-between">{{pl.cta}}<span class="dot" aria-hidden="true">→</span></a>
+</div>
+</sc-for>
+</div>
+<p style="margin: 0; text-align: center; font-size: 13px; color: #6E6C68">Up to 90 sec per video · one active request at a time · 2 revision rounds · prices excl. GST</p>
+</div>
+</section>
+
+<section aria-labelledby="tst-h" style="padding: 0 40px 200px">
+<div style="max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 40px">
+<span class="pill rv" style="border-color: #2C2C31">Members say</span>
+<h2 id="tst-h" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Testimonials</h2>
+<sc-for list="{{qOne}}" as="q" hint-placeholder-count="1">
+<figure class="fadein" style="margin: 0; display: flex; flex-direction: column; align-items: center; gap: 36px">
+<blockquote class="sans" style="margin: 0; font-size: clamp(30px, 3.4vw, 50px); font-weight: 400; line-height: 1.15">“{{q.a}}<span class="serif">{{q.b}}</span>{{q.c}}”</blockquote>
+<figcaption style="display: flex; align-items: center; gap: 14px">
+<div style="{{q.av}}"></div>
+<div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.35"><span style="font-weight: 500">{{q.name}}</span><span style="font-size: 13px; color: #8C8A86">{{q.role}}</span></div>
+</figcaption>
+</figure>
+</sc-for>
+<div style="display: flex; align-items: center; gap: 14px">
+<button type="button" class="arrow" onClick="{{qPrev}}" aria-label="Previous testimonial"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<div style="display: flex; gap: 6px"><sc-for list="{{qDots}}" as="d" hint-placeholder-count="3"><span style="{{d}}"></span></sc-for></div>
+<button type="button" class="arrow" onClick="{{qNext}}" aria-label="Next testimonial"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+<span style="font-size: 11px; color: #3E3E44">Sample copy — replace with real client reviews</span>
+</div>
+</section>
+
+<section id="faq" style="padding: 0 40px 200px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 80px">
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 22px">
+<span class="pill rv" style="align-self: flex-start; border-color: #2C2C31">FAQ</span>
+<h2 class="sans" style="margin: 0; font-size: clamp(44px, 4.6vw, 72px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Before</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif">you join</span></span></span></h2>
+</div>
+<div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column">
+<sc-for list="{{faqs}}" as="f" hint-placeholder-count="8">
+<div class="rv2" style="border-bottom: 1px solid #1E1E21">
+<button type="button" onClick="{{f.toggle}}" aria-expanded="{{f.open}}" style="width: 100%; min-height: 80px; display: flex; justify-content: space-between; align-items: center; gap: 24px; background: none; border: 0; color: #F2F0EC; text-align: left; cursor: pointer; padding: 22px 0; font: 400 20px/1.35 Inter, sans-serif">
+<span>{{f.q}}</span>
+<span aria-hidden="true" style="{{f.iconStyle}}">+</span>
+</button>
+<sc-if value="{{f.open}}" hint-placeholder-val="{{ false }}"><p class="fadein" style="margin: 0 0 28px; max-width: 600px; color: #8C8A86; font-size: 16px">{{f.a}}</p></sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="book" style="padding: 40px 40px 120px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 64px">
+<div style="display: flex; flex-direction: column; gap: 40px">
+<span style="font-size: 17px"><span class="serif" style="color: #8C8A86">(tes)</span>  Contact us</span>
+<div class="sealscroll" style="position: relative; width: 170px; height: 170px">
+<svg class="spin" viewBox="0 0 120 120" width="170" height="170" aria-hidden="true" style="position: absolute; inset: 0"><defs><path id="ringC" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"></path></defs><circle cx="60" cy="60" r="59" fill="none" stroke="#26262A"></circle><text font-family="Inter" font-size="8.4" fill="#6E6C68" letter-spacing="2.6"><textPath href="#ringC">EDITORS’ CLUB · JOIN THE CUT · EST. 2026 ·</textPath></text></svg>
+<span class="serif" style="position: absolute; inset: 0; display: grid; place-items: center; font-size: 48px">tes</span>
+</div>
+</div>
+<div class="ctaline" style="display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 10px">
+<span class="sans" style="font-size: clamp(28px, 2.6vw, 40px); font-weight: 400; color: #6E6C68">Let’s start</span>
+<h2 style="margin: 0; font-size: clamp(64px, 8vw, 128px); line-height: .95"><span class="sans" style="font-weight: 500">Join the</span><br><span class="serif">Society</span></h2>
+<div style="display: flex; gap: 28px; align-items: center; margin-top: 24px; flex-wrap: wrap; justify-content: flex-end">
+<a class="ulink" href="#book" style="color: #8C8A86">WhatsApp us</a>
+<a class="ulink" href="#book">Book a call <span class="dot" aria-hidden="true">→</span></a>
+</div>
+</div>
+</div>
+</section>
+
+<footer style="padding: 0 40px 40px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid #1E1E21; font-size: 12px; color: #6E6C68"><span>• Human-edited</span><span>• Editing worldwide</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<div class="glass rv2" style="flex: 999 1 560px; position: relative; overflow: hidden; border-radius: 24px; padding: 32px; min-height: 340px; display: flex; flex-direction: column; justify-content: space-between; gap: 32px">
+<span aria-hidden="true" class="serif" style="position: absolute; right: -10px; bottom: -80px; font-size: 360px; line-height: 1; color: #FFFFFF07">tes</span>
+<div style="position: relative; display: flex; flex-direction: column; gap: 12px">
+<span style="font-size: 30px; line-height: 1"><span class="sans" style="font-weight: 600">the</span><span class="serif" style="font-size: 33px"> edit </span><span class="sans" style="font-weight: 600">society</span></span>
+<p style="margin: 0; max-width: 340px; font-size: 14px; color: #8C8A86">We edit for <span style="color: #F2F0EC">creators</span>, brands and agencies who post every week. A <span style="color: #F2F0EC">Marca Creatives</span> studio.</p>
+</div>
+<div style="position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap">
+<span style="font-size: 12px; color: #6E6C68">The Edit Society © 2026. All rights reserved.</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; max-width: 380px">
+<a class="pill" href="#work" style="border-color: #2C2C31; min-height: 34px">Work</a>
+<a class="pill" href="#services" style="border-color: #2C2C31; min-height: 34px">Services</a>
+<a class="pill" href="#pricing" style="border-color: #2C2C31; min-height: 34px">Memberships</a>
+<a class="pill" href="#faq" style="border-color: #2C2C31; min-height: 34px">FAQ</a>
+<a class="pill" href="#book" style="border-color: #2C2C31; min-height: 34px">Editors — join us</a>
+<a class="pill" href="#book" style="border-color: #2C2C31; min-height: 34px">Privacy</a>
+</div>
+</div>
+</div>
+<div class="glass rv2 d2" style="flex: 1 1 320px; border-radius: 24px; padding: 32px; min-height: 340px; display: flex; flex-direction: column; justify-content: space-between; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<span class="sans" style="font-size: 22px; font-weight: 500; line-height: 1.2">Follow the<br>Society</span>
+<div style="display: flex; gap: 8px">
+<a href="#book" aria-label="Instagram" style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid #2C2C31; display: grid; place-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle></svg></a>
+<a href="#book" aria-label="YouTube" style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid #2C2C31; display: grid; place-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"></rect><path d="M10 9l5 3-5 3z"></path></svg></a>
+<a href="#book" aria-label="LinkedIn" style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid #2C2C31; display: grid; place-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 10v7"></path></svg></a>
+<a href="#book" aria-label="WhatsApp" style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid #2C2C31; display: grid; place-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"></path></svg></a>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<label for="nl" style="font-size: 13px; color: #C9C7C2">Monthly editing tips for creators</label>
+<div style="display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 16px; border-radius: 999px; border: 1px solid #2C2C31">
+<input id="nl" type="email" placeholder="Your email" style="flex: 1; min-width: 0; min-height: 36px; background: none; border: 0; outline: none; color: #F2F0EC; font: 400 14px Inter, sans-serif">
+<button type="button" aria-label="Subscribe" style="width: 36px; height: 36px; border-radius: 50%; border: 0; background: #F2F0EC; color: #0B0B0C; cursor: pointer">→</button>
+</div>
+<span style="font-size: 11px; color: #6E6C68">By subscribing you accept our <a href="#book" style="text-decoration: underline">Privacy Policy</a></span>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"splash":{"editor":"boolean","default":true,"section":"Intro"},"$preview":{"width":1440,"height":11500}}'>
+class Component extends DCLogic {
+  state = { phase: 0, pct: 0, mi: 0, heroIn: false, slide: 0, pack: '4', open: 0, q: 0, statsP: 0, onCanvas: false, vw: 1440, vh: 900, hr: null };
+
+  componentDidMount() {
+    const onCanvas = window.innerHeight > 2200;
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.timers = [];
+    if (onCanvas || this.props.splash === false || reduce) {
+      this.setState({ phase: 5, onCanvas, heroIn: true });
+    } else {
+      this.runSplash();
+    }
+    this.qTimer = setInterval(() => this.setState({ q: (this.state.q + 1) % 3 }), 7000);
+    if (this.statsEl && 'IntersectionObserver' in window && !onCanvas) {
+      this.io = new IntersectionObserver((es) => {
+        if (es[0].isIntersecting) { this.io.disconnect(); this.countStats(); }
+      }, { threshold: 0.3 });
+      this.io.observe(this.statsEl);
+    } else { this.setState({ statsP: 1 }); }
+  }
+  componentWillUnmount() {
+    clearInterval(this.pctTimer); clearInterval(this.qTimer); clearInterval(this.cutTimer);
+    (this.timers || []).forEach(clearTimeout);
+    if (this.io) this.io.disconnect();
+    document.documentElement.style.overflow = '';
+  }
+  at(ms, fn) { this.timers.push(setTimeout(fn, ms)); }
+  measure() {
+    const vw = window.innerWidth, vh = window.innerHeight;
+    let hr = { t: 76, l: 20, w: vw - 40, h: Math.min(vh * 0.88, 900) };
+    if (this.heroEl) { const r = this.heroEl.getBoundingClientRect(); hr = { t: r.top, l: r.left, w: r.width, h: r.height }; }
+    this.setState({ vw, vh, hr });
+  }
+  runSplash() {
+    window.scrollTo(0, 0);
+    document.documentElement.style.overflow = 'hidden';
+    this.measure();
+    this.at(120, () => {
+      this.setState({ phase: 1 });
+      this.pctTimer = setInterval(() => {
+        const pct = Math.min(100, this.state.pct + 1);
+        this.setState({ pct });
+        if (pct >= 100) clearInterval(this.pctTimer);
+      }, 17);
+    });
+    this.at(1950, () => {
+      this.measure();
+      this.setState({ phase: 2, mi: 0 });
+      this.cutTimer = setInterval(() => {
+        const mi = this.state.mi + 1;
+        this.setState({ mi });
+        if (mi >= 5) clearInterval(this.cutTimer);
+      }, 170);
+    });
+    this.at(2950, () => this.toHero());
+  }
+  toHero() {
+    clearInterval(this.pctTimer); clearInterval(this.cutTimer);
+    (this.timers || []).forEach(clearTimeout);
+    this.timers = [];
+    this.measure();
+    this.setState({ phase: 3, pct: 100, mi: 5 });
+    this.at(1280, () => this.setState({ phase: 4 }));
+    this.at(1330, () => this.setState({ heroIn: true }));
+    this.at(1750, () => {
+      this.setState({ phase: 5 });
+      document.documentElement.style.overflow = '';
+    });
+  }
+  endSplash() { this.toHero(); }
+  countStats() {
+    const t0 = performance.now(), D = 1800;
+    const step = (now) => {
+      const p = Math.min(1, (now - t0) / D);
+      this.setState({ statsP: 1 - Math.pow(1 - p, 3) });
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  renderVals() {
+    const ph = this.state.phase;
+    const ease = 'cubic-bezier(.76,0,.24,1)';
+    const onCanvas = this.state.onCanvas;
+
+    const vw = this.state.vw, vh = this.state.vh;
+    const hr = this.state.hr || { t: 76, l: 20, w: vw - 40, h: Math.min(vh * 0.88, 900) };
+    const fw = 260, fh = 340;
+    const small = 'inset(' + ((vh - fh) / 2) + 'px ' + ((vw - fw) / 2) + 'px ' + ((vh - fh) / 2) + 'px ' + ((vw - fw) / 2) + 'px round 16px)';
+    const big = 'inset(' + hr.t + 'px ' + (vw - hr.l - hr.w) + 'px ' + (vh - hr.t - hr.h) + 'px ' + hr.l + 'px round 28px)';
+    const spBg = 'position:absolute;inset:0;background:#070708;transition:opacity .9s ease .35s;opacity:' + (ph >= 3 ? 0 : 1);
+    const spBrand = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;transition:opacity .5s ease,transform .9s ' + ease + ',filter .6s;opacity:' + (ph === 1 ? 1 : 0) + ';transform:' + (ph >= 2 ? 'translateY(-60px) scale(.96)' : 'none') + ';filter:' + (ph >= 2 ? 'blur(8px)' : 'none');
+    const spFrame = 'position:absolute;inset:0;transition:clip-path 1.25s ' + ease + ',opacity .3s;opacity:' + (ph >= 2 && ph < 4 ? 1 : 0) + ';clip-path:' + (ph >= 3 ? big : small);
+    const MONT = ['./assets/c0a00075517f2d379025e986b90f3617.jpg', './assets/af56380b5550d32bc75f27aaca7c6a6d.jpg', './assets/22de4cc7dd2e04eaccafc1de95c66d76.jpg', './assets/b2e77fe76b4df7efdf97520cdc701c4a.jpg', './assets/7c39ec92c982887e66872db35fb27540.jpg', './assets/a1e3b07bbda96993863432f2eccfa315.jpg'];
+    const spImg = MONT[Math.min(5, this.state.mi)];
+    const spImgStyle = 'position:absolute;top:' + hr.t + 'px;left:' + hr.l + 'px;width:' + hr.w + 'px;height:' + hr.h + 'px;object-fit:cover;filter:saturate(1.15);transition:transform 1.25s ' + ease + ';transform:' + (ph >= 3 ? 'scale(1)' : 'scale(1.18)');
+    const spShade = 'position:absolute;top:' + hr.t + 'px;left:' + hr.l + 'px;width:' + hr.w + 'px;height:' + hr.h + 'px;background:radial-gradient(ellipse at 50% 60%, #0B0B0C33, #0B0B0CB3 80%)';
+    const spHud = 'position:absolute;left:56px;right:56px;bottom:56px;display:flex;justify-content:space-between;align-items:flex-end;transition:opacity .5s;opacity:' + (ph === 1 || ph === 2 ? 1 : 0);
+    const spLineWrap = 'position:absolute;left:56px;right:56px;bottom:40px;height:1px;background:#1E1E21;transition:opacity .5s;opacity:' + (ph === 1 || ph === 2 ? 1 : 0);
+    const spLine = 'height:100%;background:#F2F0EC;transform-origin:0 50%;transform:scaleX(' + (this.state.pct / 100) + ')';
+    const spSkip = 'position:absolute;right:48px;top:36px;min-height:44px;padding:0 8px;border:0;background:none;color:#6E6C68;font:400 14px Inter,sans-serif;cursor:pointer;text-decoration:underline;text-underline-offset:5px;transition:opacity .4s;opacity:' + (ph >= 3 ? 0 : 1);
+    const hi = this.state.heroIn;
+    const rise = (d) => 'display:inline-block;transition:transform 1.1s ' + ease + ' ' + d + 's,opacity .8s ease ' + d + 's;transform:' + (hi ? 'none' : 'translateY(110%) rotate(2deg)') + ';opacity:' + (hi ? 1 : 0);
+    const heroL1 = rise(0), heroL2 = rise(0.12);
+    const heroPill = 'border-color:#FFFFFF33;color:#F2F0EC;background:#0B0B0C40;backdrop-filter:blur(10px);transition:opacity .8s ease .3s,transform .8s ' + ease + ' .3s;opacity:' + (hi ? 1 : 0) + ';transform:' + (hi ? 'none' : 'translateY(16px)');
+    const heroFoot = 'position:absolute;left:28px;right:28px;bottom:26px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#D9D7D2;transition:opacity .8s ease .5s;opacity:' + (hi ? 1 : 0);
+    const heroImg = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.15)';
+    const navStyle = 'position:sticky;top:0;z-index:30;background:linear-gradient(#0B0B0CF2,#0B0B0C00);transition:opacity .8s ease .2s,transform .8s ' + ease + ' .2s;opacity:' + (hi ? 1 : 0) + ';transform:' + (hi ? 'none' : 'translateY(-16px)');
+
+    const INTRO = 'We edit reels, shorts and YouTube videos for creators who post every week — cut for retention, captioned, colour-graded and delivered in 48–72 hours. One flat price per video. No chasing freelancers, no missed upload days.';
+    const iw = INTRO.split(' ');
+    const introWords = iw.map((t, i) => {
+      const s = 8 + (i / iw.length) * 52;
+      return { t, cls: onCanvas ? '' : 'wd', style: onCanvas ? '' : 'animation-range:cover ' + s.toFixed(1) + '% cover ' + (s + 6).toFixed(1) + '%' };
+    });
+
+    const marq = ['Reels', 'Shorts', 'YouTube', 'Podcast clips', 'Ads', 'Motion', 'Thumbnails', 'Brand films', 'Reels', 'Shorts', 'YouTube', 'Podcast clips', 'Ads', 'Motion', 'Thumbnails', 'Brand films'];
+
+    const R1 = './assets/c0a00075517f2d379025e986b90f3617.jpg', R2 = './assets/22de4cc7dd2e04eaccafc1de95c66d76.jpg', R3 = './assets/537c5a2e97149b489e00bb566b4c588f.jpg', R4 = './assets/1572f795cfc989fbd8410e553b0c0ad2.jpg';
+    const YT = './assets/b2e77fe76b4df7efdf97520cdc701c4a.jpg', POD = './assets/af56380b5550d32bc75f27aaca7c6a6d.jpg', AD = './assets/7c39ec92c982887e66872db35fb27540.jpg', MO = './assets/278b9e09a0f96ef8ec9a1699404fa158.jpg', AFTER = './assets/a1e3b07bbda96993863432f2eccfa315.jpg';
+
+    const SL = [
+      { img: YT, title: 'Why I quit my 9–5', client: 'Finance YouTuber', cat: 'Long-form' },
+      { img: MO, title: 'App launch explainer', client: 'SaaS startup', cat: 'Motion' },
+      { img: POD, title: 'Ep. 41 — the best 60 seconds', client: 'Founder podcast', cat: 'Podcast' },
+      { img: AFTER, title: 'Golden hour, graded', client: 'Travel creator', cat: 'Colour' },
+      { img: './assets/975a9032e3bf8ab57ddcbb94b316725e.jpg', title: 'Behind the cut', client: 'The Edit Society', cat: 'Showreel' }
+    ];
+    const slide = this.state.slide;
+    const trackStyle = 'display:flex;gap:2%;transform:translateX(-' + (slide * 88) + '%)';
+
+    const pool = [R1, R2, R3, R4, AD, YT, POD, MO, AFTER];
+    const wall = [0, 1, 2].map((r) => ({
+      cls: onCanvas ? '' : (r % 2 ? 'rowr' : 'rowl'),
+      tiles: Array.from({ length: 11 }, (_, i) => {
+        const k = (i * 4 + r * 3) % pool.length;
+        const hue = ((i * 37 + r * 71) % 60) - 30;
+        return { img: pool[k], style: 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:' + ((i * 23 + r * 41) % 100) + '% ' + ((i * 31 + r * 17) % 100) + '%;transform:scale(' + (1.3 + (i % 3) * 0.25) + ');filter:hue-rotate(' + hue + 'deg) saturate(1.2)' };
+      })
+    }));
+    const wallCls = onCanvas ? '' : 'wallsec';
+
+    const glowOn = 'position:absolute;left:50%;top:-30%;width:120%;aspect-ratio:1;margin-left:-60%;border-radius:50%;background:radial-gradient(closest-side,#FF5A1F2E,transparent);pointer-events:none';
+    const glowOff = 'display:none';
+    const cardBase = 'position:relative;overflow:hidden;border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:18px;min-height:560px;';
+    const svc = [
+      { kicker: 'for', title: 'Creators', desc: 'Hook-first edits people actually finish.', chips: ['9:16', '16:9', 'Captions'], items: ['Instagram Reels', 'YouTube Shorts', 'Long-form YouTube', 'Podcast clips', 'Thumbnails'] },
+      { kicker: 'for', title: 'Brands', desc: 'On-brand content every week, without the in-house team.', chips: ['Ads', 'Launch', 'Motion'], items: ['Product launch films', 'E-commerce ads', 'Explainers', 'Motion graphics', 'Monthly social batch'], hot: 1 },
+      { kicker: 'for', title: 'Agencies', desc: 'Your brand, our editors, zero credit.', chips: ['White-label', 'Bulk'], items: ['Creative ad variants', 'Corporate videos', 'Bulk content', 'White-label delivery', 'Dedicated editor pod'] }
+    ].map((s, i) => ({ ...s, cls: 'glass tilt' + (i ? ' d' + i : ''), card: cardBase + (s.hot ? 'border-color:#34343A;' : ''), glow: s.hot ? glowOn : glowOff }));
+
+    const steps = [
+      { n: '01', t: 'Pick a plan', d: 'Choose a 4- or 12-video membership and get onboarded on a quick call.' },
+      { n: '02', t: 'Share footage + brief', d: 'Drop a Drive link, two reference videos and your fonts. That’s it.' },
+      { n: '03', t: 'Review & post', d: 'Your edit lands in 48–72 hours. Two revision rounds, then hit publish.' }
+    ].map((st, i) => ({ ...st, cls: 'rv2' + (i ? ' d' + i : '') }));
+
+    const sp = this.state.statsP;
+    const stats = [
+      { n: Math.round(10000 * sp).toLocaleString('en-IN'), suf: '+', label: 'videos delivered' },
+      { n: String(Math.round(96 * sp)), suf: '%', label: 'client satisfaction' },
+      { n: String(Math.round(100 * sp)), suf: '+', label: 'creators & brands' },
+      { n: String(Math.round(48 * sp)), suf: 'hr', label: 'average turnaround' }
+    ];
+
+    const p12 = this.state.pack === '12';
+    const packs = [['4', '4-pack'], ['12', '12-pack · save 15%']].map(([k, label]) => {
+      const sel = this.state.pack === k;
+      return { label, sel, pick: () => this.setState({ pack: k }), style: 'min-height:42px;padding:0 22px;border-radius:999px;border:0;cursor:pointer;font:500 14px Inter,sans-serif;transition:all .3s;background:' + (sel ? '#F2F0EC' : 'transparent') + ';color:' + (sel ? '#0B0B0C' : '#8C8A86') };
+    });
+    const plans = [
+      { name: 'Simple', for: 'Clean social reels', pre: '', price: p12 ? '₹[2,099]' : '₹[2,499]', unit: '/ video', items: ['Cuts, pacing & hooks', 'Captions + music', 'Basic colour', '2 revisions · 48–72 hrs'], cta: 'Become a member', btnCls: 'btn2' },
+      { name: 'Complex', for: 'Talking-head & retention edits', pre: '', price: p12 ? '₹[3,399]' : '₹[3,999]', unit: '/ video', items: ['Everything in Simple', 'Motion graphics & zooms', 'Sound design & SFX', 'Story restructure', 'Dedicated project manager'], cta: 'Become a member', btnCls: 'btn', pop: true },
+      { name: 'Premium', for: 'Brand & launch campaigns', pre: 'from', price: '₹[24,999]', unit: '/ campaign', items: ['Full campaign, multi-format', 'Scripting & hook support', 'Advanced motion titles', 'Priority queue'], cta: 'Talk to us', btnCls: 'btn2' }
+    ].map((p, i) => ({ ...p, cls: 'glass tilt' + (i ? ' d' + i : ''), card: cardBase + 'min-height:600px;' + (p.pop ? 'border-color:#34343A;' : ''), glow: p.pop ? glowOn : glowOff }));
+
+    const TS = [
+      { a: 'I used to lose my Sundays to editing. Now I film on Saturday and ', b: 'post all week', c: '.', name: '[Client name]', role: 'Lifestyle creator', av: 'width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#FF5A1F,#6B3FD6)' },
+      { a: 'They nailed our caption style on the first edit. ', b: 'Zero back-and-forth', c: ' after week one.', name: '[Client name]', role: 'Finance YouTuber', av: 'width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#3BA58C,#141416)' },
+      { a: 'Our podcast clips finally look like ', b: 'the big shows', c: ' — and watch time went way up.', name: '[Client name]', role: 'Founder, podcast host', av: 'width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#E8E6E1,#6E6C68)' }
+    ];
+    const qi = this.state.q;
+    const qDots = TS.map((_, i) => 'display:block;height:6px;border-radius:6px;transition:all .4s;width:' + (i === qi ? '26px' : '6px') + ';background:' + (i === qi ? '#F2F0EC' : '#34343A'));
+
+    const FQ = [
+      ['How do I share footage?', 'Drop a Google Drive, Dropbox or WeTransfer link. Raw phone footage is totally fine.'],
+      ['How many revisions do I get?', 'Two full revision rounds per video, with timestamped notes.'],
+      ['What if I don’t like the edit?', 'Tell us why and we re-cut it. If the first edit misses badly, a senior editor takes over.'],
+      ['Can you match my existing style?', 'Yes. Send 2–3 videos you love plus your fonts and colours — we build a style guide every editor follows.'],
+      ['Is my footage secure / under NDA?', 'Yes. We sign NDAs on request and only your assigned editors can access your files.'],
+      ['What’s the max video length?', 'Memberships cover up to 90 seconds per video. Long-form YouTube is quoted separately.'],
+      ['Do you offer white-label for agencies?', 'Yes — your branding on deliverables, a dedicated editor pod, and no Edit Society credit anywhere.'],
+      ['Can I pause or cancel my plan?', 'Anytime. Unused videos roll over for 30 days.']
+    ];
+    const faqs = FQ.map(([q, ans], i) => {
+      const open = this.state.open === i;
+      return { q, a: ans, open, toggle: () => this.setState({ open: open ? -1 : i }), iconStyle: 'flex-shrink:0;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:22px;font-weight:300;transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s,color .3s;' + (open ? 'transform:rotate(45deg);background:#F2F0EC;color:#0B0B0C' : 'border:1px solid #2C2C31;color:#F2F0EC') };
+    });
+
+    return {
+      showSplash: ph < 5, spBg, spBrand, spFrame, spImg, spImgStyle, spShade, spHud, spLineWrap, spLine, spSkip, pct: String(this.state.pct).padStart(2, '0'),
+      heroL1, heroL2, heroPill, heroFoot, heroImg, navStyle, heroRef: (el) => { this.heroEl = el; },
+      skip: () => this.endSplash(),
+      introCls: onCanvas ? '' : 'introp', introWords, marq,
+      slides: SL, trackStyle, slideNo: String(slide + 1).padStart(2, '0'),
+      prev: () => this.setState({ slide: (slide + 4) % 5 }),
+      next: () => this.setState({ slide: (slide + 1) % 5 }),
+      wall, wallCls, svc, steps,
+      statsRef: (el) => { this.statsEl = el; }, stats, packs, plans,
+      qOne: [TS[qi]], qDots,
+      qPrev: () => { clearInterval(this.qTimer); this.setState({ q: (qi + 2) % 3 }); },
+      qNext: () => { clearInterval(this.qTimer); this.setState({ q: (qi + 1) % 3 }); },
+      faqs
+    };
+  }
+}
+</script>
+</body>
+</html>
