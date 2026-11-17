@@ -119,6 +119,12 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 .wend .wmedia video{filter:brightness(.4) saturate(.9)}
 .wend .btn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap}
 .wend:hover .btn{transform:translate(-50%,calc(-50% - 2px))}
+.dot svg{display:block}
+/* Footer cards sit at the very end of the page, where scroll-linked reveals can't finish: show them plainly. */
+footer .rv2{animation:none !important}
+/* Background videos: never show native controls / the iOS "play" overlay. */
+video{pointer-events:none;-webkit-touch-callout:none}
+video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit-media-controls-overlay-play-button,video::-webkit-media-controls-start-playback-button{display:none !important;-webkit-appearance:none;opacity:0}
 @media (max-width:860px){.navlinks{display:none !important}.hidesm{display:none !important}}
 @media (max-width:700px){
   .navpad{padding:14px 20px !important}
@@ -141,7 +147,15 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
   .m-faq button{font-size:17px !important;min-height:64px !important;padding:18px 0 !important}
   .m-book{padding:20px 20px 90px !important}
   .m-foot{padding:0 20px 24px !important}
-  .m-foot .glass{padding:24px !important;min-height:0 !important}
+  .m-foot .glass{padding:24px !important;min-height:0 !important;gap:28px !important}
+  .m-foot .glass > span.serif{font-size:220px !important;bottom:-50px !important}
+  .fpills{justify-content:flex-start !important;max-width:none !important}
+  .m-book > div{gap:40px !important}
+  .ctaline{align-items:flex-start !important;text-align:left !important}
+  .ctarow{justify-content:flex-start !important;gap:22px !important}
+  .seal{width:120px !important;height:120px !important}
+  .seal svg{width:120px;height:120px}
+  .seal > span{font-size:36px !important}
   .pricerow{flex-wrap:wrap}
   .pricerow .sans{font-size:52px !important}
   .whead{padding:0 20px;flex-wrap:wrap}
@@ -228,7 +242,7 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 </p>
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap">
 <span style="font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #6E6C68; max-width: 260px; line-height: 1.5">Human editors · Flat price per video · Based in India, editing worldwide</span>
-<a class="ulink rv" href="#book">Book a free call <span class="dot" aria-hidden="true">→</span></a>
+<a class="ulink rv" href="#book">Book a free call <span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
 </div>
 </div>
 </section>
@@ -287,7 +301,7 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 <a class="wcard wend" href="{{workUrl}}">
 <div class="media wmedia">
 <video src="./assets/video/behind.mp4" poster="./assets/video/behind.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video>
-<span class="btn">See our work <span class="dot" aria-hidden="true">→</span></span>
+<span class="btn">See our work <span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></span>
 </div>
 <div class="wmeta"><b>More edits, every week</b><span>Reels · Shorts · YouTube</span></div>
 </a>
@@ -333,7 +347,7 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 <p style="margin: 0; font-size: 15px; color: #8C8A86; max-width: 300px">{{s.desc}}</p>
 </div>
 <div style="position: relative; display: flex; flex-direction: column; gap: 10px; margin-top: auto">
-<sc-for list="{{s.items}}" as="i" hint-placeholder-count="5"><span style="display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid #1E1E21; font-size: 15px; color: #C9C7C2">{{i}}<span aria-hidden="true" style="color: #4A4A50">↗</span></span></sc-for>
+<sc-for list="{{s.items}}" as="i" hint-placeholder-count="5"><span style="display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid #1E1E21; font-size: 15px; color: #C9C7C2">{{i}}<span aria-hidden="true" style="color: #4A4A50; display: inline-grid; place-items: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></span></sc-for>
 </div>
 </div>
 </sc-for>
@@ -391,7 +405,7 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 <div style="position: relative; display: flex; flex-direction: column">
 <sc-for list="{{pl.items}}" as="i" hint-placeholder-count="5"><span style="padding: 11px 0; border-top: 1px solid #1E1E21; font-size: 15px; color: #C9C7C2">{{i}}</span></sc-for>
 </div>
-<a class="{{pl.btnCls}}" href="#book" style="position: relative; margin-top: auto; justify-content: space-between">{{pl.cta}}<span class="dot" aria-hidden="true">→</span></a>
+<a class="{{pl.btnCls}}" href="#book" style="position: relative; margin-top: auto; justify-content: space-between">{{pl.cta}}<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
 </div>
 </sc-for>
 </div>
@@ -445,7 +459,7 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 <div style="max-width: 1240px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 64px">
 <div style="display: flex; flex-direction: column; gap: 40px">
 <span style="font-size: 17px"><span class="serif" style="color: #8C8A86">(tes)</span>  Contact us</span>
-<div class="sealscroll" style="position: relative; width: 170px; height: 170px">
+<div class="sealscroll seal" style="position: relative; width: 170px; height: 170px">
 <svg class="spin" viewBox="0 0 120 120" width="170" height="170" aria-hidden="true" style="position: absolute; inset: 0"><defs><path id="ringC" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"></path></defs><circle cx="60" cy="60" r="59" fill="none" stroke="#26262A"></circle><text font-family="Inter" font-size="8.4" fill="#6E6C68" letter-spacing="2.6"><textPath href="#ringC">EDITORS’ CLUB · JOIN THE CUT · EST. 2026 ·</textPath></text></svg>
 <span class="serif" style="position: absolute; inset: 0; display: grid; place-items: center; font-size: 48px">tes</span>
 </div>
@@ -453,9 +467,9 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 <div class="ctaline" style="display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 10px">
 <span class="sans" style="font-size: clamp(28px, 2.6vw, 40px); font-weight: 400; color: #6E6C68">Let’s start</span>
 <h2 style="margin: 0; font-size: clamp(64px, 8vw, 128px); line-height: .95"><span class="sans" style="font-weight: 500">Join the</span><br><span class="serif">Society</span></h2>
-<div style="display: flex; gap: 28px; align-items: center; margin-top: 24px; flex-wrap: wrap; justify-content: flex-end">
+<div class="ctarow" style="display: flex; gap: 28px; align-items: center; margin-top: 24px; flex-wrap: wrap; justify-content: flex-end">
 <a class="ulink" href="#book" style="color: #8C8A86">WhatsApp us</a>
-<a class="ulink" href="#book">Book a call <span class="dot" aria-hidden="true">→</span></a>
+<a class="ulink" href="#book">Book a call <span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
 </div>
 </div>
 </div>
@@ -473,7 +487,7 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 </div>
 <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap">
 <span style="font-size: 12px; color: #6E6C68">The Edit Society © 2026. All rights reserved.</span>
-<div style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; max-width: 380px">
+<div class="fpills" style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; max-width: 380px">
 <a class="pill" href="#work" style="border-color: #2C2C31; min-height: 34px">Work</a>
 <a class="pill" href="#services" style="border-color: #2C2C31; min-height: 34px">Services</a>
 <a class="pill" href="#pricing" style="border-color: #2C2C31; min-height: 34px">Memberships</a>
@@ -497,7 +511,7 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 <label for="nl" style="font-size: 13px; color: #C9C7C2">Monthly editing tips for creators</label>
 <div style="display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 16px; border-radius: 999px; border: 1px solid #2C2C31">
 <input id="nl" type="email" placeholder="Your email" style="flex: 1; min-width: 0; min-height: 36px; background: none; border: 0; outline: none; color: #F2F0EC; font: 400 14px Inter, sans-serif">
-<button type="button" aria-label="Subscribe" style="width: 36px; height: 36px; border-radius: 50%; border: 0; background: #F2F0EC; color: #0B0B0C; cursor: pointer">→</button>
+<button type="button" aria-label="Subscribe" style="width: 36px; height: 36px; border-radius: 50%; border: 0; background: #F2F0EC; color: #0B0B0C; cursor: pointer; display: grid; place-items: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
 </div>
 <span style="font-size: 11px; color: #6E6C68">By subscribing you accept our <a href="#book" style="text-decoration: underline">Privacy Policy</a></span>
 </div>
@@ -771,17 +785,30 @@ class Component extends DCLogic {
 }
 </script>
 <script>
-// Background videos: force mute (needed for autoplay on iOS/Chrome) and only play while on screen.
+// Background videos: muted inline autoplay that also works on phones.
+// - forces muted/playsinline (required for autoplay on iOS & Android)
+// - plays only while on screen (saves battery/data)
+// - if the browser blocked autoplay (iPhone Low Power Mode, data saver), starts them on the first touch
 (function () {
+  var vids = [];
+  function tryPlay(v) { if (!v.paused) return; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
-    es.forEach(function (e) { var v = e.target; if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else { v.pause(); } });
-  }, { threshold: 0.15 }) : null;
+    es.forEach(function (e) { var v = e.target; v.__vis = e.isIntersecting; if (v.__vis) tryPlay(v); else v.pause(); });
+  }, { threshold: 0.01 }) : null;
   function prep(v) {
-    if (v.__bg) return; v.__bg = 1;
-    v.muted = true; v.defaultMuted = true; v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
-    if (io) io.observe(v); else v.play().catch(function () {});
+    if (v.__bg) return; v.__bg = 1; vids.push(v);
+    v.muted = true; v.defaultMuted = true; v.autoplay = true; v.playsInline = true;
+    v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
+    v.setAttribute('disablepictureinpicture', ''); v.setAttribute('disableremoteplayback', '');
+    v.controls = false;
+    if (io) io.observe(v); else v.__vis = true;
+    tryPlay(v);
+    v.addEventListener('canplay', function () { if (v.__vis !== false) tryPlay(v); });
   }
-  function scan() { document.querySelectorAll('video').forEach(prep); }
+  function scan() { var l = document.getElementsByTagName('video'); for (var i = 0; i < l.length; i++) prep(l[i]); }
+  function kick() { vids.forEach(function (v) { if (v.isConnected && v.__vis !== false) tryPlay(v); }); }
+  ['touchstart', 'touchend', 'pointerdown', 'click', 'keydown'].forEach(function (t) { window.addEventListener(t, kick, { passive: true, capture: true }); });
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) kick(); });
   new MutationObserver(scan).observe(document.documentElement, { childList: true, subtree: true });
   scan();
 })();
