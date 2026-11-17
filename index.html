@@ -39,8 +39,8 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 .btn2:hover .dot{transform:rotate(-45deg)}
 .glass{background:linear-gradient(180deg,#161618,#0F0F10);border:1px solid #222226;box-shadow:inset 0 1px 0 #FFFFFF0A}
 .media{position:relative;overflow:hidden}
-.media img{transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
-.media:hover img{transform:scale(1.05)}
+.media img,.media video{transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
+.media:hover img,.media:hover video{transform:scale(1.05)}
 .ghostplay{opacity:0;transform:scale(.7);transition:all .5s cubic-bezier(.2,.8,.2,1)}
 .media:hover .ghostplay{opacity:1;transform:none}
 .tile{transition:transform .5s cubic-bezier(.2,.8,.2,1),filter .5s}
@@ -157,7 +157,7 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 
 <section id="top" style="padding: 8px 20px 0">
 <div class="heroout media" ref="{{heroRef}}" style="position: relative; max-width: 1600px; margin: 0 auto; height: min(88vh, 900px); min-height: 560px; border-radius: 28px; overflow: hidden; background: #000">
-<img src="./assets/a1e3b07bbda96993863432f2eccfa315.jpg" alt="Showreel still — replace with looping showreel video" style="{{heroImg}}">
+<video src="./assets/video/hero.mp4" poster="./assets/video/hero.jpg" autoplay muted loop playsinline preload="auto" aria-label="Showreel" style="{{heroImg}}"></video>
 <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, #0B0B0C33, #0B0B0CB3 80%)"></div>
 <div class="titlepar" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 28px; padding: 0 24px">
 <span class="pill" style="{{heroPill}}">Video editing for creators</span>
@@ -186,7 +186,7 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 <section aria-label="Highlights" style="padding: 0 20px">
 <div style="max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 14px">
 <div class="media fanl" style="aspect-ratio: 4 / 5; border-radius: 22px; background: #141416">
-<img class="par" src="./assets/c0a00075517f2d379025e986b90f3617.jpg" alt="Creator reel — replace with video" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<video class="par" src="./assets/video/lifestyle.mp4" poster="./assets/video/lifestyle.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Lifestyle reel" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video>
 <span style="position: absolute; left: 20px; bottom: 18px; font-size: 13px; color: #E8E6E1">Lifestyle reel · 0:42</span>
 </div>
 <div class="glass fanc" style="aspect-ratio: 4 / 5; border-radius: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; padding: 32px; position: relative; overflow: hidden">
@@ -195,7 +195,7 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 <span style="position: relative; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #6E6C68">The Edit Society</span>
 </div>
 <div class="media fanr" style="aspect-ratio: 4 / 5; border-radius: 22px; background: #141416">
-<img class="par" src="./assets/af56380b5550d32bc75f27aaca7c6a6d.jpg" alt="Podcast clip — replace with video" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<video class="par" src="./assets/video/podcast.mp4" poster="./assets/video/podcast.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Podcast clip" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video>
 <span style="position: absolute; left: 20px; bottom: 18px; font-size: 13px; color: #E8E6E1">Podcast clip · 0:58</span>
 </div>
 </div>
@@ -230,7 +230,7 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 <sc-for list="{{slides}}" as="s" hint-placeholder-count="5">
 <a href="#work" style="flex: 0 0 86%; display: flex; flex-direction: column; gap: 20px; color: #F2F0EC">
 <div class="media" style="aspect-ratio: 16 / 9; border-radius: 24px; background: #141416">
-<img src="{{s.img}}" alt="{{s.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<video src="{{s.vid}}" poster="{{s.poster}}" autoplay muted loop playsinline preload="metadata" aria-label="{{s.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video>
 <div class="ghostplay" style="position: absolute; top: 50%; left: 50%; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 50%; background: #F2F0EC; color: #0B0B0C; display: grid; place-items: center; font-size: 13px; font-weight: 600">Play</div>
 </div>
 <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px">
@@ -550,7 +550,7 @@ class Component extends DCLogic {
     const spBg = 'position:absolute;inset:0;background:#070708;transition:opacity .9s ease .35s;opacity:' + (ph >= 3 ? 0 : 1);
     const spBrand = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;transition:opacity .5s ease,transform .9s ' + ease + ',filter .6s;opacity:' + (ph === 1 ? 1 : 0) + ';transform:' + (ph >= 2 ? 'translateY(-60px) scale(.96)' : 'none') + ';filter:' + (ph >= 2 ? 'blur(8px)' : 'none');
     const spFrame = 'position:absolute;inset:0;transition:clip-path 1.25s ' + ease + ',opacity .3s;opacity:' + (ph >= 2 && ph < 4 ? 1 : 0) + ';clip-path:' + (ph >= 3 ? big : small);
-    const MONT = ['./assets/c0a00075517f2d379025e986b90f3617.jpg', './assets/af56380b5550d32bc75f27aaca7c6a6d.jpg', './assets/22de4cc7dd2e04eaccafc1de95c66d76.jpg', './assets/b2e77fe76b4df7efdf97520cdc701c4a.jpg', './assets/7c39ec92c982887e66872db35fb27540.jpg', './assets/a1e3b07bbda96993863432f2eccfa315.jpg'];
+    const MONT = ['./assets/c0a00075517f2d379025e986b90f3617.jpg', './assets/af56380b5550d32bc75f27aaca7c6a6d.jpg', './assets/22de4cc7dd2e04eaccafc1de95c66d76.jpg', './assets/b2e77fe76b4df7efdf97520cdc701c4a.jpg', './assets/7c39ec92c982887e66872db35fb27540.jpg', './assets/video/hero.jpg'];
     const spImg = MONT[Math.min(5, this.state.mi)];
     const spImgStyle = 'position:absolute;top:' + hr.t + 'px;left:' + hr.l + 'px;width:' + hr.w + 'px;height:' + hr.h + 'px;object-fit:cover;filter:saturate(1.15);transition:transform 1.25s ' + ease + ';transform:' + (ph >= 3 ? 'scale(1)' : 'scale(1.18)');
     const spShade = 'position:absolute;top:' + hr.t + 'px;left:' + hr.l + 'px;width:' + hr.w + 'px;height:' + hr.h + 'px;background:radial-gradient(ellipse at 50% 60%, #0B0B0C33, #0B0B0CB3 80%)';
@@ -579,12 +579,12 @@ class Component extends DCLogic {
     const YT = './assets/b2e77fe76b4df7efdf97520cdc701c4a.jpg', POD = './assets/af56380b5550d32bc75f27aaca7c6a6d.jpg', AD = './assets/7c39ec92c982887e66872db35fb27540.jpg', MO = './assets/278b9e09a0f96ef8ec9a1699404fa158.jpg', AFTER = './assets/a1e3b07bbda96993863432f2eccfa315.jpg';
 
     const SL = [
-      { img: YT, title: 'Why I quit my 9–5', client: 'Finance YouTuber', cat: 'Long-form' },
-      { img: MO, title: 'App launch explainer', client: 'SaaS startup', cat: 'Motion' },
-      { img: POD, title: 'Ep. 41 — the best 60 seconds', client: 'Founder podcast', cat: 'Podcast' },
-      { img: AFTER, title: 'Golden hour, graded', client: 'Travel creator', cat: 'Colour' },
-      { img: './assets/975a9032e3bf8ab57ddcbb94b316725e.jpg', title: 'Behind the cut', client: 'The Edit Society', cat: 'Showreel' }
-    ];
+      { v: 'youtube', title: 'Why I quit my 9–5', client: 'Finance YouTuber', cat: 'Long-form' },
+      { v: 'app', title: 'App launch explainer', client: 'SaaS startup', cat: 'Motion' },
+      { v: 'podcast-ep', title: 'Ep. 41 — the best 60 seconds', client: 'Founder podcast', cat: 'Podcast' },
+      { v: 'travel', title: 'Golden hour, graded', client: 'Travel creator', cat: 'Colour' },
+      { v: 'behind', title: 'Behind the cut', client: 'The Edit Society', cat: 'Showreel' }
+    ].map((s) => ({ ...s, vid: './assets/video/' + s.v + '.mp4', poster: './assets/video/' + s.v + '.jpg' }));
     const slide = this.state.slide;
     const trackStyle = 'display:flex;gap:2%;transform:translateX(-' + (slide * 88) + '%)';
 
@@ -673,6 +673,22 @@ class Component extends DCLogic {
     };
   }
 }
+</script>
+<script>
+// Background videos: force mute (needed for autoplay on iOS/Chrome) and only play while on screen.
+(function () {
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { var v = e.target; if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else { v.pause(); } });
+  }, { threshold: 0.15 }) : null;
+  function prep(v) {
+    if (v.__bg) return; v.__bg = 1;
+    v.muted = true; v.defaultMuted = true; v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
+    if (io) io.observe(v); else v.play().catch(function () {});
+  }
+  function scan() { document.querySelectorAll('video').forEach(prep); }
+  new MutationObserver(scan).observe(document.documentElement, { childList: true, subtree: true });
+  scan();
+})();
 </script>
 </body>
 </html>
