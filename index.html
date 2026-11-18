@@ -829,15 +829,11 @@ class Component extends DCLogic {
     (this.timers || []).forEach(clearTimeout);
     this.timers = [];
     this.measure();
+    // The last flash card shrinks and fades in place (no expansion), then the hero title rises in.
     this.setState({ phase: 3, pct: 100, mi: SPLASH_FRAMES.length - 1 });
-    this.at(1200, () => {
-      // Hand off to the real hero video at the same playback position so there is no jump.
-      const a = document.getElementById('spHero'), b = document.getElementById('heroVid');
-      if (a && b && a.readyState > 0) { try { b.currentTime = a.currentTime; b.play().catch(() => {}); } catch (e) {} }
-    });
-    this.at(1280, () => this.setState({ phase: 4 }));
-    this.at(1330, () => this.setState({ heroIn: true }));
-    this.at(1750, () => {
+    this.at(450, () => this.setState({ heroIn: true }));
+    this.at(650, () => this.setState({ phase: 4 }));
+    this.at(1050, () => {
       this.setState({ phase: 5 });
       document.documentElement.style.overflow = '';
     });
@@ -864,10 +860,10 @@ class Component extends DCLogic {
     const fw = Math.min(260, vw * 0.62), fh = fw * 340 / 260;
     const small = 'inset(' + ((vh - fh) / 2) + 'px ' + ((vw - fw) / 2) + 'px ' + ((vh - fh) / 2) + 'px ' + ((vw - fw) / 2) + 'px round 16px)';
     const big = 'inset(' + hr.t + 'px ' + (vw - hr.l - hr.w) + 'px ' + (vh - hr.t - hr.h) + 'px ' + hr.l + 'px round 28px)';
-    const spBg = 'position:absolute;inset:0;background:#070708;transition:opacity .9s ease .35s;opacity:' + (ph >= 3 ? 0 : 1);
+    const spBg = 'position:absolute;inset:0;background:#070708;transition:opacity .7s ease .2s;opacity:' + (ph >= 3 ? 0 : 1);
     const spBrand = 'position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;transition:opacity .5s ease,transform .9s ' + ease + ',filter .6s;opacity:' + (ph === 1 ? 1 : 0) + ';transform:' + (ph >= 2 ? 'translateY(-60px) scale(.96)' : 'none') + ';filter:' + (ph >= 2 ? 'blur(8px)' : 'none');
-    const spFrame = 'position:absolute;inset:0;transition:clip-path 1.25s ' + ease + ',opacity .3s;opacity:' + (ph >= 2 && ph < 4 ? 1 : 0) + ';clip-path:' + (ph >= 3 ? big : small);
-    const spImgStyle = 'position:absolute;top:' + hr.t + 'px;left:' + hr.l + 'px;width:' + hr.w + 'px;height:' + hr.h + 'px;object-fit:cover;filter:saturate(1.15);transition:transform 1.25s ' + ease + ';transform:' + (ph >= 3 ? 'scale(1)' : 'scale(1.18)');
+    const spFrame = 'position:absolute;inset:0;transform-origin:50% 50%;transition:opacity .5s ease,transform .7s ' + ease + ';opacity:' + (ph === 2 ? 1 : 0) + ';transform:' + (ph >= 3 ? 'scale(.86)' : 'none') + ';clip-path:' + small;
+    const spImgStyle = 'position:absolute;top:' + hr.t + 'px;left:' + hr.l + 'px;width:' + hr.w + 'px;height:' + hr.h + 'px;object-fit:cover;filter:saturate(1.15);transform:scale(1.18)';
     const mi = Math.min(SPLASH_FRAMES.length - 1, this.state.mi);
     const spFrames = SPLASH_FRAMES.map((f, i) => ({ src: f.src, vid: !!f.vid, img: !f.vid, id: f.id || '', style: spImgStyle + ';opacity:' + (i === mi ? 1 : 0) }));
     const spShade = 'position:absolute;top:' + hr.t + 'px;left:' + hr.l + 'px;width:' + hr.w + 'px;height:' + hr.h + 'px;background:radial-gradient(ellipse at 50% 60%, #0B0B0C33, #0B0B0CB3 80%)';
