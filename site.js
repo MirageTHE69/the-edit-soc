@@ -22,7 +22,7 @@
   }
   function shortCard(r) {
     return '<a class="scard rv" href="' + r.full + '" data-full="' + r.full + '" data-title="' + r.title + '" data-portrait="1">' + wvid(r.id) +
-      '<span class="vw">' + EYE + ' ' + r.views + ' views</span><span class="tt">' + r.title + '<small>' + r.client + ' · Instagram</small></span></a>';
+      '<span class="vw">' + (r.views ? EYE + ' ' + r.views + ' views' : r.tag || 'Reel') + '</span><span class="tt">' + r.title + '<small>' + r.client + ' · Instagram</small></span></a>';
   }
   function vid(name, extra) {
     return '<video src="./assets/video/' + name + '.mp4" poster="./assets/video/' + name + '.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"' + (extra || '') + '></video>';

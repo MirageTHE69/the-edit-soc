@@ -454,7 +454,7 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 <div class="{{row.cls}}" style="display: flex; gap: 14px; width: max-content; margin-left: -120px">
 <sc-for list="{{row.tiles}}" as="tl" hint-placeholder-count="11">
 <div class="tile reeltile">
-<sc-if value="{{tl.vid}}" hint-placeholder-val="{{ false }}"><a class="rtile" href="{{tl.full}}" data-full="{{tl.full}}" data-title="{{tl.title}}" data-portrait="1"><video src="{{tl.src}}" poster="{{tl.poster}}" autoplay muted loop playsinline preload="metadata" aria-label="{{tl.title}}"></video><span class="rviews"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg><span>{{tl.views}}</span></span><span class="rtitle">{{tl.title}}</span></a></sc-if>
+<sc-if value="{{tl.vid}}" hint-placeholder-val="{{ false }}"><a class="rtile" href="{{tl.full}}" data-full="{{tl.full}}" data-title="{{tl.title}}" data-portrait="1"><video src="{{tl.src}}" poster="{{tl.poster}}" autoplay muted loop playsinline preload="metadata" aria-label="{{tl.title}}"></video><span class="rviews"><sc-if value="{{tl.hasViews}}" hint-placeholder-val="{{ false }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></sc-if><span>{{tl.views}}</span></span><span class="rtitle">{{tl.title}}</span></a></sc-if>
 <sc-if value="{{tl.isImg}}" hint-placeholder-val="{{ false }}"><img src="{{tl.img}}" alt="" style="{{tl.style}}"></sc-if>
 </div>
 </sc-for>
@@ -891,14 +891,14 @@ class Component extends DCLogic {
     const pool = [R1, R2, R3, R4, AD, YT, POD, MO, AFTER];
     // Short-form wall: 2 rows of 9:16 tiles; real reels sit in the visible middle slots, colourful tiles fill the rest.
     const REELS = TES.reels || [];
-    const SLOTS = [[1, 4, 7, 10], [2, 5, 8]];
+    const SLOTS = [[1, 3, 5, 7, 9, 11], [2, 4, 6, 8, 10, 12]];
     let ri = 0;
     const wall = [0, 1].map((r) => ({
       cls: onCanvas ? '' : (r % 2 ? 'rowr' : 'rowl'),
-      tiles: Array.from({ length: 11 }, (_, i) => {
+      tiles: Array.from({ length: 14 }, (_, i) => {
         if (SLOTS[r].includes(i) && ri < REELS.length) {
           const x = REELS[ri++];
-          return { vid: true, isImg: false, src: './assets/work/' + x.id + '.mp4', poster: './assets/work/' + x.id + '.jpg', full: x.full, title: x.title, views: x.views + ' views' };
+          return { vid: true, isImg: false, src: './assets/work/' + x.id + '.mp4', poster: './assets/work/' + x.id + '.jpg', full: x.full, title: x.title, views: x.views ? x.views + ' views' : (x.tag || 'Reel'), hasViews: !!x.views };
         }
         const k = (i * 4 + r * 3) % pool.length;
         const hue = ((i * 37 + r * 71) % 60) - 30;

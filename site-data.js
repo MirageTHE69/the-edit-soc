@@ -6,12 +6,17 @@ window.TES = {
 
   // ---- Real work. "preview" = small silent loop shown on the page; "full" = original video opened on click (with sound).
   showreel: { preview: './assets/work/showreel.mp4', poster: './assets/work/showreel.jpg', full: 'https://ik.imagekit.io/5feqwwaxb/MARCA%20WEBSITE%2001.mp4' },
+  // "views" shows a view-count badge; reels without one show their "tag" instead.
   reels: [
+    { id: 'payalshah', title: 'Red-carpet makeup breakdown', client: 'Payal Shah, makeup artist', views: '5.6M', full: 'https://res.cloudinary.com/fhwvxdg0/video/upload/v1790856155/18_Payal_Shah_Makeup_Artist_5.6M_Views.mp4' },
     { id: 'vastu', title: 'Vastu home tour', client: 'Interior brand', views: '512K', full: 'https://ik.imagekit.io/omgojp17s/Copy%20of%20VASTU%20512K%20VIEWS%20IG.mp4' },
     { id: 'limewash', title: 'Lime wash, celebrity home', client: 'Interior brand', views: '150K', full: 'https://ik.imagekit.io/omgojp17s/LIME%20WASH%20150K%20VIEWS%20IG.mp4' },
     { id: 'flooring', title: 'Kota stone flooring', client: 'Interior brand', views: '111K', full: 'https://ik.imagekit.io/omgojp17s/FLOORING%20IG%20111K%20VIEWS.mp4' },
+    { id: 'rajvi3', title: 'Real, unfiltered — cinematic ad', client: 'Rajvi, co-founder · Marca Creatives', tag: 'Cinematic ad', full: 'https://res.cloudinary.com/fhwvxdg0/video/upload/v1790856172/3_Rajvi_Co-Founder_Marca_Creatives_Cinematic_Ad.mp4' },
     { id: 'payal', title: 'Payal & Zinal store launch', client: 'Fashion label', views: '85K', full: 'https://ik.imagekit.io/omgojp17s/PAYAL%20ZINAL%2085K%20IG%20VIEWS.mp4' },
+    { id: 'frenzy', title: 'Bridal lookbook', client: 'Frenzy Couture', tag: 'Fashion reel', full: 'https://res.cloudinary.com/fhwvxdg0/video/upload/v1790856162/7_Frenzy_Couture_Fashion_Reels.mp4' },
     { id: 'accent', title: 'Accent wall ideas', client: 'Interior brand', views: '25K', full: 'https://ik.imagekit.io/omgojp17s/ACCENT%20WALL%2025K%20VIEWS.mp4' },
+    { id: 'rajvi4', title: 'Successful — cinematic ad', client: 'Rajvi, co-founder · Marca Creatives', tag: 'Cinematic ad', full: 'https://res.cloudinary.com/fhwvxdg0/video/upload/v1790856170/4_Rajvi_Co-Founder_Marca_Creatives_Cinematic_Ad.mp4' },
     { id: 'r22k', title: 'How cricketers really earn', client: 'Finance creator', views: '22K', full: 'https://ik.imagekit.io/omgojp17s/22K.mp4' },
     { id: 'r45k', title: '₹1.5 crore home: rent or EMI?', client: 'Finance creator', views: '4.5K', full: 'https://ik.imagekit.io/omgojp17s/4.5K.mp4' }
   ],
