@@ -136,7 +136,7 @@
       '<h2 class="h2 sans"><span class="ln"><span class="up">What we</span></span><span class="ln"><span class="up"><span class="serif">edit</span></span></span></h2>' +
       '<span class="kicker rv">' + pad(D.services.length) + ' services</span></div>' +
       '<div class="slist">' + rows + '</div></div></section>' +
-      '<section style="padding:0 0 160px"><div class="wrap"><div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px;margin-bottom:64px"><span class="pill line rv">Who it’s for</span>' +
+      '<section style="padding:0 0 120px"><div class="wrap"><div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px;margin-bottom:64px"><span class="pill line rv">Who it’s for</span>' +
       '<h2 class="h2 sans"><span class="ln"><span class="up">Built for <span class="serif">how</span></span></span><span class="ln"><span class="up">you publish</span></span></h2></div>' +
       '<div class="cards3">' + aud + '</div></div></section>' +
       '<section style="padding:0 0 60px"><div class="wrap"><div style="display:flex;flex-direction:column;gap:22px;margin-bottom:56px"><span class="pill line rv" style="align-self:flex-start">How it works</span>' +
@@ -167,26 +167,26 @@
       '<p class="rv muted" style="margin:0;max-width:360px">Every ' + s.title.toLowerCase() + ' edit comes with this as standard — no add-on surprises.</p></div>' +
       '<div class="ilist">' + s.includes.map(function (t, i) { return '<div class="irow rv2"><span class="n">' + pad(i + 1) + '</span><span>' + t + '</span><span class="ck">' + CHECK + '</span></div>'; }).join('') + '</div></div></section>' +
 
-      '<section style="padding:0 0 160px"><div class="wrap"><div class="specs">' + s.specs.map(function (sp, i) {
+      '<section style="padding:0 0 120px"><div class="wrap"><div class="specs">' + s.specs.map(function (sp, i) {
         return '<div class="glass spec tilt' + (i % 3 ? ' d' + (i % 3) : '') + '"><span>' + sp[0] + '</span><b>' + sp[1] + '</b></div>';
       }).join('') + '</div></div></section>' +
 
-      '<section style="padding:0 0 160px"><div class="wrap"><div style="display:flex;flex-direction:column;gap:22px;margin-bottom:56px"><span class="pill line rv" style="align-self:flex-start">How it works</span>' +
+      '<section style="padding:0 0 120px"><div class="wrap"><div style="display:flex;flex-direction:column;gap:22px;margin-bottom:56px"><span class="pill line rv" style="align-self:flex-start">How it works</span>' +
       '<h2 class="h2 sans"><span class="ln"><span class="up">Three steps,</span></span><span class="ln"><span class="up"><span class="serif">zero chasing</span></span></span></h2></div>' + stepsHtml() + '</div></section>' +
 
-      (work.length ? '<section style="padding:0 0 160px"><div class="wrap"><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:48px">' +
+      (work.length ? '<section style="padding:0 0 120px"><div class="wrap"><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:48px">' +
         '<h2 class="h2 sans"><span class="ln"><span class="up">Selected</span></span><span class="ln"><span class="up"><span class="serif">work</span></span></span></h2>' +
         '<a class="ulink rv" href="work.html">All work <span class="dot" aria-hidden="true">' + ARROW + '</span></a></div>' +
         '<div class="rgrid">' + work.map(function (p) { return pcard(p, { cls: 'rv' }); }).join('') + '</div></div></section>' : '') +
 
-      '<section id="pricing" style="padding:0 0 160px;scroll-margin-top:90px"><div class="wrap"><div class="glass pricecard statsin"><div class="glow glowc" aria-hidden="true"></div>' +
+      '<section id="pricing" style="padding:0 0 120px;scroll-margin-top:90px"><div class="wrap"><div class="glass pricecard statsin"><div class="glow glowc" aria-hidden="true"></div>' +
       '<div style="position:relative;display:flex;flex-direction:column;gap:14px"><span class="kicker">Pricing</span>' +
       '<div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">' + (s.pre ? '<span class="serif" style="font-size:24px;color:#8C8A86">' + s.pre + '</span>' : '') + '<span class="price">' + s.price + '</span><span style="color:#6E6C68">' + s.unit + '</span></div>' +
       '<span class="muted" style="font-size:15px;max-width:440px">Flat price, no hourly billing. Save 15% on a 12-video membership. Pause or cancel anytime.</span></div>' +
       '<div style="position:relative;display:flex;gap:12px;flex-wrap:wrap">' + btn('index.html#pricing', 'Become a member') + btn(BOOK, 'Book a call', 'btn2') + '</div></div>' +
       '<p style="margin:16px 0 0;text-align:center;font-size:13px;color:#6E6C68">Prices excl. GST</p></div></section>' +
 
-      '<section style="padding:0 0 160px"><div class="wrap split"><div class="sticky"><span class="pill line rv" style="align-self:flex-start">FAQ</span>' +
+      '<section style="padding:0 0 120px"><div class="wrap split"><div class="sticky"><span class="pill line rv" style="align-self:flex-start">FAQ</span>' +
       '<h2 class="h2 sans"><span class="ln"><span class="up">Good</span></span><span class="ln"><span class="up"><span class="serif">questions</span></span></span></h2></div>' +
       '<div>' + faqList(s.faqs) + '</div></div></section>' +
 
@@ -214,7 +214,7 @@
       '<div id="tab-long" class="lgrid">' + (D.longs || []).map(longCard).join('') + '</div>' +
       '<div id="tab-short" class="sgrid hide-tab">' + (D.reels || []).map(shortCard).join('') + '</div>' +
       '<p class="muted" style="margin:28px 0 0;font-size:14px">Tap any video to watch it in full.</p></div></section>' +
-      '<section style="padding:140px 0 0"><div class="wrap"><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:56px"><h2 class="h2 sans"><span class="ln"><span class="up">Case</span></span><span class="ln"><span class="up"><span class="serif">studies</span></span></span></h2><span class="count"><span id="wcount">' + pad(D.projects.length) + '</span> projects</span></div>' +
+      '<section style="padding:120px 0 0"><div class="wrap"><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:56px"><h2 class="h2 sans"><span class="ln"><span class="up">Case</span></span><span class="ln"><span class="up"><span class="serif">studies</span></span></span></h2><span class="count"><span id="wcount">' + pad(D.projects.length) + '</span> projects</span></div>' +
       '<div class="pgrid" id="pgrid">' + D.projects.map(function (p) { return pcard(p, { cls: 'pin' }); }).join('') + '</div></div></section>' +
       ctaBand('Your edit<br><span class="serif">could be next.</span>', 'Send us your footage and we’ll send back something you’ll want to post — in 48–72 hours.');
     var flt = app.querySelector('.filters'); flt.classList.remove('fade-in', 'd-2'); flt.style.margin = '0 0 48px';
@@ -314,10 +314,10 @@
       '<h2 class="h2 sans"><span class="ln"><span class="up">Compare</span></span><span class="ln"><span class="up"><span class="serif">every plan</span></span></span></h2>' +
       '<p class="muted rv" style="margin:0;max-width:380px">Everything that’s included — side by side. Swipe the table sideways on mobile.</p></div>' +
       '<div class="cmpwrap rv"><table class="cmp">' + head + body + '</table></div></div></section>' +
-      '<section style="padding:0 0 160px"><div class="wrap"><div style="display:flex;flex-direction:column;gap:22px;margin-bottom:40px"><span class="pill line rv" style="align-self:flex-start">Add-ons</span>' +
+      '<section style="padding:0 0 120px"><div class="wrap"><div style="display:flex;flex-direction:column;gap:22px;margin-bottom:40px"><span class="pill line rv" style="align-self:flex-start">Add-ons</span>' +
       '<h2 class="h2 sans"><span class="ln"><span class="up">Need a little</span></span><span class="ln"><span class="up"><span class="serif">extra?</span></span></span></h2></div>' +
       '<div class="addons">' + P.addons.map(function (a, i) { return '<div class="glass addon tilt' + (i % 3 ? ' d' + (i % 3) : '') + '"><div class="row"><b>' + a[0] + '</b><em>' + a[1] + '</em></div><span>' + a[2] + '</span></div>'; }).join('') + '</div></div></section>' +
-      '<section style="padding:0 0 160px"><div class="wrap"><div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px;margin-bottom:56px"><span class="pill line rv">Not sure?</span>' +
+      '<section style="padding:0 0 120px"><div class="wrap"><div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px;margin-bottom:56px"><span class="pill line rv">Not sure?</span>' +
       '<h2 class="h2 sans"><span class="ln"><span class="up">Which plan is</span></span><span class="ln"><span class="up"><span class="serif">right for you</span></span></span></h2></div>' +
       '<div class="cards3">' + fits.map(function (f, i) { return '<div class="glass fit tilt' + (i ? ' d' + i : '') + '"><span class="q">' + pad(i + 1) + '</span><h3>' + f[0] + '</h3><p>' + f[1] + '</p><span class="rec"><i></i>' + f[2] + '</span></div>'; }).join('') + '</div></div></section>' +
       '<section style="padding:0 0 60px"><div class="wrap split"><div class="sticky"><span class="pill line rv" style="align-self:flex-start">FAQ</span>' +
@@ -357,18 +357,18 @@
       '<section class="sec"><div class="wrap split"><div class="sticky"><span class="pill line rv" style="align-self:flex-start">The brief</span><span class="kicker rv">Platform · ' + p.platform + '</span></div>' +
       '<p class="prose rv">' + p.brief + '</p></div></section>' +
 
-      '<section style="padding:0 0 140px"><div class="wrap split"><div class="sticky"><span class="pill line rv" style="align-self:flex-start">The edit</span>' +
+      '<section style="padding:0 0 110px"><div class="wrap split"><div class="sticky"><span class="pill line rv" style="align-self:flex-start">The edit</span>' +
       '<h2 class="h2 sans"><span class="ln"><span class="up">What we</span></span><span class="ln"><span class="up"><span class="serif">did</span></span></span></h2></div>' +
       '<div class="ilist">' + p.approach.map(function (t, i) { return '<div class="irow rv2"><span class="n">' + pad(i + 1) + '</span><span>' + t + '</span><span class="ck">' + CHECK + '</span></div>'; }).join('') + '</div></div></section>' +
 
-      '<section style="padding:0 0 140px"><div class="wide"><div class="gallery">' +
+      '<section style="padding:0 0 110px"><div class="wide"><div class="gallery">' +
       '<div class="media rv"><img class="par" src="./assets/video/' + p.video + '-a.jpg" alt="' + p.title + ' — frame" loading="lazy"></div>' +
       '<div class="media rv"><img class="par" src="./assets/video/' + p.video + '-b.jpg" alt="' + p.title + ' — frame" loading="lazy"></div>' +
       '<div class="media full cliprev">' + vid(p.video) + '</div></div></div></section>' +
 
-      '<section style="padding:0 0 140px"><div class="wide"><div class="glass stats statsin">' + res + '</div></div></section>' +
+      '<section style="padding:0 0 110px"><div class="wide"><div class="glass stats statsin">' + res + '</div></div></section>' +
 
-      '<section style="padding:0 0 160px"><div class="wrap" style="max-width:1000px"><span class="pill line rv" style="display:flex;width:max-content;margin:0 auto 40px">Client says</span>' +
+      '<section style="padding:0 0 120px"><div class="wrap" style="max-width:1000px"><span class="pill line rv" style="display:flex;width:max-content;margin:0 auto 40px">Client says</span>' +
       '<blockquote class="quote rv">“' + p.quote[0] + '<span class="serif">' + p.quote[1] + '</span>' + p.quote[2] + '”</blockquote>' +
       '<div class="who rv"><span class="av"></span><div><span style="font-weight:500">' + p.who[0] + '</span><small>' + p.who[1] + '</small></div></div>' +
       '<p class="note">Sample results &amp; quote — replace with real client data</p></div></section>' +

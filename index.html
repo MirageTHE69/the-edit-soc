@@ -22,7 +22,7 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 .disp{font-family:'Inter Tight',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-0.045em}
 .sans{font-family:'Inter Tight',sans-serif;letter-spacing:-0.03em}
 .serif{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;letter-spacing:-0.01em;text-transform:none}
-.grain{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.045;background-image:url(./assets/d62b53dfdf56072f71b27a215dbd355c.png);mix-blend-mode:overlay}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.03;background-image:url(./assets/d62b53dfdf56072f71b27a215dbd355c.png);mix-blend-mode:overlay}
 .spin{animation:spin 24s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .marq{display:flex;width:max-content;animation:marq 38s linear infinite}
@@ -115,7 +115,7 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 .wcard{flex:0 0 auto;width:min(60vw,calc((100vh - 430px) * 1.6));width:min(60vw,calc((100svh - 430px) * 1.6));display:flex;flex-direction:column;gap:16px;color:#F2F0EC}
 .wmedia{aspect-ratio:16/10;border-radius:24px;background:#141416}
 .wmeta{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
-.wmeta b{font:600 26px/1.15 'Inter Tight',sans-serif;letter-spacing:-.03em}
+.wmeta b{font:600 22px/1.2 'Inter Tight',sans-serif;letter-spacing:-.03em}
 .wmeta>span{font-size:14px;color:#8C8A86;white-space:nowrap}
 .wend .wmedia video{filter:brightness(.4) saturate(.9)}
 .wend .btn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap}
@@ -153,7 +153,7 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 .heroglow{position:absolute;left:50%;bottom:-40%;width:76%;aspect-ratio:1;margin-left:-38%;border-radius:50%;background:radial-gradient(closest-side,#FF5A1F40,transparent);pointer-events:none}
 .herogrid{position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:linear-gradient(#FFFFFF08 1px,transparent 1px),linear-gradient(90deg,#FFFFFF08 1px,transparent 1px);background-size:72px 72px;-webkit-mask-image:radial-gradient(ellipse at 50% 50%,#000 20%,transparent 70%);mask-image:radial-gradient(ellipse at 50% 50%,#000 20%,transparent 70%)}
 /* full-screen showreel */
-.fsrl{position:relative;padding:0 20px 180px}
+.fsrl{position:relative;padding:0 20px 130px}
 .fspin{position:relative;max-width:1180px;margin:0 auto}
 .fsclip{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;border-radius:28px;border:1px solid #1E1E21;box-shadow:0 40px 120px #0009}
 .fsui{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;padding:28px 32px}
@@ -190,7 +190,7 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 .svmedia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .svnum{position:absolute;left:12px;top:12px;min-height:26px;padding:0 10px;display:inline-flex;align-items:center;border-radius:999px;background:#0B0B0C99;font-size:12px;color:#E8E6E1}
 .svbody{display:flex;flex-direction:column;gap:8px;padding:0 10px;flex:1}
-.svbody h3{margin:0;font-size:24px;font-weight:600;line-height:1.1}
+.svbody h3{margin:0;font-size:20px;font-weight:600;line-height:1.1}
 .svbody p{margin:0;font-size:14px;color:#8C8A86}
 .svgo{margin-top:auto;padding-top:10px;display:inline-flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;font-weight:500;color:#F2F0EC}
 .svgo .dot{width:34px;height:34px;border-radius:50%;border:1px solid #34343A;display:grid;place-items:center;transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s,color .3s}
@@ -208,7 +208,7 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
   .fnav{top:70px;gap:6px;padding:5px}
   .fnav a{min-height:40px;padding:0 16px;font-size:13px}
   .fnav .lg{display:none}.fnav .sm{display:inline}
-  .fsrl{padding:0 12px 110px}
+  .fsrl{padding:0 12px 96px}
   .fsclip{border-radius:20px}
   .fsui{padding:14px}
   .fslabel{font-size:12px}
@@ -219,29 +219,30 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
   .phones{height:460px !important;max-width:520px;width:100%;margin:0 auto}
 }
 @media (max-width:700px){
+  .m-price [role="tablist"] button{padding:0 12px !important;font-size:12px !important;white-space:nowrap}
   .reeltile{width:138px;height:245px}
   .svgrid{grid-template-columns:1fr;gap:12px}
   .svmedia{aspect-ratio:16/11}
   .herobox{height:auto !important;min-height:calc(100svh - 90px) !important}
-  .m-dash{padding:0 12px 110px !important}
+  .m-dash{padding:0 12px 96px !important}
   .dashband{padding:32px 20px !important;gap:32px !important}
   .phones{height:400px !important}
   .navpad{padding:14px 20px !important}
-  .m-about{padding:110px 20px 90px !important}
+  .m-about{padding:96px 20px 80px !important}
   .m-big{padding:100px 0 0 !important}
-  .m-wall{padding:100px 0 110px !important}
+  .m-wall{padding:88px 0 96px !important}
   .m-wall-h{padding:0 20px !important;margin-bottom:48px !important}
   .tile{width:138px !important;height:245px !important;border-radius:16px !important}
-  .m-svc{padding:40px 20px 110px !important}
+  .m-svc{padding:32px 20px 96px !important}
   .m-svc > div{gap:44px !important}
   .tilt{min-height:0 !important;padding:24px !important}
-  .m-proc{padding:0 20px 110px !important}
+  .m-proc{padding:0 20px 96px !important}
   .m-proc > div{gap:40px !important}
   .m-stats{padding:44px 20px !important;gap:32px !important}
-  .m-price{padding:110px 20px !important}
+  .m-price{padding:96px 20px !important}
   .m-price > div{gap:44px !important}
-  .m-tst{padding:0 20px 110px !important}
-  .m-faq{padding:0 20px 110px !important}
+  .m-tst{padding:0 20px 96px !important}
+  .m-faq{padding:0 20px 96px !important}
   .m-faq > div{gap:36px !important}
   .m-faq button{font-size:17px !important;min-height:64px !important;padding:18px 0 !important}
   .m-book{padding:20px 20px 90px !important}
@@ -281,7 +282,7 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 <svg class="spin" viewBox="0 0 120 120" width="120" height="120" aria-hidden="true" style="position: absolute; inset: 0"><defs><path id="ringS" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"></path></defs><circle class="sealdraw" cx="60" cy="60" r="59" fill="none" stroke="#3A3A40" stroke-dasharray="371" stroke-dashoffset="371"></circle><text class="fadein" style="animation-delay: .4s" font-family="Inter" font-size="8.6" fill="#8C8A86" letter-spacing="2.6"><textPath href="#ringS">A MEMBERS’ CLUB FOR GREAT EDITS · EST. 2026 ·</textPath></text></svg>
 <span class="serif fadein" style="animation-delay: .25s; position: absolute; inset: 0; display: grid; place-items: center; font-size: 38px; color: #F2F0EC">tes</span>
 </div>
-<div style="display: flex; gap: .25em; font-size: clamp(44px, 5.6vw, 88px); line-height: 1.05">
+<div style="display: flex; gap: .25em; font-size: clamp(36px, 4.4vw, 68px); line-height: 1.05">
 <span style="overflow: hidden; display: inline-block; padding-bottom: .08em"><span class="sans rise" style="display: inline-block; font-weight: 600; animation-delay: .1s">The</span></span>
 <span style="overflow: hidden; display: inline-block; padding-bottom: .08em"><span class="serif rise" style="display: inline-block; animation-delay: .2s">Edit</span></span>
 <span style="overflow: hidden; display: inline-block; padding-bottom: .08em"><span class="sans rise" style="display: inline-block; font-weight: 600; animation-delay: .3s">Society</span></span>
@@ -337,7 +338,7 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 <div aria-hidden="true" class="herogrid"></div>
 <div class="titlepar" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 28px; padding: 0 24px">
 <span class="pill" style="{{heroPill}}">10,000+ videos delivered</span>
-<h1 class="disp" style="margin: 0; font-size: clamp(52px, 9vw, 156px); line-height: .86; color: #FFFFFF"><span style="display: block; overflow: hidden; padding-bottom: .04em"><span style="{{heroL1}}">The Edit Society<sup style="font-size: .3em; vertical-align: top; position: relative; top: .25em; margin-left: .05em">®</sup></span></span><span style="display: block; overflow: hidden; padding-bottom: .06em"><span style="{{heroL2}}">We cut <span class="serif" style="font-size: 1.08em; letter-spacing: -.02em">scroll-stoppers</span></span></span></h1>
+<h1 class="disp" style="margin: 0; font-size: clamp(42px, 7vw, 112px); line-height: .86; color: #FFFFFF"><span style="display: block; overflow: hidden; padding-bottom: .04em"><span style="{{heroL1}}">The Edit Society<sup style="font-size: .3em; vertical-align: top; position: relative; top: .25em; margin-left: .05em">®</sup></span></span><span style="display: block; overflow: hidden; padding-bottom: .06em"><span style="{{heroL2}}">We cut <span class="serif" style="font-size: 1.08em; letter-spacing: -.02em">scroll-stoppers</span></span></span></h1>
 <div style="{{heroCta}}">
 <p style="margin: 0 auto; max-width: 520px; color: #C9C7C2; font-size: 18px">Human-edited reels, shorts and YouTube videos. First cut in 48–72 hours, flat price per video.</p>
 <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px">
@@ -354,9 +355,9 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 </div>
 </section>
 
-<section aria-label="About" class="m-about" style="padding: 200px 40px 160px">
+<section aria-label="About" class="m-about" style="padding: 140px 40px 120px">
 <div style="max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px">
-<p class="{{introCls}}" style="margin: 0; font-size: clamp(30px, 3.4vw, 52px); font-weight: 300; line-height: 1.18; letter-spacing: -.025em; color: #F2F0EC">
+<p class="{{introCls}}" style="margin: 0; font-size: clamp(22px, 2.3vw, 34px); font-weight: 300; line-height: 1.18; letter-spacing: -.025em; color: #F2F0EC">
 <sc-for list="{{introWords}}" as="w" hint-placeholder-count="40"><span class="{{w.cls}}" style="{{w.style}}">{{w.t}} </span></sc-for>
 </p>
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap">
@@ -392,7 +393,7 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 </a></div></div>
 <div class="glass fanc" style="aspect-ratio: 4 / 5; border-radius: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; padding: 32px; position: relative; overflow: hidden">
 <div aria-hidden="true" class="glowc" style="position: absolute; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, #FF5A1F24, transparent); opacity: .9"></div>
-<h2 class="disp" style="position: relative; margin: 0; font-size: clamp(38px, 3.6vw, 58px); line-height: .9">Edits that<br><span class="serif" style="font-size: 1.1em">keep them</span><br>watching</h2>
+<h2 class="disp" style="position: relative; margin: 0; font-size: clamp(30px, 2.8vw, 44px); line-height: .9">Edits that<br><span class="serif" style="font-size: 1.1em">keep them</span><br>watching</h2>
 <span style="position: relative; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #6E6C68">Long-form · Short-form</span>
 </div>
 <div class="morph" id="hlR"><div class="morph-in">
@@ -405,9 +406,9 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 </section>
 
 <section aria-label="Services list" style="padding: 40px 0 0; overflow: hidden">
-<div style="border-top: 1px solid #1A1A1D; border-bottom: 1px solid #1A1A1D; padding: 22px 0; overflow: hidden">
+<div style="border-top: 1px solid #1A1A1D; border-bottom: 1px solid #1A1A1D; padding: 16px 0; overflow: hidden">
 <div class="marq" style="gap: 36px; align-items: center">
-<sc-for list="{{marq}}" as="m" hint-placeholder-count="16"><span class="disp" style="font-size: 18px; letter-spacing: -.01em; white-space: nowrap">{{m}}</span><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: #FF5A1F; flex-shrink: 0"></span></sc-for>
+<sc-for list="{{marq}}" as="m" hint-placeholder-count="16"><span class="disp" style="font-size: 14px; letter-spacing: .01em; white-space: nowrap">{{m}}</span><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: #FF5A1F; flex-shrink: 0"></span></sc-for>
 </div>
 </div>
 </section>
@@ -415,7 +416,7 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 <section id="work" class="wsec" ref="{{workRef}}" style="margin-top: 120px">
 <div class="wpin">
 <div class="whead">
-<h2 class="disp" style="margin: 0; font-size: clamp(44px, 6vw, 96px); line-height: .88"><span style="display: block; overflow: hidden"><span class="up">Long-form</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif" style="font-size: 1.08em">that holds</span></span></span></h2>
+<h2 class="disp" style="margin: 0; font-size: clamp(34px, 4.4vw, 68px); line-height: .88"><span style="display: block; overflow: hidden"><span class="up">Long-form</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif" style="font-size: 1.08em">that holds</span></span></span></h2>
 <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 12px">
 <span class="sans" style="font-size: 15px; color: #8C8A86; font-variant-numeric: tabular-nums"><span ref="{{workNoRef}}"></span> / {{workTotal}}</span>
 <div style="width: 140px; height: 2px; border-radius: 2px; background: #1E1E21; overflow: hidden"><div ref="{{workBarRef}}" style="height: 100%; background: #FF5A1F; transform-origin: 0 50%; transform: scaleX(0)"></div></div>
@@ -443,10 +444,10 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 </div>
 </section>
 
-<section id="shorts" aria-labelledby="wall-h" class="{{wallCls}} m-wall" style="padding: 160px 0 180px; overflow: hidden">
+<section id="shorts" aria-labelledby="wall-h" class="{{wallCls}} m-wall" style="padding: 120px 0 130px; overflow: hidden">
 <div class="m-wall-h" style="max-width: 900px; margin: 0 auto 72px; padding: 0 40px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px">
 <span class="pill rv" style="border-color: #2C2C31">Short-form</span>
-<h2 id="wall-h" class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Reels that <span class="serif">actually</span></span></span><span style="display: block; overflow: hidden"><span class="up">get watched</span></span></h2>
+<h2 id="wall-h" class="sans" style="margin: 0; font-size: clamp(34px, 3.8vw, 56px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Reels that <span class="serif">actually</span></span></span><span style="display: block; overflow: hidden"><span class="up">get watched</span></span></h2>
 <p class="rv" style="margin: 0; max-width: 480px; color: #8C8A86">Real reels we’ve cut for creators and brands — and the views they pulled on Instagram. Tap any reel to watch it in full.</p>
 </div>
 <div style="display: flex; flex-direction: column; gap: 14px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)">
@@ -464,12 +465,12 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 <div class="rv" style="display: flex; justify-content: center; margin-top: 56px; padding: 0 20px"><a class="btn" href="work.html#shorts">See our work<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a></div>
 </section>
 
-<section id="services" class="m-svc" style="padding: 80px 40px 200px">
+<section id="services" class="m-svc" style="padding: 40px 40px 140px">
 <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px">
 <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap">
 <div style="display: flex; flex-direction: column; gap: 22px">
 <span class="pill rv" style="align-self: flex-start; border-color: #2C2C31">Services</span>
-<h2 class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">What we</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif">edit</span> for you</span></span></h2>
+<h2 class="sans" style="margin: 0; font-size: clamp(34px, 3.8vw, 56px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">What we</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif">edit</span> for you</span></span></h2>
 </div>
 <p class="rv" style="margin: 0; max-width: 380px; color: #8C8A86">From 15-second reels to 20-minute YouTube videos — one team, every format you post.</p>
 </div>
@@ -493,20 +494,20 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 </div>
 </section>
 
-<section aria-labelledby="why-h" class="m-proc" style="padding: 0 40px 200px">
+<section aria-labelledby="why-h" class="m-proc" style="padding: 0 40px 140px">
 <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px">
 <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap">
 <div style="display: flex; flex-direction: column; gap: 22px">
 <span class="pill rv" style="align-self: flex-start; border-color: #2C2C31">Why us</span>
-<h2 id="why-h" class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Why creators</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif">choose</span> the Society</span></span></h2>
+<h2 id="why-h" class="sans" style="margin: 0; font-size: clamp(34px, 3.8vw, 56px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Why creators</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif">choose</span> the Society</span></span></h2>
 </div>
 <p class="rv" style="margin: 0; max-width: 400px; color: #8C8A86">Quality-checked edits, delivered fast and made to feel like you. Here’s what you get on every plan.</p>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 16px">
 <sc-for list="{{whys}}" as="w" hint-placeholder-count="6">
-<div class="{{w.cls}}" style="border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 14px; min-height: 230px">
+<div class="{{w.cls}}" style="border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 14px; min-height: 200px">
 <div style="display: flex; justify-content: space-between; align-items: center"><span class="sans" style="font-size: 13px; color: #6E6C68; font-variant-numeric: tabular-nums">{{w.n}}</span><span style="width: 8px; height: 8px; border-radius: 50%; background: #FF5A1F"></span></div>
-<h3 class="sans" style="margin: auto 0 0; font-size: 26px; font-weight: 600; line-height: 1.1">{{w.t}}</h3>
+<h3 class="sans" style="margin: auto 0 0; font-size: 21px; font-weight: 600; line-height: 1.15">{{w.t}}</h3>
 <p style="margin: 0; color: #8C8A86; font-size: 15px">{{w.d}}</p>
 <span class="serif" style="font-size: 20px; color: #C9C7C2">{{w.tag}}</span>
 </div>
@@ -515,11 +516,11 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 </div>
 </section>
 
-<section id="process" class="m-proc" style="padding: 0 40px 200px">
+<section id="process" class="m-proc" style="padding: 0 40px 140px">
 <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px">
 <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px">
 <span class="pill rv" style="border-color: #2C2C31">How it works</span>
-<h2 class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Your videos,</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif">effortlessly</span></span></span></h2>
+<h2 class="sans" style="margin: 0; font-size: clamp(34px, 3.8vw, 56px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Your videos,</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif">effortlessly</span></span></span></h2>
 <p class="rv" style="margin: 0; max-width: 520px; color: #8C8A86">Three steps from raw footage to ready-to-post — all inside your Society dashboard.</p>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 16px; align-items: stretch">
@@ -529,8 +530,8 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 <img src="{{st.img}}" alt="{{st.alt}}" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: left top">
 </div>
 <div style="display: flex; flex-direction: column; gap: 10px; padding: 0 14px">
-<span class="serif numslide" style="display: inline-block; font-size: 52px; line-height: 1; color: #FF5A1F">{{st.n}}</span>
-<h3 class="sans" style="margin: 0; font-size: 26px; font-weight: 600">{{st.t}}</h3>
+<span class="serif numslide" style="display: inline-block; font-size: 40px; line-height: 1; color: #FF5A1F">{{st.n}}</span>
+<h3 class="sans" style="margin: 0; font-size: 21px; font-weight: 600">{{st.t}}</h3>
 <p style="margin: 0; color: #8C8A86; font-size: 15px">{{st.d}}</p>
 </div>
 </div>
@@ -543,12 +544,12 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 </div>
 </section>
 
-<section aria-labelledby="dash-h" style="padding: 0 20px 200px" class="m-dash">
+<section aria-labelledby="dash-h" style="padding: 0 20px 140px" class="m-dash">
 <div class="glass statsin dashband" style="position: relative; overflow: hidden; max-width: 1600px; margin: 0 auto; border-radius: 28px; padding: 64px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center">
 <div aria-hidden="true" class="glowc" style="position: absolute; right: -10%; top: -40%; width: 60%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, #FF5A1F26, transparent)"></div>
 <div style="position: relative; display: flex; flex-direction: column; gap: 24px">
 <span style="font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #8C8A86">Upload · Review · Download</span>
-<h2 id="dash-h" class="sans" style="margin: 0; font-size: clamp(40px, 4.4vw, 72px); font-weight: 500; line-height: 1">Your Society<br><span class="serif">dashboard</span></h2>
+<h2 id="dash-h" class="sans" style="margin: 0; font-size: clamp(32px, 3.4vw, 52px); font-weight: 500; line-height: 1">Your Society<br><span class="serif">dashboard</span></h2>
 <p style="margin: 0; max-width: 460px; color: #8C8A86">Every member gets a private dashboard. Brief new videos, send footage, watch drafts, ask for changes and download finals — no email chains, no lost links.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
 <sc-for list="{{dashFeats}}" as="f" hint-placeholder-count="6"><span style="min-height: 34px; padding: 0 14px; display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; border: 1px solid #2C2C31; font-size: 13px; color: #C9C7C2"><span style="color: #FF5A1F; display: inline-grid"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>{{f}}</span></sc-for>
@@ -569,18 +570,18 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 <div class="glass statsin m-stats" style="max-width: 1600px; margin: 0 auto; border-radius: 28px; padding: 72px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 40px; text-align: center">
 <sc-for list="{{stats}}" as="s" hint-placeholder-count="4">
 <div style="display: flex; flex-direction: column; gap: 8px">
-<span class="sans" style="font-size: clamp(56px, 5.6vw, 92px); font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums">{{s.n}}<span class="serif" style="color: #FF5A1F">{{s.suf}}</span></span>
+<span class="sans" style="font-size: clamp(40px, 4vw, 64px); font-weight: 500; line-height: 1; font-variant-numeric: tabular-nums">{{s.n}}<span class="serif" style="color: #FF5A1F">{{s.suf}}</span></span>
 <span style="font-size: 14px; color: #8C8A86">{{s.label}}</span>
 </div>
 </sc-for>
 </div>
 </section>
 
-<section id="pricing" class="m-price" style="padding: 200px 40px">
+<section id="pricing" class="m-price" style="padding: 140px 40px">
 <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px">
 <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px">
 <span class="pill rv" style="border-color: #2C2C31">Pricing</span>
-<h2 class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Simple, <span class="serif">transparent</span> pricing</span></span></h2>
+<h2 class="sans" style="margin: 0; font-size: clamp(34px, 3.8vw, 56px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Simple, <span class="serif">transparent</span> pricing</span></span></h2>
 <p class="rv" style="margin: 0; max-width: 520px; color: #8C8A86">No hidden fees. Prepaid video packs that fit how often you post — bigger packs cost less per video.</p>
 <div role="tablist" aria-label="Pack size" class="rv" style="display: flex; padding: 4px; border-radius: 999px; border: 1px solid #222226; background: #111113">
 <sc-for list="{{packs}}" as="p" hint-placeholder-count="3"><button type="button" role="tab" aria-selected="{{p.sel}}" onClick="{{p.pick}}" style="{{p.style}}">{{p.label}}</button></sc-for>
@@ -595,7 +596,7 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 <sc-if value="{{pl.pop}}" hint-placeholder-val="{{ false }}"><span style="min-height: 30px; padding: 0 12px; display: inline-flex; align-items: center; border-radius: 999px; background: #F2F0EC; color: #0B0B0C; font-size: 12px; font-weight: 500">Most popular</span></sc-if>
 </div>
 <span style="position: relative; font-size: 15px; color: #8C8A86">{{pl.for}}</span>
-<div class="pricerow" style="position: relative; display: flex; align-items: baseline; gap: 8px; padding: 10px 0"><span class="serif" style="font-size: 20px; color: #8C8A86">{{pl.pre}}</span><span class="sans" style="font-size: 64px; font-weight: 500; line-height: 1">{{pl.price}}</span><span style="color: #6E6C68; font-size: 15px">{{pl.unit}}</span></div>
+<div class="pricerow" style="position: relative; display: flex; align-items: baseline; gap: 8px; padding: 10px 0"><span class="serif" style="font-size: 20px; color: #8C8A86">{{pl.pre}}</span><span class="sans" style="font-size: 52px; font-weight: 500; line-height: 1">{{pl.price}}</span><span style="color: #6E6C68; font-size: 15px">{{pl.unit}}</span></div>
 <span style="position: relative; font-size: 13px; color: #8C8A86; margin-top: -8px">{{pl.total}}</span>
 <div style="position: relative; display: flex; flex-direction: column">
 <sc-for list="{{pl.items}}" as="i" hint-placeholder-count="5"><span style="padding: 11px 0; border-top: 1px solid #1E1E21; font-size: 15px; color: #C9C7C2">{{i}}</span></sc-for>
@@ -608,13 +609,13 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 </div>
 </section>
 
-<section aria-labelledby="tst-h" class="m-tst" style="padding: 0 40px 200px">
+<section aria-labelledby="tst-h" class="m-tst" style="padding: 0 40px 140px">
 <div style="max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 40px">
 <span class="pill rv" style="border-color: #2C2C31">Members say</span>
 <h2 id="tst-h" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Testimonials</h2>
 <sc-for list="{{qOne}}" as="q" hint-placeholder-count="1">
 <figure class="fadein" style="margin: 0; display: flex; flex-direction: column; align-items: center; gap: 36px">
-<blockquote class="sans" style="margin: 0; font-size: clamp(30px, 3.4vw, 50px); font-weight: 400; line-height: 1.15">“{{q.a}}<span class="serif">{{q.b}}</span>{{q.c}}”</blockquote>
+<blockquote class="sans" style="margin: 0; font-size: clamp(22px, 2.4vw, 36px); font-weight: 400; line-height: 1.15">“{{q.a}}<span class="serif">{{q.b}}</span>{{q.c}}”</blockquote>
 <figcaption style="display: flex; align-items: center; gap: 14px">
 <div style="{{q.av}}"></div>
 <div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.35"><span style="font-weight: 500">{{q.name}}</span><span style="font-size: 13px; color: #8C8A86">{{q.role}}</span></div>
@@ -630,11 +631,11 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 </div>
 </section>
 
-<section id="faq" class="m-faq" style="padding: 0 40px 200px">
+<section id="faq" class="m-faq" style="padding: 0 40px 140px">
 <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 80px">
 <div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 22px">
 <span class="pill rv" style="align-self: flex-start; border-color: #2C2C31">FAQ</span>
-<h2 class="sans" style="margin: 0; font-size: clamp(44px, 4.6vw, 72px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Before</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif">you join</span></span></span></h2>
+<h2 class="sans" style="margin: 0; font-size: clamp(34px, 3.6vw, 52px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Before</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif">you join</span></span></span></h2>
 </div>
 <div style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column">
 <sc-for list="{{faqs}}" as="f" hint-placeholder-count="8">
@@ -660,8 +661,8 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 </div>
 </div>
 <div class="ctaline" style="display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 10px">
-<span class="sans" style="font-size: clamp(28px, 2.6vw, 40px); font-weight: 400; color: #6E6C68">Let’s start</span>
-<h2 style="margin: 0; font-size: clamp(64px, 8vw, 128px); line-height: .95"><span class="sans" style="font-weight: 500">Join the</span><br><span class="serif">Society</span></h2>
+<span class="sans" style="font-size: clamp(20px, 1.9vw, 28px); font-weight: 400; color: #6E6C68">Let’s start</span>
+<h2 style="margin: 0; font-size: clamp(48px, 6vw, 92px); line-height: .95"><span class="sans" style="font-weight: 500">Join the</span><br><span class="serif">Society</span></h2>
 <div class="ctarow" style="display: flex; gap: 28px; align-items: center; margin-top: 24px; flex-wrap: wrap; justify-content: flex-end">
 <a class="ulink" href="#book" style="color: #8C8A86">WhatsApp us</a>
 <a class="ulink" href="#book">Book a call <span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
@@ -917,7 +918,7 @@ class Component extends DCLogic {
 
     const glowOn = 'position:absolute;left:50%;top:-30%;width:120%;aspect-ratio:1;margin-left:-60%;border-radius:50%;background:radial-gradient(closest-side,#FF5A1F2E,transparent);pointer-events:none';
     const glowOff = 'display:none';
-    const cardBase = 'position:relative;overflow:hidden;border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:18px;min-height:560px;';
+    const cardBase = 'position:relative;overflow:hidden;border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:16px;min-height:480px;';
     const svc = [
       { kicker: 'for', title: 'Creators', desc: 'Hook-first edits people actually finish.', chips: ['9:16', '16:9', 'Captions'], items: [['Instagram Reels', 'short-form'], ['YouTube Shorts', 'short-form'], ['Long-form YouTube', 'youtube'], ['Podcast clips', 'podcast'], ['Thumbnails', 'youtube']] },
       { kicker: 'for', title: 'Brands', desc: 'On-brand content every week, without the in-house team.', chips: ['Ads', 'Launch', 'Motion'], items: [['Product launch films', 'brand-films'], ['E-commerce ads', 'ads'], ['Explainers', 'motion'], ['Motion graphics', 'motion'], ['Monthly social batch', 'short-form']], hot: 1 },
@@ -964,7 +965,7 @@ class Component extends DCLogic {
         items: ['Up to ' + pkN + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Motion graphics, zooms & sound design', 'Story restructure for retention', 'Dedicated project manager'], cta: 'Get started', btnCls: 'btn', pop: true, href: '#book' },
       { name: 'Premium', for: 'Campaigns that need extra love', pre: 'from', price: inr(PR.premiumFrom), unit: '/ campaign', total: 'Scoped to your project on a quick call',
         items: ['Full campaign, every format', 'Scripting & hook support', 'Advanced motion, VFX & colour', 'Up to 3 videos in production at once', '3 revision rounds per video', 'Priority queue & project manager'], cta: 'Book a call', btnCls: 'btn2', href: '#book' }
-    ].map((p, i) => ({ ...p, cls: 'glass tilt' + (i ? ' d' + i : ''), card: cardBase + 'min-height:640px;' + (p.pop ? 'border-color:#34343A;' : ''), glow: p.pop ? glowOn : glowOff }));
+    ].map((p, i) => ({ ...p, cls: 'glass tilt' + (i ? ' d' + i : ''), card: cardBase + 'min-height:580px;' + (p.pop ? 'border-color:#34343A;' : ''), glow: p.pop ? glowOn : glowOff }));
 
     const TS = [
       { a: 'I used to lose my Sundays to editing. Now I film on Saturday and ', b: 'post all week', c: '.', name: '[Client name]', role: 'Lifestyle creator', av: 'width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#FF5A1F,#6B3FD6)' },
