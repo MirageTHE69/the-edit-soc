@@ -148,6 +148,12 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 .pgcurtain{position:fixed;inset:0;z-index:300;background:#070708;pointer-events:none;transform:translateY(101%)}
 .leaving .pgcurtain{animation:cin .5s cubic-bezier(.76,0,.24,1) both}
 @keyframes cin{from{transform:translateY(101%)}to{transform:translateY(0)}}
+/* service-name strip under the hero */
+.marqsec{padding:20px 0 0;overflow:hidden}
+.marqbar{border-top:1px solid #1A1A1D;border-bottom:1px solid #1A1A1D;padding:18px 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marqbar:hover .marq{animation-play-state:paused}
+.marqbar .disp{color:#E8E6E1}
+@media (max-width:700px){.marqsec{padding:12px 0 0}.marqbar{padding:14px 0}}
 /* hero (typographic) */
 .herobox{position:relative;max-width:1600px;margin:0 auto;height:min(88vh,900px);min-height:560px;border-radius:28px;overflow:hidden;border:1px solid #1E1E21;background:radial-gradient(120% 90% at 50% 115%,#2A140C 0%,#140E0C 38%,#0E0E0F 70%)}
 .heroglow{position:absolute;left:50%;bottom:-40%;width:76%;aspect-ratio:1;margin-left:-38%;border-radius:50%;background:radial-gradient(closest-side,#FF5A1F40,transparent);pointer-events:none}
@@ -355,6 +361,14 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 </div>
 </section>
 
+<section aria-label="What we edit" class="marqsec">
+<div class="marqbar">
+<div class="marq" style="gap: 36px; align-items: center">
+<sc-for list="{{marq}}" as="m" hint-placeholder-count="16"><span class="disp" style="font-size: 14px; letter-spacing: .01em; white-space: nowrap">{{m}}</span><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: #FF5A1F; flex-shrink: 0"></span></sc-for>
+</div>
+</div>
+</section>
+
 <section aria-label="About" class="m-about" style="padding: 140px 40px 120px">
 <div style="max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px">
 <p class="{{introCls}}" style="margin: 0; font-size: clamp(22px, 2.3vw, 34px); font-weight: 300; line-height: 1.18; letter-spacing: -.025em; color: #F2F0EC">
@@ -402,14 +416,6 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 <span class="hltag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg> 150K views</span>
 <span style="position: absolute; left: 20px; bottom: 18px; font-size: 13px; color: #E8E6E1">Lime wash, celebrity home · Instagram</span>
 </a></div></div>
-</div>
-</section>
-
-<section aria-label="Services list" style="padding: 40px 0 0; overflow: hidden">
-<div style="border-top: 1px solid #1A1A1D; border-bottom: 1px solid #1A1A1D; padding: 16px 0; overflow: hidden">
-<div class="marq" style="gap: 36px; align-items: center">
-<sc-for list="{{marq}}" as="m" hint-placeholder-count="16"><span class="disp" style="font-size: 14px; letter-spacing: .01em; white-space: nowrap">{{m}}</span><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: #FF5A1F; flex-shrink: 0"></span></sc-for>
-</div>
 </div>
 </section>
 
