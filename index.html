@@ -125,7 +125,28 @@ footer .rv2{animation:none !important}
 /* Background videos: never show native controls / the iOS "play" overlay. */
 video{pointer-events:none;-webkit-touch-callout:none}
 video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit-media-controls-overlay-play-button,video::-webkit-media-controls-start-playback-button{display:none !important;-webkit-appearance:none;opacity:0}
-@media (max-width:860px){.navlinks{display:none !important}.hidesm{display:none !important}}
+.svcrow:hover{color:#FFFFFF !important}
+/* mobile menu */
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid #34343A;background:none;color:#F2F0EC;cursor:pointer;place-items:center}
+.burger span{display:block;width:16px;height:1.5px;background:currentColor;position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:16px;height:1.5px;background:currentColor;transition:transform .4s cubic-bezier(.76,0,.24,1)}
+.burger span::before{top:-5px}.burger span::after{top:5px}
+.menu-open .burger span{background:transparent}
+.menu-open .burger span::before{transform:translateY(5px) rotate(45deg)}
+.menu-open .burger span::after{transform:translateY(-5px) rotate(-45deg)}
+.menu{position:fixed;inset:0;z-index:25;background:#0B0B0C;display:flex;flex-direction:column;justify-content:flex-end;padding:110px 24px 40px;gap:4px;clip-path:inset(0 0 100% 0);visibility:hidden;transition:clip-path .7s cubic-bezier(.76,0,.24,1),visibility 0s .7s}
+.menu-open .menu{clip-path:inset(0 0 0 0);visibility:visible;transition:clip-path .7s cubic-bezier(.76,0,.24,1)}
+.menu a.big{display:block;overflow:hidden;font:800 clamp(40px,12vw,72px)/1.02 'Inter Tight',sans-serif;text-transform:uppercase;letter-spacing:-.045em}
+.menu a.big span{display:inline-block;transform:translateY(105%);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.menu-open .menu a.big span{transform:none}
+.menu a.big:nth-child(2) span{transition-delay:.05s}.menu a.big:nth-child(3) span{transition-delay:.1s}.menu a.big:nth-child(4) span{transition-delay:.15s}.menu a.big:nth-child(5) span{transition-delay:.2s}
+.menu .mfoot{display:flex;justify-content:space-between;align-items:center;margin-top:32px;padding-top:20px;border-top:1px solid #1E1E21;font-size:13px;color:#8C8A86}
+.menu-open{overflow:hidden}
+/* page-change curtain */
+.pgcurtain{position:fixed;inset:0;z-index:300;background:#070708;pointer-events:none;transform:translateY(101%)}
+.leaving .pgcurtain{animation:cin .5s cubic-bezier(.76,0,.24,1) both}
+@keyframes cin{from{transform:translateY(101%)}to{transform:translateY(0)}}
+@media (max-width:860px){.navlinks{display:none !important}.hidesm{display:none !important}.navcta{display:none !important}.burger{display:grid}}
 @media (max-width:700px){
   .navpad{padding:14px 20px !important}
   .m-about{padding:110px 20px 90px !important}
@@ -205,6 +226,14 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 </div>
 </sc-if>
 
+<div class="menu" id="menu" aria-hidden="true">
+<a class="big" href="#top"><span>Home</span></a>
+<a class="big" href="work.html"><span>Work</span></a>
+<a class="big" href="services.html"><span>Services</span></a>
+<a class="big" href="#pricing"><span>Memberships</span></a>
+<a class="big" href="#faq"><span>FAQ</span></a>
+<div class="mfoot"><span>Delivered in 48–72 hrs</span><a class="btn" href="#book">Book a call<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a></div>
+</div>
 <header style="{{navStyle}}">
 <nav aria-label="Main" class="navpad" style="max-width: 1440px; margin: 0 auto; padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px">
 <a href="#top" style="font-size: 24px; line-height: 1; white-space: nowrap"><span class="sans" style="font-weight: 600">the</span><span class="serif" style="font-size: 27px"> edit </span><span class="sans" style="font-weight: 600">society</span></a>
@@ -215,7 +244,7 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 <a class="pill" href="#pricing">Memberships</a>
 <a class="pill" href="#faq">FAQ</a>
 </div>
-<a class="pill" href="#book" style="border-color: #34343A; color: #F2F0EC">Book a call</a>
+<div style="display: flex; align-items: center; gap: 8px"><a class="pill navcta" href="#book" style="border-color: #34343A; color: #F2F0EC">Book a call</a><button type="button" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span></button></div>
 </nav>
 </header>
 
@@ -290,7 +319,7 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 </div>
 <div class="wtrack" ref="{{workTrackRef}}">
 <sc-for list="{{slides}}" as="s" hint-placeholder-count="4">
-<a class="wcard" href="#work">
+<a class="wcard" href="{{s.href}}">
 <div class="media wmedia">
 <video src="{{s.vid}}" poster="{{s.poster}}" autoplay muted loop playsinline preload="metadata" aria-label="{{s.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video>
 <span style="position: absolute; left: 16px; top: 16px; min-height: 28px; padding: 0 12px; display: inline-flex; align-items: center; border-radius: 999px; background: #0B0B0C80; backdrop-filter: blur(8px); font-size: 12px; color: #E8E6E1">{{s.cat}}</span>
@@ -347,11 +376,12 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 <p style="margin: 0; font-size: 15px; color: #8C8A86; max-width: 300px">{{s.desc}}</p>
 </div>
 <div style="position: relative; display: flex; flex-direction: column; gap: 10px; margin-top: auto">
-<sc-for list="{{s.items}}" as="i" hint-placeholder-count="5"><span style="display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid #1E1E21; font-size: 15px; color: #C9C7C2">{{i}}<span aria-hidden="true" style="color: #4A4A50; display: inline-grid; place-items: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></span></sc-for>
+<sc-for list="{{s.items}}" as="i" hint-placeholder-count="5"><a class="svcrow" href="{{i.href}}" style="display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid #1E1E21; font-size: 15px; color: #C9C7C2">{{i.t}}<span aria-hidden="true" style="color: #4A4A50; display: inline-grid; place-items: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></a></sc-for>
 </div>
 </div>
 </sc-for>
 </div>
+<div class="rv" style="display: flex; justify-content: center"><a class="btn2" href="services.html">Explore all services<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a></div>
 </div>
 </section>
 
@@ -488,8 +518,8 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap">
 <span style="font-size: 12px; color: #6E6C68">The Edit Society © 2026. All rights reserved.</span>
 <div class="fpills" style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; max-width: 380px">
-<a class="pill" href="#work" style="border-color: #2C2C31; min-height: 34px">Work</a>
-<a class="pill" href="#services" style="border-color: #2C2C31; min-height: 34px">Services</a>
+<a class="pill" href="work.html" style="border-color: #2C2C31; min-height: 34px">Work</a>
+<a class="pill" href="services.html" style="border-color: #2C2C31; min-height: 34px">Services</a>
 <a class="pill" href="#pricing" style="border-color: #2C2C31; min-height: 34px">Memberships</a>
 <a class="pill" href="#faq" style="border-color: #2C2C31; min-height: 34px">FAQ</a>
 <a class="pill" href="#book" style="border-color: #2C2C31; min-height: 34px">Editors — join us</a>
@@ -536,12 +566,12 @@ const SPLASH_FRAMES = [
 const SPLASH_HOLD = [150, 150, 150, 150, 560, 560];
 // Work section cards, and where the final "See our work" card links (set this to your portfolio / Instagram / YouTube).
 const WORK = [
-  { v: 'youtube', title: 'Why I quit my 9–5', client: 'Finance YouTuber', cat: 'Long-form' },
-  { v: 'app', title: 'App launch explainer', client: 'SaaS startup', cat: 'Motion' },
-  { v: 'podcast-ep', title: 'Ep. 41 — the best 60 seconds', client: 'Founder podcast', cat: 'Podcast' },
-  { v: 'travel', title: 'Golden hour, graded', client: 'Travel creator', cat: 'Colour' }
+  { v: 'youtube', p: 'why-i-quit', title: 'Why I quit my 9–5', client: 'Finance YouTuber', cat: 'Long-form' },
+  { v: 'app', p: 'app-launch', title: 'App launch explainer', client: 'SaaS startup', cat: 'Motion' },
+  { v: 'podcast-ep', p: 'ep-41', title: 'Ep. 41 — the best 60 seconds', client: 'Founder podcast', cat: 'Podcast' },
+  { v: 'travel', p: 'golden-hour', title: 'Golden hour, graded', client: 'Travel creator', cat: 'Colour' }
 ];
-const WORK_URL = '#book';
+const WORK_URL = 'work.html';
 
 class Component extends DCLogic {
   state = { phase: 0, pct: 0, mi: 0, heroIn: false, slide: 0, pack: '4', open: 0, q: 0, statsP: 0, onCanvas: false, vw: 1440, vh: 900, hr: null };
@@ -696,7 +726,7 @@ class Component extends DCLogic {
     const R1 = './assets/c0a00075517f2d379025e986b90f3617.jpg', R2 = './assets/22de4cc7dd2e04eaccafc1de95c66d76.jpg', R3 = './assets/537c5a2e97149b489e00bb566b4c588f.jpg', R4 = './assets/1572f795cfc989fbd8410e553b0c0ad2.jpg';
     const YT = './assets/b2e77fe76b4df7efdf97520cdc701c4a.jpg', POD = './assets/af56380b5550d32bc75f27aaca7c6a6d.jpg', AD = './assets/7c39ec92c982887e66872db35fb27540.jpg', MO = './assets/278b9e09a0f96ef8ec9a1699404fa158.jpg', AFTER = './assets/a1e3b07bbda96993863432f2eccfa315.jpg';
 
-    const SL = WORK.map((s) => ({ ...s, vid: './assets/video/' + s.v + '.mp4', poster: './assets/video/' + s.v + '.jpg' }));
+    const SL = WORK.map((s) => ({ ...s, vid: './assets/video/' + s.v + '.mp4', poster: './assets/video/' + s.v + '.jpg', href: 'project.html?p=' + s.p }));
 
     const pool = [R1, R2, R3, R4, AD, YT, POD, MO, AFTER];
     const wall = [0, 1, 2].map((r) => ({
@@ -713,10 +743,10 @@ class Component extends DCLogic {
     const glowOff = 'display:none';
     const cardBase = 'position:relative;overflow:hidden;border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:18px;min-height:560px;';
     const svc = [
-      { kicker: 'for', title: 'Creators', desc: 'Hook-first edits people actually finish.', chips: ['9:16', '16:9', 'Captions'], items: ['Instagram Reels', 'YouTube Shorts', 'Long-form YouTube', 'Podcast clips', 'Thumbnails'] },
-      { kicker: 'for', title: 'Brands', desc: 'On-brand content every week, without the in-house team.', chips: ['Ads', 'Launch', 'Motion'], items: ['Product launch films', 'E-commerce ads', 'Explainers', 'Motion graphics', 'Monthly social batch'], hot: 1 },
-      { kicker: 'for', title: 'Agencies', desc: 'Your brand, our editors, zero credit.', chips: ['White-label', 'Bulk'], items: ['Creative ad variants', 'Corporate videos', 'Bulk content', 'White-label delivery', 'Dedicated editor pod'] }
-    ].map((s, i) => ({ ...s, cls: 'glass tilt' + (i ? ' d' + i : ''), card: cardBase + (s.hot ? 'border-color:#34343A;' : ''), glow: s.hot ? glowOn : glowOff }));
+      { kicker: 'for', title: 'Creators', desc: 'Hook-first edits people actually finish.', chips: ['9:16', '16:9', 'Captions'], items: [['Instagram Reels', 'short-form'], ['YouTube Shorts', 'short-form'], ['Long-form YouTube', 'youtube'], ['Podcast clips', 'podcast'], ['Thumbnails', 'youtube']] },
+      { kicker: 'for', title: 'Brands', desc: 'On-brand content every week, without the in-house team.', chips: ['Ads', 'Launch', 'Motion'], items: [['Product launch films', 'brand-films'], ['E-commerce ads', 'ads'], ['Explainers', 'motion'], ['Motion graphics', 'motion'], ['Monthly social batch', 'short-form']], hot: 1 },
+      { kicker: 'for', title: 'Agencies', desc: 'Your brand, our editors, zero credit.', chips: ['White-label', 'Bulk'], items: [['Creative ad variants', 'ads'], ['Corporate videos', 'brand-films'], ['Bulk content', 'short-form'], ['White-label delivery', 'brand-films'], ['Dedicated editor pod', '']] }
+    ].map((s, i) => ({ ...s, items: s.items.map(([t, slug]) => ({ t, href: slug ? 'service.html?s=' + slug : 'services.html' })), cls: 'glass tilt' + (i ? ' d' + i : ''), card: cardBase + (s.hot ? 'border-color:#34343A;' : ''), glow: s.hot ? glowOn : glowOff }));
 
     const steps = [
       { n: '01', t: 'Pick a plan', d: 'Choose a 4- or 12-video membership and get onboarded on a quick call.' },
@@ -811,6 +841,32 @@ class Component extends DCLogic {
   document.addEventListener('visibilitychange', function () { if (!document.hidden) kick(); });
   new MutationObserver(scan).observe(document.documentElement, { childList: true, subtree: true });
   scan();
+})();
+// Mobile menu + curtain transition to the other pages.
+(function () {
+  var root = document.documentElement;
+  function setMenu(open) {
+    root.classList.toggle('menu-open', open);
+    var b = document.querySelector('.burger'), m = document.getElementById('menu');
+    if (b) { b.setAttribute('aria-expanded', open); b.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); }
+    if (m) m.setAttribute('aria-hidden', !open);
+  }
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('.burger')) { setMenu(!root.classList.contains('menu-open')); return; }
+    var a = e.target.closest('a[href]');
+    if (!a) return;
+    if (a.closest('#menu')) setMenu(false);
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.target === '_blank') return;
+    var u = new URL(a.href, location.href);
+    if (u.origin !== location.origin || (u.pathname === location.pathname && u.search === location.search)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    if (!document.querySelector('.pgcurtain')) { var c = document.createElement('div'); c.className = 'pgcurtain'; document.body.appendChild(c); }
+    root.classList.add('leaving');
+    setTimeout(function () { location.href = u.href; }, 480);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+  window.addEventListener('pageshow', function (e) { if (e.persisted) root.classList.remove('leaving', 'menu-open'); });
 })();
 </script>
 </body>
