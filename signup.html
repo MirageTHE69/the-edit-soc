@@ -82,7 +82,7 @@ const box = document.getElementById('su');
 const CHECK = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>';
 const ARROW = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 
-if (!DEMO && await api.session()) { const me = await api.me(); location.replace(me && me.role === 'admin' ? 'admin.html' : 'dashboard.html'); }
+// If someone is already logged in, signing up here simply creates the new account and switches to it.
 
 const PLANS = [
   { k: 'simple', name: 'Simple', d: 'Clean, punchy social reels' },

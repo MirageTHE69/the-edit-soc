@@ -31,6 +31,10 @@
 
     <form id="login" novalidate>
       <div><h1>Welcome <span class="serif">back</span></h1><p class="muted" style="margin:10px 0 0">Log in to your Society dashboard.</p></div>
+      <div id="already" class="hide" style="display:flex;flex-direction:column;gap:12px;padding:16px;border-radius:16px;border:1px solid #2C2C31;background:#0F0F10">
+        <span style="font-size:14px;color:#C9C7C2">You’re already logged in as <b id="alreadyEmail" style="color:#F2F0EC"></b></span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn sm" id="contBtn">Continue to dashboard</button><button type="button" class="btn ghost sm" id="switchBtn">Switch account</button></div>
+      </div>
       <div id="msg"></div>
       <div class="field"><label for="email">Email</label><input class="in" id="email" type="email" autocomplete="email" required placeholder="you@brand.com"></div>
       <div class="field"><label for="pw">Password</label><input class="in" id="pw" type="password" autocomplete="current-password" required placeholder="••••••••"></div>
@@ -74,14 +78,23 @@ const params = new URLSearchParams(location.search);
 let recovering = params.has('reset');
 api.onAuth((evt) => { if (evt === 'PASSWORD_RECOVERY') { recovering = true; $('login').classList.add('hide'); $('resetForm').classList.remove('hide'); } });
 if (recovering && !DEMO) { $('login').classList.add('hide'); $('resetForm').classList.remove('hide'); }
-else if (!DEMO && await api.session()) routeIn();
+else if (!DEMO && await api.session()) {
+  // Already signed in: don't redirect silently — let the person continue or switch accounts.
+  const cur = await api.me();
+  if (cur) {
+    $('alreadyEmail').textContent = cur.email + (cur.role === 'admin' ? ' (admin)' : '');
+    $('already').classList.remove('hide');
+    $('contBtn').addEventListener('click', routeIn);
+    $('switchBtn').addEventListener('click', async () => { await api.signOut(); $('already').classList.add('hide'); $('email').focus(); });
+  }
+}
 
 $('login').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const email = $('email').value.trim(), pw = $('pw').value;
+  const email = $('email').value.trim(), pw = $('pw').value.trim();
   if (!email || !pw) return show('msg', 'Enter your email and password.');
   $('go').disabled = true; show('msg', '');
-  try { await api.signIn(email, pw); await routeIn(); }
+  try { await api.signOut().catch(() => {}); await api.signIn(email, pw); await routeIn(); }
   catch (err) { show('msg', esc(/invalid/i.test(err.message) ? 'That email and password don’t match.' : err.message)); }
   finally { $('go').disabled = false; }
 });
