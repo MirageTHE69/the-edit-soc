@@ -213,7 +213,7 @@
       '<div class="wtabs" role="tablist" aria-label="Video type"><button type="button" role="tab" class="on" data-t="long">Long-form video editing</button><button type="button" role="tab" data-t="short">Short-form video editing</button></div></div>' +
       '<div id="tab-long" class="lgrid">' + (D.longs || []).map(longCard).join('') + '</div>' +
       '<div id="tab-short" class="sgrid hide-tab">' + (D.reels || []).map(shortCard).join('') + '</div>' +
-      '<p class="muted" style="margin:28px 0 0;font-size:14px">Tap any video to watch it in full with sound.</p></div></section>' +
+      '<p class="muted" style="margin:28px 0 0;font-size:14px">Tap any video to watch it in full.</p></div></section>' +
       '<section style="padding:140px 0 0"><div class="wrap"><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:56px"><h2 class="h2 sans"><span class="ln"><span class="up">Case</span></span><span class="ln"><span class="up"><span class="serif">studies</span></span></span></h2><span class="count"><span id="wcount">' + pad(D.projects.length) + '</span> projects</span></div>' +
       '<div class="pgrid" id="pgrid">' + D.projects.map(function (p) { return pcard(p, { cls: 'pin' }); }).join('') + '</div></div></section>' +
       ctaBand('Your edit<br><span class="serif">could be next.</span>', 'Send us your footage and we’ll send back something you’ll want to post — in 48–72 hours.');
@@ -437,15 +437,15 @@
     window.addEventListener('pageshow', function (e) { if (e.persisted) document.documentElement.classList.remove('leaving', 'menu-open'); });
   }
 
-  // Lightbox: any element with data-full plays the original video with sound.
+  // Lightbox: any element with data-full plays the original video (muted, with controls).
   function initLightbox() {
     document.addEventListener('click', function (e) {
       var t = e.target.closest('[data-full]'); if (!t || e.metaKey || e.ctrlKey) return;
       e.preventDefault(); e.stopPropagation();
       var box = document.createElement('div'); box.className = 'lb' + (t.hasAttribute('data-portrait') ? ' portrait' : '');
       box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true');
-      box.innerHTML = '<button type="button" class="lbx" aria-label="Close video">×</button><video data-nobg controls autoplay playsinline preload="auto"></video><span class="lbt"></span>';
-      var v = box.querySelector('video'); v.src = t.getAttribute('data-full');
+      box.innerHTML = '<button type="button" class="lbx" aria-label="Close video">×</button><video data-nobg controls autoplay muted playsinline preload="auto"></video><span class="lbt"></span>';
+      var v = box.querySelector('video'); v.muted = true; v.src = t.getAttribute('data-full');
       box.querySelector('.lbt').textContent = t.getAttribute('data-title') || '';
       document.body.appendChild(box); document.documentElement.style.overflow = 'hidden'; v.play().catch(function () {});
       function close() { v.pause(); v.removeAttribute('src'); v.load(); box.remove(); document.documentElement.style.overflow = ''; document.removeEventListener('keydown', key); }
