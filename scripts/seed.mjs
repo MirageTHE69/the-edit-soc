@@ -9,14 +9,15 @@
 import { randomBytes } from 'node:crypto';
 
 const URL_ = (process.env.SUPABASE_URL || '').replace(/\/$/, '');
-const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY || '';
 if (!URL_ || !KEY) { console.error('Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY first (see the top of this file).'); process.exit(1); }
 
 const pw = () => randomBytes(9).toString('base64').replace(/[+/=]/g, '').slice(0, 10) + '#7a';
 const ADMIN = { email: process.env.ADMIN_EMAIL || 'admin@theeditsociety.in', password: process.env.ADMIN_PASSWORD || pw(), full_name: 'Studio Admin' };
 const TEST = { email: process.env.TEST_EMAIL || 'test@theeditsociety.in', password: process.env.TEST_PASSWORD || pw(), full_name: 'Test Client', company: 'Test Brand' };
 
-const H = { apikey: KEY, Authorization: `Bearer ${KEY}`, 'Content-Type': 'application/json' };
+// New-style keys (sb_secret_…) go in the apikey header only; legacy service_role JWTs also go in Authorization.
+const H = KEY.startsWith('sb_') ? { apikey: KEY, 'Content-Type': 'application/json' } : { apikey: KEY, Authorization: `Bearer ${KEY}`, 'Content-Type': 'application/json' };
 async function call(method, path, body, extra = {}) {
   const res = await fetch(URL_ + path, { method, headers: { ...H, ...extra }, body: body ? JSON.stringify(body) : undefined });
   const text = await res.text(); let data; try { data = text ? JSON.parse(text) : null; } catch { data = text; }
@@ -47,7 +48,7 @@ const testId = await ensureUser(TEST);
 
 // Profiles are created by a trigger; upsert to be safe and set roles/details.
 await call('POST', '/rest/v1/profiles?on_conflict=id', [
-  { id: adminId, email: ADMIN.email, full_name: ADMIN.full_name, role: 'admin' },
+  { id: adminId, email: ADMIN.email, full_name: ADMIN.full_name, company: 'The Edit Society', role: 'admin' },
   { id: testId, email: TEST.email, full_name: TEST.full_name, company: TEST.company, role: 'customer' }
 ], { Prefer: 'resolution=merge-duplicates' });
 
