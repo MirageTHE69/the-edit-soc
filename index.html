@@ -126,6 +126,7 @@ footer .rv2{animation:none !important}
 video{pointer-events:none;-webkit-touch-callout:none}
 video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit-media-controls-overlay-play-button,video::-webkit-media-controls-start-playback-button{display:none !important;-webkit-appearance:none;opacity:0}
 .svcrow:hover{color:#FFFFFF !important}
+.pricerow{flex-wrap:wrap;row-gap:0}
 /* mobile menu */
 .burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid #34343A;background:none;color:#F2F0EC;cursor:pointer;place-items:center}
 .burger span{display:block;width:16px;height:1.5px;background:currentColor;position:relative}
@@ -139,7 +140,7 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 .menu a.big{display:block;overflow:hidden;font:800 clamp(40px,12vw,72px)/1.02 'Inter Tight',sans-serif;text-transform:uppercase;letter-spacing:-.045em}
 .menu a.big span{display:inline-block;transform:translateY(105%);transition:transform .8s cubic-bezier(.2,.8,.2,1)}
 .menu-open .menu a.big span{transform:none}
-.menu a.big:nth-child(2) span{transition-delay:.05s}.menu a.big:nth-child(3) span{transition-delay:.1s}.menu a.big:nth-child(4) span{transition-delay:.15s}.menu a.big:nth-child(5) span{transition-delay:.2s}
+.menu a.big:nth-child(2) span{transition-delay:.05s}.menu a.big:nth-child(3) span{transition-delay:.1s}.menu a.big:nth-child(4) span{transition-delay:.15s}.menu a.big:nth-child(5) span{transition-delay:.2s}.menu a.big:nth-child(6) span{transition-delay:.25s}
 .menu .mfoot{display:flex;justify-content:space-between;align-items:center;margin-top:32px;padding-top:20px;border-top:1px solid #1E1E21;font-size:13px;color:#8C8A86}
 .menu-open{overflow:hidden}
 /* page-change curtain */
@@ -147,7 +148,14 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 .leaving .pgcurtain{animation:cin .5s cubic-bezier(.76,0,.24,1) both}
 @keyframes cin{from{transform:translateY(101%)}to{transform:translateY(0)}}
 @media (max-width:860px){.navlinks{display:none !important}.hidesm{display:none !important}.navcta{display:none !important}.burger{display:grid}}
+@media (max-width:1000px){
+  .dashband{grid-template-columns:1fr !important;padding:44px 28px !important}
+  .phones{height:460px !important;max-width:520px;width:100%;margin:0 auto}
+}
 @media (max-width:700px){
+  .m-dash{padding:0 12px 110px !important}
+  .dashband{padding:32px 20px !important;gap:32px !important}
+  .phones{height:400px !important}
   .navpad{padding:14px 20px !important}
   .m-about{padding:110px 20px 90px !important}
   .m-big{padding:100px 0 0 !important}
@@ -232,6 +240,7 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 <a class="big" href="services.html"><span>Services</span></a>
 <a class="big" href="#pricing"><span>Memberships</span></a>
 <a class="big" href="#faq"><span>FAQ</span></a>
+<a class="big" href="login.html"><span>Log in</span></a>
 <div class="mfoot"><span>Delivered in 48–72 hrs</span><a class="btn" href="#book">Book a call<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a></div>
 </div>
 <header style="{{navStyle}}">
@@ -244,7 +253,7 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 <a class="pill" href="#pricing">Memberships</a>
 <a class="pill" href="#faq">FAQ</a>
 </div>
-<div style="display: flex; align-items: center; gap: 8px"><a class="pill navcta" href="#book" style="border-color: #34343A; color: #F2F0EC">Book a call</a><button type="button" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span></button></div>
+<div style="display: flex; align-items: center; gap: 8px"><a class="pill navcta" href="login.html">Log in</a><a class="pill navcta" href="#book" style="border-color: #34343A; color: #F2F0EC">Book a call</a><button type="button" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span></button></div>
 </nav>
 </header>
 
@@ -253,12 +262,12 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 <video id="heroVid" src="./assets/video/hero.mp4" poster="./assets/video/hero.jpg" autoplay muted loop playsinline preload="auto" aria-label="Showreel" style="{{heroImg}}"></video>
 <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, #0B0B0C33, #0B0B0CB3 80%)"></div>
 <div class="titlepar" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 28px; padding: 0 24px">
-<span class="pill" style="{{heroPill}}">Video editing for creators</span>
+<span class="pill" style="{{heroPill}}">10,000+ videos delivered</span>
 <h1 class="disp" style="margin: 0; font-size: clamp(56px, 9vw, 156px); line-height: .86; color: #FFFFFF"><span style="display: block; overflow: hidden; padding-bottom: .04em"><span style="{{heroL1}}">The Edit Society<sup style="font-size: .3em; vertical-align: top; position: relative; top: .25em; margin-left: .05em">®</sup></span></span><span style="display: block; overflow: hidden; padding-bottom: .06em"><span style="{{heroL2}}">We cut <span class="serif" style="font-size: 1.08em; letter-spacing: -.02em">scroll-stoppers</span></span></span></h1>
 </div>
 <div style="{{heroFoot}}">
 <span style="display: flex; align-items: center; gap: 10px"><span style="width: 7px; height: 7px; border-radius: 50%; background: #F2F0EC"></span>Reels · Shorts · YouTube</span>
-<span class="hidesm">Delivered in 48–72 hrs</span>
+<span class="hidesm">First cut in 48–72 hrs</span>
 <span style="display: flex; align-items: center; gap: 10px">Scroll<span style="width: 7px; height: 7px; border-radius: 50%; background: #F2F0EC"></span></span>
 </div>
 </div>
@@ -385,19 +394,75 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 </div>
 </section>
 
-<section id="process" class="m-proc" style="padding: 0 40px 200px">
-<div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 64px; align-items: start">
+<section aria-labelledby="why-h" class="m-proc" style="padding: 0 40px 200px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap">
 <div style="display: flex; flex-direction: column; gap: 22px">
-<span class="pill rv" style="align-self: flex-start; border-color: #2C2C31">How it works</span>
-<h2 class="disp" style="margin: 0; font-size: clamp(44px, 4.8vw, 76px); line-height: .9"><span style="display: block; overflow: hidden"><span class="up">Upload.</span></span><span style="display: block; overflow: hidden"><span class="up">Brief.</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif" style="font-size: 1.1em">Approve.</span></span></span></h2>
+<span class="pill rv" style="align-self: flex-start; border-color: #2C2C31">Why us</span>
+<h2 id="why-h" class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Why creators</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif">choose</span> the Society</span></span></h2>
 </div>
-<sc-for list="{{steps}}" as="st" hint-placeholder-count="3">
-<div class="{{st.cls}}" style="display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 1px solid #1E1E21">
-<span class="serif numslide" style="display: inline-block; font-size: 64px; line-height: 1; color: #FF5A1F">{{st.n}}</span>
-<h3 class="sans" style="margin: 0; font-size: 28px; font-weight: 600">{{st.t}}</h3>
-<p style="margin: 0; color: #8C8A86; font-size: 16px">{{st.d}}</p>
+<p class="rv" style="margin: 0; max-width: 400px; color: #8C8A86">Quality-checked edits, delivered fast and made to feel like you. Here’s what you get on every plan.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 16px">
+<sc-for list="{{whys}}" as="w" hint-placeholder-count="6">
+<div class="{{w.cls}}" style="border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 14px; min-height: 230px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span class="sans" style="font-size: 13px; color: #6E6C68; font-variant-numeric: tabular-nums">{{w.n}}</span><span style="width: 8px; height: 8px; border-radius: 50%; background: #FF5A1F"></span></div>
+<h3 class="sans" style="margin: auto 0 0; font-size: 26px; font-weight: 600; line-height: 1.1">{{w.t}}</h3>
+<p style="margin: 0; color: #8C8A86; font-size: 15px">{{w.d}}</p>
+<span class="serif" style="font-size: 20px; color: #C9C7C2">{{w.tag}}</span>
 </div>
 </sc-for>
+</div>
+</div>
+</section>
+
+<section id="process" class="m-proc" style="padding: 0 40px 200px">
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px">
+<div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px">
+<span class="pill rv" style="border-color: #2C2C31">How it works</span>
+<h2 class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Your videos,</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif">effortlessly</span></span></span></h2>
+<p class="rv" style="margin: 0; max-width: 520px; color: #8C8A86">Three steps from raw footage to ready-to-post — all inside your Society dashboard.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 16px; align-items: stretch">
+<sc-for list="{{steps}}" as="st" hint-placeholder-count="3">
+<div class="{{st.cls}}" style="border-radius: 28px; padding: 14px 14px 28px; display: flex; flex-direction: column; gap: 22px">
+<div class="media" style="aspect-ratio: 16 / 11; border-radius: 18px; background: #0B0B0C; border: 1px solid #222226">
+<img src="{{st.img}}" alt="{{st.alt}}" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: left top">
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 0 14px">
+<span class="serif numslide" style="display: inline-block; font-size: 52px; line-height: 1; color: #FF5A1F">{{st.n}}</span>
+<h3 class="sans" style="margin: 0; font-size: 26px; font-weight: 600">{{st.t}}</h3>
+<p style="margin: 0; color: #8C8A86; font-size: 15px">{{st.d}}</p>
+</div>
+</div>
+</sc-for>
+</div>
+<div class="rv" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap">
+<a class="btn" href="#pricing">Start editing<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
+<a class="btn2" href="dashboard.html?demo">See the dashboard<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="dash-h" style="padding: 0 20px 200px" class="m-dash">
+<div class="glass statsin dashband" style="position: relative; overflow: hidden; max-width: 1600px; margin: 0 auto; border-radius: 28px; padding: 64px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center">
+<div aria-hidden="true" class="glowc" style="position: absolute; right: -10%; top: -40%; width: 60%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, #FF5A1F26, transparent)"></div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 24px">
+<span style="font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #8C8A86">Upload · Review · Download</span>
+<h2 id="dash-h" class="sans" style="margin: 0; font-size: clamp(40px, 4.4vw, 72px); font-weight: 500; line-height: 1">Your Society<br><span class="serif">dashboard</span></h2>
+<p style="margin: 0; max-width: 460px; color: #8C8A86">Every member gets a private dashboard. Brief new videos, send footage, watch drafts, ask for changes and download finals — no email chains, no lost links.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{dashFeats}}" as="f" hint-placeholder-count="6"><span style="min-height: 34px; padding: 0 14px; display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; border: 1px solid #2C2C31; font-size: 13px; color: #C9C7C2"><span style="color: #FF5A1F; display: inline-grid"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>{{f}}</span></sc-for>
+</div>
+<div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px">
+<a class="btn" href="login.html">Log in<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
+<a class="btn2" href="dashboard.html?demo">See the demo<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
+</div>
+</div>
+<div class="phones" aria-hidden="true" style="position: relative; height: 560px">
+<div style="position: absolute; left: 6%; top: 30px; width: 46%; aspect-ratio: 390 / 780; border-radius: 34px; overflow: hidden; border: 6px solid #1E1E21; box-shadow: 0 30px 80px #000A; transform: rotate(-5deg)"><img src="./assets/dash/phone-1.jpg" alt="" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; object-position: top"></div>
+<div style="position: absolute; right: 4%; top: 0; width: 48%; aspect-ratio: 390 / 780; border-radius: 34px; overflow: hidden; border: 6px solid #2C2C31; box-shadow: 0 30px 80px #000C; transform: rotate(4deg)"><img src="./assets/dash/phone-2.jpg" alt="" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; object-position: top"></div>
+</div>
 </div>
 </section>
 
@@ -415,11 +480,11 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 <section id="pricing" class="m-price" style="padding: 200px 40px">
 <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px">
 <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px">
-<span class="pill rv" style="border-color: #2C2C31">Memberships</span>
-<h2 class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Flat price. <span class="serif">Per video.</span></span></span></h2>
-<p class="rv" style="margin: 0; color: #8C8A86">No hourly billing. Pause or cancel anytime.</p>
+<span class="pill rv" style="border-color: #2C2C31">Pricing</span>
+<h2 class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Simple, <span class="serif">transparent</span> pricing</span></span></h2>
+<p class="rv" style="margin: 0; max-width: 520px; color: #8C8A86">No hidden fees. Prepaid video packs that fit how often you post — bigger packs cost less per video.</p>
 <div role="tablist" aria-label="Pack size" class="rv" style="display: flex; padding: 4px; border-radius: 999px; border: 1px solid #222226; background: #111113">
-<sc-for list="{{packs}}" as="p" hint-placeholder-count="2"><button type="button" role="tab" aria-selected="{{p.sel}}" onClick="{{p.pick}}" style="{{p.style}}">{{p.label}}</button></sc-for>
+<sc-for list="{{packs}}" as="p" hint-placeholder-count="3"><button type="button" role="tab" aria-selected="{{p.sel}}" onClick="{{p.pick}}" style="{{p.style}}">{{p.label}}</button></sc-for>
 </div>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 16px; align-items: stretch">
@@ -432,14 +497,15 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 </div>
 <span style="position: relative; font-size: 15px; color: #8C8A86">{{pl.for}}</span>
 <div class="pricerow" style="position: relative; display: flex; align-items: baseline; gap: 8px; padding: 10px 0"><span class="serif" style="font-size: 20px; color: #8C8A86">{{pl.pre}}</span><span class="sans" style="font-size: 64px; font-weight: 500; line-height: 1">{{pl.price}}</span><span style="color: #6E6C68; font-size: 15px">{{pl.unit}}</span></div>
+<span style="position: relative; font-size: 13px; color: #8C8A86; margin-top: -8px">{{pl.total}}</span>
 <div style="position: relative; display: flex; flex-direction: column">
 <sc-for list="{{pl.items}}" as="i" hint-placeholder-count="5"><span style="padding: 11px 0; border-top: 1px solid #1E1E21; font-size: 15px; color: #C9C7C2">{{i}}</span></sc-for>
 </div>
-<a class="{{pl.btnCls}}" href="#book" style="position: relative; margin-top: auto; justify-content: space-between">{{pl.cta}}<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
+<a class="{{pl.btnCls}}" href="{{pl.href}}" style="position: relative; margin-top: auto; justify-content: space-between">{{pl.cta}}<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
 </div>
 </sc-for>
 </div>
-<p style="margin: 0; text-align: center; font-size: 13px; color: #6E6C68">Up to 90 sec per video · one active request at a time · 2 revision rounds · prices excl. GST</p>
+<p style="margin: 0; text-align: center; font-size: 13px; color: #6E6C68">Videos up to 90 sec · packs valid 60 days and auto-renew · pause or cancel anytime · prices excl. GST</p>
 </div>
 </section>
 
@@ -522,6 +588,7 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 <a class="pill" href="services.html" style="border-color: #2C2C31; min-height: 34px">Services</a>
 <a class="pill" href="#pricing" style="border-color: #2C2C31; min-height: 34px">Memberships</a>
 <a class="pill" href="#faq" style="border-color: #2C2C31; min-height: 34px">FAQ</a>
+<a class="pill" href="login.html" style="border-color: #2C2C31; min-height: 34px">Client login</a>
 <a class="pill" href="#book" style="border-color: #2C2C31; min-height: 34px">Editors — join us</a>
 <a class="pill" href="#book" style="border-color: #2C2C31; min-height: 34px">Privacy</a>
 </div>
@@ -714,7 +781,7 @@ class Component extends DCLogic {
     const heroImg = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.15)';
     const navStyle = 'position:sticky;top:0;z-index:30;background:linear-gradient(#0B0B0CF2,#0B0B0C00);transition:opacity .8s ease .2s,transform .8s ' + ease + ' .2s;opacity:' + (hi ? 1 : 0) + ';transform:' + (hi ? 'none' : 'translateY(-16px)');
 
-    const INTRO = 'We edit reels, shorts and YouTube videos for creators who post every week — cut for retention, captioned, colour-graded and delivered in 48–72 hours. One flat price per video. No chasing freelancers, no missed upload days.';
+    const INTRO = 'Really good edits, back in 48–72 hours. Human editors cut your reels, shorts and YouTube videos for retention — captioned, colour-graded and quality-checked. One flat price per video and one dashboard to brief, upload and approve. No freelancers to chase. No missed upload days.';
     const iw = INTRO.split(' ');
     const introWords = iw.map((t, i) => {
       const s = 8 + (i / iw.length) * 52;
@@ -749,10 +816,19 @@ class Component extends DCLogic {
     ].map((s, i) => ({ ...s, items: s.items.map(([t, slug]) => ({ t, href: slug ? 'service.html?s=' + slug : 'services.html' })), cls: 'glass tilt' + (i ? ' d' + i : ''), card: cardBase + (s.hot ? 'border-color:#34343A;' : ''), glow: s.hot ? glowOn : glowOff }));
 
     const steps = [
-      { n: '01', t: 'Pick a plan', d: 'Choose a 4- or 12-video membership and get onboarded on a quick call.' },
-      { n: '02', t: 'Share footage + brief', d: 'Drop a Drive link, two reference videos and your fonts. That’s it.' },
-      { n: '03', t: 'Review & post', d: 'Your edit lands in 48–72 hours. Two revision rounds, then hit publish.' }
-    ].map((st, i) => ({ ...st, cls: 'rv2' + (i ? ' d' + i : '') }));
+      { n: '01', t: 'Pick your pack', d: 'Choose Simple, Complex or Premium. Your dashboard login lands in your inbox the same day.', img: './assets/dash/step-1.jpg', alt: 'Dashboard overview showing plan and videos left', pos: 'left top' },
+      { n: '02', t: 'Brief & upload', d: 'Pick the video type, answer a guided brief and upload footage — or paste a Drive link for big files.', img: './assets/dash/step-2.jpg', alt: 'New request form with video types', pos: 'left top' },
+      { n: '03', t: 'Review & download', d: 'Watch your first cut in 48–72 hours, ask for changes with timestamps, approve and download.', img: './assets/dash/step-3.jpg', alt: 'Draft review with approve and request changes', pos: 'left top' }
+    ].map((st, i) => ({ ...st, cls: 'glass tilt' + (i ? ' d' + i : '') }));
+    const whys = [
+      { t: 'Two-step quality check', d: 'A second editor reviews every cut before it reaches you — sound, captions, spelling, safe zones.', tag: 'Flawless, every time.' },
+      { t: 'First cut in 48–72 hours', d: 'Submit a complete brief and your draft is in the dashboard within three days. Usually sooner.', tag: 'No delays, no drama.' },
+      { t: 'Flat, honest pricing', d: 'One price per video, prepaid in packs. No hourly billing, no surprise invoices.', tag: 'No hidden fees.' },
+      { t: 'Real editors, not templates', d: 'Human editors who cut for retention — hooks, pacing and story, not presets.', tag: 'Built by editors.' },
+      { t: 'Every format, every platform', d: '9:16, 4:5, 1:1 and 16:9 — exported to each platform’s specs and safe zones.', tag: 'Post anywhere.' },
+      { t: 'Edits that feel like you', d: 'Send your references, fonts and colours once. We build a style guide every editor follows.', tag: 'True to you.' }
+    ].map((w, i) => ({ ...w, n: String(i + 1).padStart(2, '0'), cls: 'glass tilt' + (i % 3 ? ' d' + (i % 3) : '') }));
+    const dashFeats = ['Guided briefs', 'Footage upload + Drive links', 'Draft player & versions', 'Timestamped revisions', 'Chat with your editor', 'Download finals'];
 
     const sp = this.state.statsP;
     const stats = [
@@ -762,16 +838,23 @@ class Component extends DCLogic {
       { n: String(Math.round(48 * sp)), suf: 'hr', label: 'average turnaround' }
     ];
 
-    const p12 = this.state.pack === '12';
-    const packs = [['4', '4-pack'], ['12', '12-pack · save 15%']].map(([k, label]) => {
+    const pk = this.state.pack;
+    const packs = [['4', '4-pack'], ['8', '8-pack · save 8%'], ['12', '12-pack · save 15%']].map(([k, label]) => {
       const sel = this.state.pack === k;
-      return { label, sel, pick: () => this.setState({ pack: k }), style: 'min-height:42px;padding:0 22px;border-radius:999px;border:0;cursor:pointer;font:500 14px Inter,sans-serif;transition:all .3s;background:' + (sel ? '#F2F0EC' : 'transparent') + ';color:' + (sel ? '#0B0B0C' : '#8C8A86') };
+      return { label, sel, pick: () => this.setState({ pack: k }), style: 'min-height:42px;padding:0 18px;border-radius:999px;border:0;cursor:pointer;font:500 14px Inter,sans-serif;transition:all .3s;background:' + (sel ? '#F2F0EC' : 'transparent') + ';color:' + (sel ? '#0B0B0C' : '#8C8A86') };
     });
+    // Per-video prices by pack size. [Brackets] = placeholder prices — replace with your real ones.
+    const PRICE = { simple: { 4: 2499, 8: 2299, 12: 2099 }, complex: { 4: 3999, 8: 3699, 12: 3399 } };
+    const inr = (n) => '₹[' + n.toLocaleString('en-IN') + ']';
+    const pkN = +pk;
     const plans = [
-      { name: 'Simple', for: 'Clean social reels', pre: '', price: p12 ? '₹[2,099]' : '₹[2,499]', unit: '/ video', items: ['Cuts, pacing & hooks', 'Captions + music', 'Basic colour', '2 revisions · 48–72 hrs'], cta: 'Become a member', btnCls: 'btn2' },
-      { name: 'Complex', for: 'Talking-head & retention edits', pre: '', price: p12 ? '₹[3,399]' : '₹[3,999]', unit: '/ video', items: ['Everything in Simple', 'Motion graphics & zooms', 'Sound design & SFX', 'Story restructure', 'Dedicated project manager'], cta: 'Become a member', btnCls: 'btn', pop: true },
-      { name: 'Premium', for: 'Brand & launch campaigns', pre: 'from', price: '₹[24,999]', unit: '/ campaign', items: ['Full campaign, multi-format', 'Scripting & hook support', 'Advanced motion titles', 'Priority queue'], cta: 'Talk to us', btnCls: 'btn2' }
-    ].map((p, i) => ({ ...p, cls: 'glass tilt' + (i ? ' d' + i : ''), card: cardBase + 'min-height:600px;' + (p.pop ? 'border-color:#34343A;' : ''), glow: p.pop ? glowOn : glowOff }));
+      { name: 'Simple', for: 'Clean, punchy social reels', pre: '', price: inr(PRICE.simple[pkN]), unit: '/ video', total: pkN + ' videos · ' + inr(PRICE.simple[pkN] * pkN) + ' total · valid 60 days',
+        items: ['Up to ' + pkN + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Cuts, captions, music & basic colour', 'Ideal for lifestyle & social-first reels', 'Guided brief in your dashboard'], cta: 'Get started', btnCls: 'btn2', href: '#book' },
+      { name: 'Complex', for: 'Talking-head & retention edits', pre: '', price: inr(PRICE.complex[pkN]), unit: '/ video', total: pkN + ' videos · ' + inr(PRICE.complex[pkN] * pkN) + ' total · valid 60 days',
+        items: ['Up to ' + pkN + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Motion graphics, zooms & sound design', 'Story restructure for retention', 'Dedicated project manager'], cta: 'Get started', btnCls: 'btn', pop: true, href: '#book' },
+      { name: 'Premium', for: 'Campaigns that need extra love', pre: 'from', price: '₹[24,999]', unit: '/ campaign', total: 'Scoped to your project on a quick call',
+        items: ['Full campaign, every format', 'Scripting & hook support', 'Advanced motion, VFX & colour', 'Up to 3 videos in production at once', '3 revision rounds per video', 'Priority queue & project manager'], cta: 'Book a call', btnCls: 'btn2', href: '#book' }
+    ].map((p, i) => ({ ...p, cls: 'glass tilt' + (i ? ' d' + i : ''), card: cardBase + 'min-height:640px;' + (p.pop ? 'border-color:#34343A;' : ''), glow: p.pop ? glowOn : glowOff }));
 
     const TS = [
       { a: 'I used to lose my Sundays to editing. Now I film on Saturday and ', b: 'post all week', c: '.', name: '[Client name]', role: 'Lifestyle creator', av: 'width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#FF5A1F,#6B3FD6)' },
@@ -782,14 +865,15 @@ class Component extends DCLogic {
     const qDots = TS.map((_, i) => 'display:block;height:6px;border-radius:6px;transition:all .4s;width:' + (i === qi ? '26px' : '6px') + ';background:' + (i === qi ? '#F2F0EC' : '#34343A'));
 
     const FQ = [
-      ['How do I share footage?', 'Drop a Google Drive, Dropbox or WeTransfer link. Raw phone footage is totally fine.'],
-      ['How many revisions do I get?', 'Two full revision rounds per video, with timestamped notes.'],
-      ['What if I don’t like the edit?', 'Tell us why and we re-cut it. If the first edit misses badly, a senior editor takes over.'],
-      ['Can you match my existing style?', 'Yes. Send 2–3 videos you love plus your fonts and colours — we build a style guide every editor follows.'],
-      ['Is my footage secure / under NDA?', 'Yes. We sign NDAs on request and only your assigned editors can access your files.'],
-      ['What’s the max video length?', 'Memberships cover up to 90 seconds per video. Long-form YouTube is quoted separately.'],
-      ['Do you offer white-label for agencies?', 'Yes — your branding on deliverables, a dedicated editor pod, and no Edit Society credit anywhere.'],
-      ['Can I pause or cancel my plan?', 'Anytime. Unused videos roll over for 30 days.']
+      ['How does pricing work?', 'You buy a prepaid pack of 4, 8 or 12 videos at a flat price per video — bigger packs cost less per video. Packs are valid for 60 days and renew automatically. Pause or cancel anytime.'],
+      ['How do I send my footage?', 'Inside your dashboard: upload files directly, or paste a Google Drive, Dropbox or WeTransfer link for big footage. Raw phone footage is totally fine.'],
+      ['How many revisions are included?', 'Two revision rounds per video on Simple and Complex, three on Premium. Leave timestamped notes in the dashboard and your editor picks them up.'],
+      ['What counts as a revision?', 'Changes to the edit you briefed — pacing, cuts, captions, music, colour. A brand-new concept or new footage counts as a new video.'],
+      ['How fast will I get my video?', 'Your first cut lands in 48–72 hours after a complete brief. Long-form and Premium projects get a delivery date on day one.'],
+      ['Can you match my existing style?', 'Yes. Send 2–3 videos you love plus your fonts and colours — we build a style guide every editor on your account follows.'],
+      ['What if I’m not happy with the edit?', 'Tell us why in the dashboard and we re-cut it. If a first cut misses the brief, a senior editor takes over.'],
+      ['Is my footage secure?', 'Your files sit in a private dashboard only you and your assigned team can access. We sign NDAs on request.'],
+      ['Do I own the final videos?', 'Yes — 100%. You keep full rights to every video we deliver.']
     ];
     const faqs = FQ.map(([q, ans], i) => {
       const open = this.state.open === i;
@@ -805,7 +889,7 @@ class Component extends DCLogic {
       workRef: (el) => { this.workSec = el; }, workTrackRef: (el) => { this.workTrack = el; },
       workBarRef: (el) => { this.workBar = el; }, workNoRef: (el) => { this.workNo = el; if (el && !el.textContent) el.textContent = '01'; },
       wall, wallCls, svc, steps,
-      statsRef: (el) => { this.statsEl = el; }, stats, packs, plans,
+      statsRef: (el) => { this.statsEl = el; }, stats, packs, plans, whys, dashFeats,
       qOne: [TS[qi]], qDots,
       qPrev: () => { clearInterval(this.qTimer); this.setState({ q: (qi + 2) % 3 }); },
       qNext: () => { clearInterval(this.qTimer); this.setState({ q: (qi + 1) % 3 }); },

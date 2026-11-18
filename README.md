@@ -23,3 +23,24 @@ Static site, ready to host. No build step.
 - `vercel.json` — caching for assets
 
 To test locally: `npx serve .` then open the printed URL (double-clicking index.html won't work).
+
+## Client & admin dashboards
+- `login.html` — one login for everyone; admins go to `admin.html`, clients to `dashboard.html`
+- `dashboard.html` — clients: plan & videos left, new request (type → brief → footage upload/Drive links → submit), drafts, approve / request changes, messages
+- `admin.html` — studio: overview, production board, all requests, deliver drafts (v1, v2…), change status, assign editor, clients & plans
+- `dash/` — dashboard code · `supabase/schema.sql` — database · `scripts/seed.mjs` — creates the admin + test logins
+
+Until Supabase keys are added, the dashboards run in **demo mode** (sample data, nothing saved). `?demo` in the URL forces demo mode.
+
+### Go live with Supabase (one time)
+1. Create a free project at supabase.com.
+2. **SQL Editor → New query** → paste all of `supabase/schema.sql` → **Run**.
+3. **Authentication → Sign In / Providers → Email**: turn **off** “Allow new users to sign up” (you create client logins yourself).
+4. **Authentication → URL Configuration**: set Site URL to your live site and add `https://YOUR-SITE/login.html` to Redirect URLs (for password resets).
+5. Put the **Project URL** and **anon public key** (Project Settings → API) into `dash/config.js`, commit, push.
+6. On your computer, create the admin + Premium test user (prints the passwords):
+   `SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... node scripts/seed.mjs`
+   Never commit the service_role key.
+7. New clients: Supabase → Authentication → Users → **Add user** (tick “Auto confirm”), then give them a plan in **admin.html → Clients**.
+
+Uploads are limited to 50 MB per file on Supabase’s free plan (clients can paste Drive/Dropbox links for bigger footage). Raise `MAX_UPLOAD_MB` in `dash/config.js` and the bucket limit on a paid plan.

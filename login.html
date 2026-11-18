@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Log in — The Edit Society</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B0B0C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./dash/dash.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div id="demo"></div>
+<div class="auth">
+  <div class="art">
+    <video data-bg src="./assets/video/behind.mp4" poster="./assets/video/behind.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+    <div class="in">
+      <a class="logo" href="index.html" style="padding:0"><span class="sans" style="font-weight:600">the</span><span class="serif"> edit </span><span class="sans" style="font-weight:600">society</span></a>
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <span style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#D9D7D2">Upload · Review · Download</span>
+        <h2 class="disp">Your edits,<br><span class="serif" style="font-size:1.08em">one dashboard</span></h2>
+        <p style="margin:0;max-width:420px;color:#D9D7D2">Brief new videos, upload footage, watch drafts and approve — all in one place. First cut in 48–72 hours.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pane">
+    <a class="logo mlogo" href="index.html" style="padding:0"><span class="sans" style="font-weight:600">the</span><span class="serif"> edit </span><span class="sans" style="font-weight:600">society</span></a>
+
+    <form id="login" novalidate>
+      <div><h1>Welcome <span class="serif">back</span></h1><p class="muted" style="margin:10px 0 0">Log in to your Society dashboard.</p></div>
+      <div id="msg"></div>
+      <div class="field"><label for="email">Email</label><input class="in" id="email" type="email" autocomplete="email" required placeholder="you@brand.com"></div>
+      <div class="field"><label for="pw">Password</label><input class="in" id="pw" type="password" autocomplete="current-password" required placeholder="••••••••"></div>
+      <button class="btn" type="submit" id="go">Log in <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px">
+        <button type="button" class="link" id="forgot">Forgot password?</button>
+        <a class="link" href="index.html#pricing">No account? See plans</a>
+      </div>
+      <div id="demoBtns" class="hide" style="display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:1px solid #1E1E21">
+        <span class="muted" style="font-size:13px">Demo mode — explore with sample data:</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn ghost sm" href="dashboard.html">Customer demo</a><a class="btn ghost sm" href="admin.html">Admin demo</a></div>
+      </div>
+    </form>
+
+    <form id="resetForm" class="hide" novalidate>
+      <div><h1>Set a new <span class="serif">password</span></h1><p class="muted" style="margin:10px 0 0">Choose a password with at least 8 characters.</p></div>
+      <div id="msg2"></div>
+      <div class="field"><label for="npw">New password</label><input class="in" id="npw" type="password" autocomplete="new-password" minlength="8" required></div>
+      <button class="btn" type="submit">Save password</button>
+    </form>
+
+    <p class="dim" style="font-size:12px;margin:0">Trouble logging in? <a class="link" href="index.html#book">Contact the studio</a></p>
+  </div>
+</div>
+<style>.mlogo{display:none}@media (max-width:900px){.mlogo{display:block;font-size:20px}}</style>
+<script type="module">
+import { getApi, DEMO } from './dash/api.js';
+import { esc, autoplay } from './dash/ui.js';
+autoplay();
+const api = await getApi('customer');
+const $ = (id) => document.getElementById(id);
+const show = (id, html, ok) => { $(id).innerHTML = html ? `<div class="${ok ? 'ok' : 'err'}">${html}</div>` : ''; };
+
+async function routeIn() {
+  const me = await api.me();
+  location.replace(me && me.role === 'admin' ? 'admin.html' : 'dashboard.html');
+}
+if (DEMO) $('demoBtns').classList.remove('hide');
+
+const params = new URLSearchParams(location.search);
+let recovering = params.has('reset');
+api.onAuth((evt) => { if (evt === 'PASSWORD_RECOVERY') { recovering = true; $('login').classList.add('hide'); $('resetForm').classList.remove('hide'); } });
+if (recovering && !DEMO) { $('login').classList.add('hide'); $('resetForm').classList.remove('hide'); }
+else if (!DEMO && await api.session()) routeIn();
+
+$('login').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = $('email').value.trim(), pw = $('pw').value;
+  if (!email || !pw) return show('msg', 'Enter your email and password.');
+  $('go').disabled = true; show('msg', '');
+  try { await api.signIn(email, pw); await routeIn(); }
+  catch (err) { show('msg', esc(/invalid/i.test(err.message) ? 'That email and password don’t match.' : err.message)); }
+  finally { $('go').disabled = false; }
+});
+$('forgot').addEventListener('click', async () => {
+  const email = $('email').value.trim();
+  if (!email) return show('msg', 'Type your email above, then click “Forgot password?”.');
+  try { await api.resetPassword(email); show('msg', 'Check your inbox — we sent a link to reset your password.', true); }
+  catch (err) { show('msg', esc(err.message)); }
+});
+$('resetForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const pw = $('npw').value;
+  if (pw.length < 8) return show('msg2', 'Use at least 8 characters.');
+  try { await api.updatePassword(pw); show('msg2', 'Password saved. Taking you to your dashboard…', true); setTimeout(routeIn, 900); }
+  catch (err) { show('msg2', esc(err.message)); }
+});
+</script>
+</body>
+</html>
