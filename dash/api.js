@@ -37,6 +37,14 @@ async function supabaseApi() {
     demo: false,
     async session() { return (await sb.auth.getSession()).data.session; },
     async signIn(email, password) { must(await sb.auth.signInWithPassword({ email, password })); },
+    // Sign up with the chosen plan in user metadata; the database starts the plan (marked unpaid).
+    async signUp({ email, password, meta }) {
+      const { data, error } = await sb.auth.signUp({ email, password, options: { data: meta, emailRedirectTo: new URL('login.html?welcome=1', location.href).href } });
+      if (error) throw new Error(/registered|already/i.test(error.message) ? 'An account with this email already exists — log in instead.' : error.message);
+      if (data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) throw new Error('An account with this email already exists — log in instead.');
+      return { session: data.session, user: data.user };
+    },
+    async choosePlan(plan, pack) { must(await sb.rpc('choose_plan', { p_plan: plan, p_pack: pack })); },
     async signOut() { await sb.auth.signOut(); },
     async resetPassword(email) {
       must(await sb.auth.resetPasswordForEmail(email, { redirectTo: new URL('login.html?reset=1', location.href).href }));
@@ -148,6 +156,14 @@ function demoApi(role) {
     demo: true,
     async session() { return signedIn ? { user: { id: meId } } : null; },
     async signIn() { await wait(); signedIn = true; },
+    async signUp({ email, meta }) {
+      await wait(600); signedIn = true;
+      Object.assign(people[meId], { email, full_name: meta.full_name, company: meta.company, phone: meta.phone });
+      const s = subOf(meId); const pk = meta.plan === 'premium' ? 12 : +meta.pack || 4;
+      Object.assign(s, { plan: meta.plan, pack_size: pk, credits_total: pk, credits_used: 0, max_active: meta.plan === 'premium' ? 3 : 1, max_revisions: meta.plan === 'premium' ? 3 : 2, paid: false, source: 'signup', valid_until: iso(Date.now() + 60 * Dd) });
+      return { session: { user: { id: meId } } };
+    },
+    async choosePlan(plan, pack) { const s = subOf(meId); Object.assign(s, { plan, pack_size: pack, credits_total: pack, credits_used: 0, paid: false }); },
     async signOut() { signedIn = false; },
     async resetPassword() { await wait(); },
     async updatePassword() { await wait(); },

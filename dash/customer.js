@@ -65,7 +65,7 @@ async function overview(v) {
 }
 function planCard() {
   const s = sub();
-  if (!s) return `<div class="plancard glass"><div class="glow"></div><span class="dim" style="font-size:12px;letter-spacing:.08em;text-transform:uppercase">No active plan</span><p class="muted" style="margin:0">Pick a pack to start sending footage.</p><a class="btn" href="index.html#pricing">See plans</a></div>`;
+  if (!s) return `<div class="plancard glass"><div class="glow"></div><span class="dim" style="font-size:12px;letter-spacing:.08em;text-transform:uppercase">No active plan</span><p class="muted" style="margin:0">Pick a pack to start sending footage.</p><button class="btn" type="button" data-choose>Choose a plan</button></div>`;
   const active = cache.filter((r) => ACTIVE.includes(r.status)).length;
   return `<div class="plancard glass"><div class="glow"></div>
     <span class="dim" style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;position:relative">Your plan</span>
@@ -76,7 +76,8 @@ function planCard() {
       <div class="kv"><span>Revisions per video</span><b>${s.max_revisions} rounds</b></div>
       <div class="kv"><span>Valid until</span><b>${fmtDate(s.valid_until)}</b></div>
     </div>
-    <a class="btn ghost sm" href="index.html#pricing" style="position:relative;align-self:flex-start">Top up or upgrade</a></div>`;
+    ${s.paid === false ? '<div class="kv" style="position:relative;border-top:0;padding:0"><span style="color:#F2C14E">Payment pending</span><b style="font-weight:400;color:#8C8A86;font-size:13px">Invoice on its way</b></div>' : ''}
+    <a class="btn ghost sm" href="pricing.html" style="position:relative;align-self:flex-start">Top up or upgrade</a></div>`;
 }
 const emptyState = () => `<div class="empty"><b>No requests yet</b><span>Send your first footage — your first cut lands in 48–72 hours.</span><a class="btn sm" href="#/new">${ic('plus', 16)} New request</a></div>`;
 const row = (r) => `<a class="rrow" href="#/request/${r.id}"><span class="num">${refNo(r)}</span><span class="tt"><b>${esc(r.title)}</b><small>${esc(typeLabel(r.video_type))} · ${PLAN_LABEL[r.tier]}</small></span><span class="stc">${chip(r.status)}</span><span class="when">${ago(r.updated_at || r.created_at)}</span><span class="go">${ic('arrow', 16)}</span></a>`;
@@ -319,13 +320,105 @@ async function account(v) {
       <div id="pmsg"></div><div><button class="btn">Save changes</button></div></form>
     ${planCard()}
   </div>
-  <form class="card glass fadeup" id="pwf" style="display:flex;flex-direction:column;gap:18px;max-width:560px"><h2>Change password</h2>
-    <div class="field"><label for="a-pw">New password</label><input class="in" id="a-pw" type="password" minlength="8" autocomplete="new-password"></div><div id="pwmsg"></div><div><button class="btn ghost">Update password</button></div></form>`;
+  <div class="grid g2 fadeup"><form class="card glass" id="pwf" style="display:flex;flex-direction:column;gap:18px"><h2>Change password</h2>
+    <div class="field"><label for="a-pw">New password</label><input class="in" id="a-pw" type="password" minlength="8" autocomplete="new-password"></div><div id="pwmsg"></div><div><button class="btn ghost">Update password</button></div></form>
+  <div class="card glass" style="display:flex;flex-direction:column;gap:14px;align-items:flex-start"><h2>Dashboard guide</h2><p class="muted" style="margin:0">A 30-second walkthrough of requests, uploads, drafts and approvals.</p><button class="btn ghost" id="replayTour" type="button">${ic('play', 16)} Replay the tour</button></div></div>`;
+  $('#replayTour', v).addEventListener('click', () => tour());
   $('#prof', v).addEventListener('submit', async (e) => { e.preventDefault();
     try { await api.updateProfile({ full_name: $('#a-name', v).value.trim(), company: $('#a-co', v).value.trim(), phone: $('#a-ph', v).value.trim() }); me = await api.me(); $('#pmsg', v).innerHTML = '<div class="ok">Saved.</div>'; } catch (err) { $('#pmsg', v).innerHTML = errorBox(err); } });
   $('#pwf', v).addEventListener('submit', async (e) => { e.preventDefault(); const p = $('#a-pw', v).value;
     if (p.length < 8) { $('#pwmsg', v).innerHTML = '<div class="err">Use at least 8 characters.</div>'; return; }
     try { await api.updatePassword(p); $('#pwmsg', v).innerHTML = '<div class="ok">Password updated.</div>'; $('#a-pw', v).value = ''; } catch (err) { $('#pwmsg', v).innerHTML = errorBox(err); } });
+}
+
+/* ---------------- onboarding: welcome (after sign-up), tour, choose plan ---------------- */
+const TOUR_KEY = 'tes_tour_done_' + me.id;
+function welcome() {
+  const s = sub(); if (!s) return choosePlan(true);
+  const d = document.createElement('div'); d.className = 'wel'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'welH');
+  const colors = ['#FF5A1F', '#F2A65A', '#E0303B', '#F2F0EC', '#6B3FD6', '#3BA58C'];
+  const conf = Array.from({ length: 36 }, (_, i) => { const a = (i / 36) * Math.PI * 2 + Math.random() * .3, r = 140 + Math.random() * 160;
+    return `<i style="--x:${(Math.cos(a) * r).toFixed(0)}px;--y:${(Math.sin(a) * r * .8 + 120).toFixed(0)}px;--r:${(Math.random() * 720 - 360).toFixed(0)}deg;background:${colors[i % colors.length]};animation-delay:${(.85 + Math.random() * .2).toFixed(2)}s;${i % 3 ? '' : 'border-radius:50%;width:8px;height:8px;'}"></i>`; }).join('');
+  d.innerHTML = `<div class="box glass"><div class="glowx" aria-hidden="true"></div><div class="confetti" aria-hidden="true">${conf}</div>
+    <div class="tick" aria-hidden="true"><svg viewBox="0 0 84 84"><circle cx="42" cy="42" r="38"/><path d="M27 43l10 10 20-21"/></svg></div>
+    <h2 id="welH">You’re in, ${esc(firstName())}! <span class="serif" style="color:#FF7A45">Plan active.</span></h2>
+    <p>Welcome to the Society. Your pack is ready — send your first footage whenever you like.</p>
+    <div class="ticket"><div class="t1"><b>${PLAN_LABEL[s.plan]} <span class="serif" style="font-size:20px;color:#8C8A86;letter-spacing:0;text-transform:none">${s.pack_size}-pack</span></b><span>Subscribed</span></div>
+      <div class="rows"><div><small>Videos</small><b>${s.credits_total}</b></div><div><small>Revisions</small><b>${s.max_revisions} rounds</b></div><div><small>Valid until</small><b>${fmtDate(s.valid_until)}</b></div></div></div>
+    ${s.paid === false ? '<p style="font-size:13px">No payment needed today — your invoice will follow on email/WhatsApp.</p>' : ''}
+    <div class="acts"><button class="btn accent" id="wTour" type="button">Take a quick tour ${ic('arrow', 16)}</button><button class="btn ghost" id="wSkip" type="button">Skip — go to my dashboard</button></div></div>`;
+  document.body.appendChild(d);
+  const close = () => { d.style.transition = 'opacity .3s'; d.style.opacity = '0'; setTimeout(() => d.remove(), 300); };
+  d.querySelector('#wTour').addEventListener('click', () => { close(); setTimeout(tour, 250); });
+  d.querySelector('#wSkip').addEventListener('click', () => { localStorage.setItem(TOUR_KEY, '1'); close(); });
+  d.querySelector('#wTour').focus();
+}
+function tour() {
+  const slides = [
+    { t: 'Your dashboard', d: 'See your plan, videos left and what’s in production — everything at a glance.', art: '<img src="assets/dash/step-1.jpg" alt="">' },
+    { t: 'Start a new request', d: 'Tap “New request”, pick the video type and answer a short guided brief. Takes two minutes.', art: '<img src="assets/dash/step-2.jpg" alt="">' },
+    { t: 'Send your footage', d: 'Upload files up to 50 MB each, or paste a Google Drive / Dropbox link for bigger footage.', art: `<div class="upl"><div class="dz">${ic('upload', 22)}<b style="color:#F2F0EC">Drop files or browse</b><span style="color:#8C8A86">or paste a Drive link</span></div><div class="fr">${ic('film', 14)} raw_footage_A.mp4 <i></i></div><div class="fr">${ic('link', 14)} drive.google.com/… <span style="margin-left:auto;color:#5CC9A7">Added</span></div></div>` },
+    { t: 'Review & approve', d: 'Your first cut lands in 48–72 hours. Watch it, ask for changes with timestamps, then approve.', art: '<img src="assets/dash/step-3.jpg" alt="">' },
+    { t: 'Chat & download', d: 'Message your editor, compare versions and download finals — on desktop or phone.', art: '<img class="phone" src="assets/dash/phone-2.jpg" alt="">' }
+  ];
+  let i = 0;
+  const d = document.createElement('div'); d.className = 'tour'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-label', 'Dashboard tour');
+  d.innerHTML = `<div class="box glass"><div class="top"><span id="tStep">Step 1 of ${slides.length}</span><button class="skip" id="tSkip" type="button">Skip tour</button></div>
+    <div class="vp"><div class="track" id="tTrack">${slides.map((x, n) => `<div class="slide" aria-hidden="${n ? 'true' : 'false'}"><div class="art"><span class="num">${String(n + 1).padStart(2, '0')}</span>${x.art}</div><div class="txt"><h3>${x.t}</h3><p>${x.d}</p></div></div>`).join('')}</div></div>
+    <div class="foot"><div class="dots" id="tDots">${slides.map((_, n) => `<button type="button" aria-label="Go to step ${n + 1}" data-i="${n}"></button>`).join('')}</div>
+    <div class="nav"><button class="btn ghost sm" id="tBack" type="button">${ic('back', 15)} Back</button><button class="btn sm" id="tNext" type="button">Next ${ic('arrow', 15)}</button></div></div></div>`;
+  document.body.appendChild(d);
+  const track = d.querySelector('#tTrack'), sl = [...d.querySelectorAll('.slide')], dots = [...d.querySelectorAll('#tDots button')];
+  const close = (done) => { localStorage.setItem(TOUR_KEY, '1'); d.style.transition = 'opacity .3s'; d.style.opacity = '0'; setTimeout(() => d.remove(), 300); document.removeEventListener('keydown', key); if (done) location.hash = '#/new'; };
+  const show = (n) => {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    track.style.transform = `translateX(-${i * 100}%)`;
+    sl.forEach((x, k) => { x.classList.toggle('cur', k === i); x.setAttribute('aria-hidden', k !== i); });
+    dots.forEach((x, k) => x.classList.toggle('on', k === i));
+    d.querySelector('#tStep').textContent = `Step ${i + 1} of ${slides.length}`;
+    d.querySelector('#tBack').style.visibility = i ? 'visible' : 'hidden';
+    d.querySelector('#tNext').innerHTML = i === slides.length - 1 ? `Start my first request ${ic('arrow', 15)}` : `Next ${ic('arrow', 15)}`;
+  };
+  const key = (e) => { if (e.key === 'ArrowRight') show(i + 1); if (e.key === 'ArrowLeft') show(i - 1); if (e.key === 'Escape') close(); };
+  d.querySelector('#tNext').addEventListener('click', () => (i === slides.length - 1 ? close(true) : show(i + 1)));
+  d.querySelector('#tBack').addEventListener('click', () => show(i - 1));
+  d.querySelector('#tSkip').addEventListener('click', () => close());
+  dots.forEach((b) => b.addEventListener('click', () => show(+b.dataset.i)));
+  document.addEventListener('keydown', key);
+  let x0 = null; const vp = d.querySelector('.vp');
+  vp.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  vp.addEventListener('touchend', (e) => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) show(i + (dx < 0 ? 1 : -1)); x0 = null; });
+  show(0); d.querySelector('#tNext').focus();
+}
+function choosePlan(thenWelcome) {
+  const P = (window.TES && window.TES.pricing) || { simple: { 4: 2499, 8: 2299, 12: 2099 }, complex: { 4: 3999, 8: 3699, 12: 3399 } };
+  const inr = (n) => '₹[' + n.toLocaleString('en-IN') + ']';
+  let plan = 'complex', pack = 8;
+  const m = modal(`<h2 class="sans" style="margin:0">Choose your <span class="serif">plan</span></h2><p class="muted" style="margin:0">No payment needed today — your plan starts right away and we’ll send an invoice.</p>
+    <div class="seg" id="cpPack">${[4, 8, 12].map((n) => `<button type="button" data-n="${n}" class="${n === pack ? 'on' : ''}">${n}-pack</button>`).join('')}</div>
+    <div class="flist" id="cpList"></div><div id="cpErr"></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn ghost" data-close>Later</button><button class="btn accent" id="cpGo">Start plan</button></div>`);
+  const draw = () => {
+    m.el.querySelector('#cpList').innerHTML = [['simple', 'Simple', 'Clean social reels'], ['complex', 'Complex', 'Talking-head & retention edits'], ['premium', 'Premium', 'Campaigns · 12 videos']].map(([k, n, dsc]) =>
+      `<button type="button" class="frow" data-p="${k}" style="cursor:pointer;text-align:left;${plan === k ? 'border-color:#FF5A1F' : ''}"><span class="fi" style="${plan === k ? 'background:#FF5A1F;color:#0B0B0C' : ''}">${ic('check', 14)}</span><span class="nm"><b>${n}</b><small>${dsc}</small></span><span style="font-weight:500">${k === 'premium' ? 'custom' : inr(P[k][pack]) + '<small class="dim"> /video</small>'}</span></button>`).join('');
+    m.el.querySelectorAll('[data-p]').forEach((b) => b.addEventListener('click', () => { plan = b.dataset.p; draw(); }));
+  };
+  m.el.querySelectorAll('#cpPack button').forEach((b) => b.addEventListener('click', () => { pack = +b.dataset.n; m.el.querySelectorAll('#cpPack button').forEach((x) => x.classList.toggle('on', x === b)); draw(); }));
+  m.el.querySelector('#cpGo').addEventListener('click', async () => {
+    try { await api.choosePlan(plan, plan === 'premium' ? 12 : pack); me = await api.me(); m.close(); location.hash = '#/'; window.dispatchEvent(new HashChangeEvent('hashchange')); if (thenWelcome) setTimeout(welcome, 500); else toast('Plan started — welcome to the Society!'); }
+    catch (e) { m.el.querySelector('#cpErr').innerHTML = errorBox(e); }
+  });
+  draw();
+}
+document.addEventListener('click', (e) => { if (e.target.closest('[data-choose]')) choosePlan(true); });
+function onboarding() {
+  const qs = new URLSearchParams(location.search);
+  if (qs.has('welcome')) {
+    qs.delete('welcome'); history.replaceState(null, '', location.pathname + (qs.toString() ? '?' + qs : '') + location.hash);
+    return setTimeout(welcome, 500);
+  }
+  if (!sub()) return setTimeout(() => choosePlan(true), 600);
+  if (!localStorage.getItem(TOUR_KEY) && sub().source === 'signup') setTimeout(welcome, 600);
 }
 
 router([
@@ -335,3 +428,4 @@ router([
   [/^#\/request\/([\w-]+)$/, detail],
   [/^#\/account$/, account]
 ], frame);
+onboarding();

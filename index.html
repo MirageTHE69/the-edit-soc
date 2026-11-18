@@ -556,7 +556,7 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 </div>
 <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px">
 <a class="btn" href="login.html">Log in<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
-<a class="btn2" href="dashboard.html?demo">See the demo<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
+<a class="btn2" href="signup.html">Create account<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
 </div>
 </div>
 <div class="phones" aria-hidden="true" style="position: relative; height: 560px">
@@ -960,9 +960,9 @@ class Component extends DCLogic {
     const pkN = +pk;
     const plans = [
       { name: 'Simple', for: 'Clean, punchy social reels', pre: '', price: inr(PRICE.simple[pkN]), unit: '/ video', total: pkN + ' videos · ' + inr(PRICE.simple[pkN] * pkN) + ' total · valid 60 days',
-        items: ['Up to ' + pkN + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Cuts, captions, music & basic colour', 'Ideal for lifestyle & social-first reels', 'Guided brief in your dashboard'], cta: 'Get started', btnCls: 'btn2', href: '#book' },
+        items: ['Up to ' + pkN + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Cuts, captions, music & basic colour', 'Ideal for lifestyle & social-first reels', 'Guided brief in your dashboard'], cta: 'Get started', btnCls: 'btn2', href: 'signup.html?plan=simple&pack=' + pkN },
       { name: 'Complex', for: 'Talking-head & retention edits', pre: '', price: inr(PRICE.complex[pkN]), unit: '/ video', total: pkN + ' videos · ' + inr(PRICE.complex[pkN] * pkN) + ' total · valid 60 days',
-        items: ['Up to ' + pkN + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Motion graphics, zooms & sound design', 'Story restructure for retention', 'Dedicated project manager'], cta: 'Get started', btnCls: 'btn', pop: true, href: '#book' },
+        items: ['Up to ' + pkN + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Motion graphics, zooms & sound design', 'Story restructure for retention', 'Dedicated project manager'], cta: 'Get started', btnCls: 'btn', pop: true, href: 'signup.html?plan=complex&pack=' + pkN },
       { name: 'Premium', for: 'Campaigns that need extra love', pre: 'from', price: inr(PR.premiumFrom), unit: '/ campaign', total: 'Scoped to your project on a quick call',
         items: ['Full campaign, every format', 'Scripting & hook support', 'Advanced motion, VFX & colour', 'Up to 3 videos in production at once', '3 revision rounds per video', 'Priority queue & project manager'], cta: 'Book a call', btnCls: 'btn2', href: '#book' }
     ].map((p, i) => ({ ...p, cls: 'glass tilt' + (i ? ' d' + i : ''), card: cardBase + 'min-height:580px;' + (p.pop ? 'border-color:#34343A;' : ''), glow: p.pop ? glowOn : glowOff }));

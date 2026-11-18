@@ -260,9 +260,9 @@
       var n = pack;
       var plans = [
         { k: 'simple', name: 'Simple', for: 'Clean, punchy social reels', price: inr(P.simple[n]), unit: '/ video', tot: n + ' videos · ' + inr(P.simple[n] * n) + ' total · valid ' + P.validity,
-          feats: ['Up to ' + n + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Cuts, captions, music & basic colour', 'Client dashboard & guided brief'], cta: btn(BOOK, 'Get started', 'btn2') },
+          feats: ['Up to ' + n + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Cuts, captions, music & basic colour', 'Client dashboard & guided brief'], cta: btn('signup.html?plan=simple&pack=' + n, 'Get started', 'btn2') },
         { k: 'complex', pop: true, name: 'Complex', for: 'Talking-head & retention edits', price: inr(P.complex[n]), unit: '/ video', tot: n + ' videos · ' + inr(P.complex[n] * n) + ' total · valid ' + P.validity,
-          feats: ['Up to ' + n + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Motion graphics, zooms & sound design', 'Story restructure for retention', 'Dedicated project manager'], cta: btn(BOOK, 'Get started') },
+          feats: ['Up to ' + n + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Motion graphics, zooms & sound design', 'Story restructure for retention', 'Dedicated project manager'], cta: btn('signup.html?plan=complex&pack=' + n, 'Get started') },
         { k: 'premium', name: 'Premium', for: 'Launches & campaigns that need extra love', pre: 'from', price: inr(P.premiumFrom), unit: '/ campaign', tot: 'Scoped to your project on a quick call',
           feats: ['Full campaign, every format', 'Scripting & hook support', 'Advanced motion, VFX & colour', 'Up to 3 videos in production at once', '3 revision rounds per video', 'Creative director & priority queue'], cta: btn(BOOK, 'Book a call', 'btn2') }
       ];
@@ -299,7 +299,7 @@
       ['Can I switch plans later?', 'Yes — upgrade or downgrade when your pack renews, or top up any time from your dashboard.'],
       ['Is GST included?', 'Prices are shown excluding GST. GST is added at checkout where applicable.'],
       ['What if my video is longer than 90 seconds?', 'Simple and Complex cover videos up to 90 seconds. Longer edits are quoted per video or handled on Premium.'],
-      ['How do I pay?', 'Book a quick call and we’ll send an invoice or payment link. Your dashboard login arrives the same day.']
+      ['How do I pay?', 'Sign up and your plan starts right away — no card needed. We send an invoice or payment link on email/WhatsApp after your first request.']
     ];
     app.innerHTML =
       '<section class="phero"><div class="wrap">' + crumbs([['Home', 'index.html'], ['Pricing']]) +

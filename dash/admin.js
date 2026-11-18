@@ -169,15 +169,15 @@ function thread(ms) {
 /* ---------------- clients ---------------- */
 async function clients(v) {
   const list = await api.listClients();
-  v.innerHTML = `<div class="ph fadeup"><div><h1><span class="serif">Clients</span> &amp; plans</h1><p>${list.length} client${list.length === 1 ? '' : 's'}. Edit a plan to top up videos or extend validity.</p></div></div>
+  v.innerHTML = `<div class="ph fadeup"><div><h1><span class="serif">Clients</span> &amp; plans</h1><p>${list.length} client${list.length === 1 ? '' : 's'}${list.filter((c) => c.subscription && c.subscription.paid === false).length ? ` · <span style="color:#F2C14E">${list.filter((c) => c.subscription && c.subscription.paid === false).length} awaiting payment</span>` : ''}. Edit a plan to mark it paid, top up videos or extend validity.</p></div></div>
   <div class="card glass fadeup ctable"><div class="rlist">
     <div class="rrow head"><span>Client</span><span>Plan</span><span>Videos used</span><span>Valid until</span><span></span></div>
     ${list.map((c) => { const s = c.subscription; return `<div class="rrow"><span class="tt"><b>${esc(c.full_name || c.email)}</b><small>${esc(c.company || '')} ${esc(c.email)}</small></span>
-      <span>${s ? tierChip(s.plan) + ` <span class="dim" style="font-size:12px">${s.pack_size}-pack</span>` : '<span class="dim">None</span>'}</span>
+      <span>${s ? tierChip(s.plan) + ` <span class="dim" style="font-size:12px">${s.pack_size}-pack</span>` + (s.paid === false ? ' <span class="chip st-revision" style="min-height:22px;font-size:11px">Unpaid</span>' : '') : '<span class="dim">None</span>'}</span>
       <span class="when">${s ? `${s.credits_used} / ${s.credits_total}` : '—'}</span><span class="when">${s ? fmtDate(s.valid_until) : '—'}</span>
       <button class="btn sm ghost" data-edit="${c.id}">${s ? 'Edit plan' : 'Add plan'}</button></div>`; }).join('') || '<div class="empty"><b>No clients yet</b><span>Create logins in Supabase → Authentication → Users.</span></div>'}
   </div></div>
-  <p class="dim" style="font-size:13px;margin:0">New client logins are created in Supabase (Authentication → Users → Add user) or with <code>scripts/seed.mjs</code>. They then appear here so you can assign a plan.</p>`;
+  <p class="dim" style="font-size:13px;margin:0">Clients sign up at <b>/signup.html</b> and their plan starts right away (marked unpaid until you mark it paid here). You can also add logins in Supabase → Authentication → Users.</p>`;
   $$('[data-edit]', v).forEach((b) => b.addEventListener('click', () => editPlan(list.find((c) => c.id === b.dataset.edit), () => clients(v))));
 }
 function editPlan(c, done) {
@@ -191,6 +191,7 @@ function editPlan(c, done) {
       <div class="field"><label for="p-act">Active at a time</label><input class="in" id="p-act" type="number" min="1" value="${s.max_active}"></div>
       <div class="field"><label for="p-rev">Revisions per video</label><input class="in" id="p-rev" type="number" min="0" value="${s.max_revisions}"></div>
       <div class="field"><label for="p-until">Valid until</label><input class="in" id="p-until" type="date" value="${s.valid_until.slice(0, 10)}"></div>
+      <div class="field"><label for="p-paid">Payment</label><select class="in" id="p-paid"><option value="paid" ${s.paid === false ? '' : 'selected'}>Paid</option><option value="unpaid" ${s.paid === false ? 'selected' : ''}>Unpaid — invoice sent</option></select></div>
       <div class="field"><label for="p-st">Status</label><select class="in" id="p-st">${['active', 'paused', 'expired'].map((x) => `<option ${s.status === x ? 'selected' : ''}>${x}</option>`).join('')}</select></div>
     </div><div id="perr"></div>
     <div style="display:flex;gap:10px;justify-content:flex-end"><button class="btn ghost" data-close>Cancel</button><button class="btn" id="psave">Save plan</button></div>`);
@@ -198,7 +199,7 @@ function editPlan(c, done) {
   $('#p-pack', m.el).addEventListener('change', (e) => { $('#p-tot', m.el).value = e.target.value; });
   $('#psave', m.el).addEventListener('click', async () => {
     const g = (id) => $('#' + id, m.el).value;
-    const fields = { plan: g('p-plan'), pack_size: +g('p-pack'), credits_total: +g('p-tot'), credits_used: +g('p-used'), max_active: +g('p-act'), max_revisions: +g('p-rev'), valid_until: new Date(g('p-until') + 'T23:59:59').toISOString(), status: g('p-st') };
+    const fields = { plan: g('p-plan'), pack_size: +g('p-pack'), credits_total: +g('p-tot'), credits_used: +g('p-used'), max_active: +g('p-act'), max_revisions: +g('p-rev'), valid_until: new Date(g('p-until') + 'T23:59:59').toISOString(), status: g('p-st'), paid: g('p-paid') === 'paid' };
     try { await api.saveSubscription(c.id, fields, c.subscription && c.subscription.id); m.close(); toast('Plan saved'); done(); } catch (e) { $('#perr', m.el).innerHTML = errorBox(e); }
   });
 }
