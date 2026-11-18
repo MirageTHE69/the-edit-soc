@@ -13,6 +13,17 @@
   var NE = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg>';
   var CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>';
   function pad(n) { return String(n).padStart(2, '0'); }
+  var PLAY = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"></path></svg>';
+  var EYE = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+  function wvid(id) { return '<video src="./assets/work/' + id + '.mp4" poster="./assets/work/' + id + '.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>'; }
+  function longCard(l) {
+    return '<a class="lcard rv" href="' + l.full + '" data-full="' + l.full + '" data-title="' + l.title + '"><div class="media">' + wvid(l.id) + '<span class="tag">' + l.cat + '</span><span class="playpill">' + PLAY + '<span>Play · ' + l.length + '</span></span></div>' +
+      '<div class="pmeta"><b>' + l.title + '</b><span>' + l.client + '</span></div></a>';
+  }
+  function shortCard(r) {
+    return '<a class="scard rv" href="' + r.full + '" data-full="' + r.full + '" data-title="' + r.title + '" data-portrait="1">' + wvid(r.id) +
+      '<span class="vw">' + EYE + ' ' + r.views + ' views</span><span class="tt">' + r.title + '<small>' + r.client + ' · Instagram</small></span></a>';
+  }
   function vid(name, extra) {
     return '<video src="./assets/video/' + name + '.mp4" poster="./assets/video/' + name + '.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"' + (extra || '') + '></video>';
   }
@@ -42,7 +53,7 @@
       '<span class="pill line rv">Let’s work together</span>' +
       '<h2 class="sans">' + h + '</h2>' +
       '<p class="lead rv" style="text-align:center">' + sub + '</p>' +
-      '<div class="rv" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">' + btn(BOOK, 'Book a free call') + btn('index.html#pricing', 'See memberships', 'btn2') + '</div>' +
+      '<div class="rv" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">' + btn(BOOK, 'Book a free call') + btn('pricing.html', 'See pricing', 'btn2') + '</div>' +
       '</div></section>';
   }
   function faqList(items) {
@@ -64,7 +75,7 @@
 
   /* ---------- nav, mobile menu, footer ---------- */
   function navHtml() {
-    var links = [['Home', 'index.html', 'home'], ['Work', 'work.html', 'work'], ['Services', 'services.html', 'services'], ['Memberships', 'index.html#pricing'], ['FAQ', 'index.html#faq']];
+    var links = [['Home', 'index.html', 'home'], ['Work', 'work.html', 'work'], ['Services', 'services.html', 'services'], ['Pricing', 'pricing.html', 'pricing'], ['FAQ', 'index.html#faq']];
     var cur = page === 'project' ? 'work' : page === 'service' ? 'services' : page;
     return '<header class="nav"><nav class="nav-in" aria-label="Main">' +
       '<a class="logo" href="index.html"><span class="sans" style="font-weight:600">the</span><span class="serif"> edit </span><span class="sans" style="font-weight:600">society</span></a>' +
@@ -85,7 +96,7 @@
       '<div style="position:relative;display:flex;flex-direction:column;gap:12px"><span style="font-size:30px;line-height:1"><span class="sans" style="font-weight:600">the</span><span class="serif" style="font-size:33px"> edit </span><span class="sans" style="font-weight:600">society</span></span>' +
       '<p style="margin:0;max-width:340px;font-size:14px;color:#8C8A86">We edit for <span style="color:#F2F0EC">creators</span>, brands and agencies who post every week. A <span style="color:#F2F0EC">Marca Creatives</span> studio.</p></div>' +
       '<div style="position:relative;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap"><span style="font-size:12px;color:#6E6C68">The Edit Society © 2026. All rights reserved.</span>' +
-      '<div class="fpills"><a class="pill" href="work.html">Work</a><a class="pill" href="services.html">Services</a><a class="pill" href="index.html#pricing">Memberships</a><a class="pill" href="index.html#faq">FAQ</a><a class="pill" href="' + BOOK + '">Editors — join us</a><a class="pill" href="' + BOOK + '">Privacy</a></div></div></div>' +
+      '<div class="fpills"><a class="pill" href="work.html">Work</a><a class="pill" href="services.html">Services</a><a class="pill" href="pricing.html">Pricing</a><a class="pill" href="login.html">Client login</a><a class="pill" href="index.html#faq">FAQ</a><a class="pill" href="' + BOOK + '">Editors — join us</a><a class="pill" href="' + BOOK + '">Privacy</a></div></div></div>' +
       '<div class="glass fcard b"><div style="display:flex;flex-direction:column;gap:18px"><span class="sans" style="font-size:22px;font-weight:500;line-height:1.2">Follow the<br>Society</span><div class="social">' +
       ico('Instagram', '<rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle>') +
       ico('YouTube', '<rect x="2" y="5" width="20" height="14" rx="4"></rect><path d="M10 9l5 3-5 3z"></path>') +
@@ -193,12 +204,32 @@
       '<section class="phero"><div class="wrap">' + crumbs([['Home', 'index.html'], ['Work']]) +
       '<h1 class="ptitle disp">' + title2('Selected', '<span class="serif" style="font-size:1.08em">work</span>') + '</h1>' +
       '<div class="hrow"><p class="lead fade-in d-1">Reels, YouTube, podcasts, ads and brand films — a few of the edits we’ve shipped for creators and brands who post every week.</p>' +
-      '<span class="count fade-in d-2"><span id="wcount">' + pad(D.projects.length) + '</span> projects</span></div>' +
+      '<span class="count fade-in d-2">' + pad((D.longs || []).length + (D.reels || []).length) + ' videos · ' + pad(D.projects.length) + ' case studies</span></div>' +
       '<div class="filters fade-in d-2" role="tablist" aria-label="Filter projects" style="margin-top:48px">' + cats.map(function (c, i) {
         return '<button type="button" role="tab" class="pill' + (i ? '' : ' on') + '" aria-selected="' + (!i) + '" data-f="' + c + '">' + c + '</button>';
       }).join('') + '</div></div></section>' +
-      '<section style="padding:72px 0 0"><div class="wrap"><div class="pgrid" id="pgrid">' + D.projects.map(function (p) { return pcard(p, { cls: 'pin' }); }).join('') + '</div></div></section>' +
+      '<section id="latest" style="padding:72px 0 0;scroll-margin-top:90px"><div class="wrap">' +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:40px"><h2 class="h2 sans"><span class="ln"><span class="up">Latest</span></span><span class="ln"><span class="up"><span class="serif">edits</span></span></span></h2>' +
+      '<div class="wtabs" role="tablist" aria-label="Video type"><button type="button" role="tab" class="on" data-t="long">Long-form video editing</button><button type="button" role="tab" data-t="short">Short-form video editing</button></div></div>' +
+      '<div id="tab-long" class="lgrid">' + (D.longs || []).map(longCard).join('') + '</div>' +
+      '<div id="tab-short" class="sgrid hide-tab">' + (D.reels || []).map(shortCard).join('') + '</div>' +
+      '<p class="muted" style="margin:28px 0 0;font-size:14px">Tap any video to watch it in full with sound.</p></div></section>' +
+      '<section style="padding:140px 0 0"><div class="wrap"><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:56px"><h2 class="h2 sans"><span class="ln"><span class="up">Case</span></span><span class="ln"><span class="up"><span class="serif">studies</span></span></span></h2><span class="count"><span id="wcount">' + pad(D.projects.length) + '</span> projects</span></div>' +
+      '<div class="pgrid" id="pgrid">' + D.projects.map(function (p) { return pcard(p, { cls: 'pin' }); }).join('') + '</div></div></section>' +
       ctaBand('Your edit<br><span class="serif">could be next.</span>', 'Send us your footage and we’ll send back something you’ll want to post — in 48–72 hours.');
+    var flt = app.querySelector('.filters'); flt.classList.remove('fade-in', 'd-2'); flt.style.margin = '0 0 48px';
+    document.getElementById('pgrid').parentNode.insertBefore(flt, document.getElementById('pgrid'));
+    var tabs = app.querySelector('.wtabs');
+    function showTab(t) {
+      [].forEach.call(tabs.children, function (b) { var on = b.getAttribute('data-t') === t; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
+      document.getElementById('tab-long').classList.toggle('hide-tab', t !== 'long');
+      document.getElementById('tab-short').classList.toggle('hide-tab', t !== 'short');
+    }
+    tabs.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) showTab(b.getAttribute('data-t')); });
+    if (location.hash === '#shorts' || location.hash === '#long') {
+      showTab(location.hash === '#shorts' ? 'short' : 'long');
+      setTimeout(function () { document.getElementById('latest').scrollIntoView(); }, 50);
+    }
     var grid = document.getElementById('pgrid');
     function stagger() {
       var vis = [].filter.call(grid.children, function (c) { return !c.classList.contains('hide'); });
@@ -217,6 +248,88 @@
         if (show) { c.classList.remove('pin'); void c.offsetWidth; c.style.animationDelay = (i * 0.04) + 's'; c.classList.add('pin'); }
       });
       stagger();
+    });
+  }
+
+  function renderPricing() {
+    setMeta('Pricing', 'Simple, transparent pricing for video editing: prepaid packs of 4, 8 or 12 videos at a flat price per video. Compare Simple, Complex and Premium plans.');
+    var P = D.pricing, pack = 8;
+    var inr = function (n) { return '₹[' + n.toLocaleString('en-IN') + ']'; };
+    var CHK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>';
+    function planCards() {
+      var n = pack;
+      var plans = [
+        { k: 'simple', name: 'Simple', for: 'Clean, punchy social reels', price: inr(P.simple[n]), unit: '/ video', tot: n + ' videos · ' + inr(P.simple[n] * n) + ' total · valid ' + P.validity,
+          feats: ['Up to ' + n + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Cuts, captions, music & basic colour', 'Client dashboard & guided brief'], cta: btn(BOOK, 'Get started', 'btn2') },
+        { k: 'complex', pop: true, name: 'Complex', for: 'Talking-head & retention edits', price: inr(P.complex[n]), unit: '/ video', tot: n + ' videos · ' + inr(P.complex[n] * n) + ' total · valid ' + P.validity,
+          feats: ['Up to ' + n + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Motion graphics, zooms & sound design', 'Story restructure for retention', 'Dedicated project manager'], cta: btn(BOOK, 'Get started') },
+        { k: 'premium', name: 'Premium', for: 'Launches & campaigns that need extra love', pre: 'from', price: inr(P.premiumFrom), unit: '/ campaign', tot: 'Scoped to your project on a quick call',
+          feats: ['Full campaign, every format', 'Scripting & hook support', 'Advanced motion, VFX & colour', 'Up to 3 videos in production at once', '3 revision rounds per video', 'Creative director & priority queue'], cta: btn(BOOK, 'Book a call', 'btn2') }
+      ];
+      return plans.map(function (pl, i) {
+        return '<div class="glass plan tilt' + (i ? ' d' + i : '') + (pl.pop ? ' pop' : '') + '">' + (pl.pop ? '<div class="glow" aria-hidden="true"></div>' : '') +
+          '<div class="top"><span class="nm">' + pl.name + '</span>' + (pl.pop ? '<span class="badge">Most popular</span>' : '') + '</div>' +
+          '<span class="for">' + pl.for + '</span>' +
+          '<div class="pr">' + (pl.pre ? '<span class="serif" style="font-size:20px;color:#8C8A86">' + pl.pre + '</span>' : '') + '<b>' + pl.price + '</b><span style="color:#6E6C68">' + pl.unit + '</span></div>' +
+          '<span class="tot">' + pl.tot + '</span>' +
+          '<div class="feats">' + pl.feats.map(function (f) { return '<span><i>' + CHK + '</i>' + f + '</span>'; }).join('') + '</div>' + pl.cta + '</div>';
+      }).join('');
+    }
+    function cell(v, pop) {
+      var c = pop ? ' class="pop"' : '';
+      if (v === true) return '<td' + c + '><span class="yes" aria-label="Included">' + CHK + '</span></td>';
+      if (v === false) return '<td' + c + '><span class="no" aria-label="Not included">—</span></td>';
+      return '<td' + c + '>' + v + '</td>';
+    }
+    var head = '<thead><tr><th scope="col"><span style="margin:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase">Compare plans</span></th>' +
+      '<th scope="col"><b>Simple</b><span>from ' + inr(P.simple[12]) + ' / video</span></th>' +
+      '<th scope="col" class="pop"><b>Complex</b><span>from ' + inr(P.complex[12]) + ' / video</span></th>' +
+      '<th scope="col"><b>Premium</b><span>from ' + inr(P.premiumFrom) + ' / campaign</span></th></tr></thead>';
+    var body = '<tbody>' + P.compare.map(function (r) {
+      if (r[1] === null) return '<tr class="grp"><th colspan="4" scope="colgroup">' + r[0] + '</th></tr>';
+      return '<tr><th scope="row">' + r[0] + '</th>' + cell(r[1]) + cell(r[2], true) + cell(r[3]) + '</tr>';
+    }).join('') + '</tbody>';
+    var fits = [
+      ['Posting 2–4 reels a month?', 'You want clean, on-brand reels without spending your weekends editing.', 'Simple · 4-pack'],
+      ['Posting every week?', 'Talking-head videos, podcasts or YouTube where retention matters most.', 'Complex · 8 or 12-pack'],
+      ['Launching something big?', 'A product launch, campaign or brand film across every platform.', 'Premium · custom scope']
+    ];
+    var faqs = [
+      ['Do unused videos roll over?', 'Packs are valid for 60 days. Unused videos roll over once when your pack renews.'],
+      ['Can I switch plans later?', 'Yes — upgrade or downgrade when your pack renews, or top up any time from your dashboard.'],
+      ['Is GST included?', 'Prices are shown excluding GST. GST is added at checkout where applicable.'],
+      ['What if my video is longer than 90 seconds?', 'Simple and Complex cover videos up to 90 seconds. Longer edits are quoted per video or handled on Premium.'],
+      ['How do I pay?', 'Book a quick call and we’ll send an invoice or payment link. Your dashboard login arrives the same day.']
+    ];
+    app.innerHTML =
+      '<section class="phero"><div class="wrap">' + crumbs([['Home', 'index.html'], ['Pricing']]) +
+      '<h1 class="ptitle disp">' + title2('Simple,', '<span class="serif" style="font-size:1.08em">transparent</span> pricing') + '</h1>' +
+      '<div class="hrow"><p class="lead fade-in d-1">Prepaid video packs at a flat price per video. No hidden fees, no hourly billing — and bigger packs cost less per video.</p>' +
+      '<div class="fade-in d-2">' + btn(BOOK, 'Book a free call') + '</div></div></div></section>' +
+      '<section style="padding:80px 0 0"><div class="wrap" style="display:flex;flex-direction:column;gap:40px">' +
+      '<div class="packbar fade-in d-2" role="tablist" aria-label="Pack size">' + P.packs.map(function (n) { return '<button type="button" role="tab" data-n="' + n + '" class="' + (n === pack ? 'on' : '') + '" aria-selected="' + (n === pack) + '">' + n + '-pack' + (P.save[n] ? ' · ' + P.save[n] : '') + '</button>'; }).join('') + '</div>' +
+      '<div class="plans" id="plans">' + planCards() + '</div>' +
+      '<p style="margin:0;text-align:center;font-size:13px;color:#6E6C68">Videos up to 90 sec · packs valid 60 days and auto-renew · pause or cancel anytime · prices excl. GST</p></div></section>' +
+      '<section id="compare" class="sec" style="scroll-margin-top:90px"><div class="wrap"><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:40px">' +
+      '<h2 class="h2 sans"><span class="ln"><span class="up">Compare</span></span><span class="ln"><span class="up"><span class="serif">every plan</span></span></span></h2>' +
+      '<p class="muted rv" style="margin:0;max-width:380px">Everything that’s included — side by side. Swipe the table sideways on mobile.</p></div>' +
+      '<div class="cmpwrap rv"><table class="cmp">' + head + body + '</table></div></div></section>' +
+      '<section style="padding:0 0 160px"><div class="wrap"><div style="display:flex;flex-direction:column;gap:22px;margin-bottom:40px"><span class="pill line rv" style="align-self:flex-start">Add-ons</span>' +
+      '<h2 class="h2 sans"><span class="ln"><span class="up">Need a little</span></span><span class="ln"><span class="up"><span class="serif">extra?</span></span></span></h2></div>' +
+      '<div class="addons">' + P.addons.map(function (a, i) { return '<div class="glass addon tilt' + (i % 3 ? ' d' + (i % 3) : '') + '"><div class="row"><b>' + a[0] + '</b><em>' + a[1] + '</em></div><span>' + a[2] + '</span></div>'; }).join('') + '</div></div></section>' +
+      '<section style="padding:0 0 160px"><div class="wrap"><div style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px;margin-bottom:56px"><span class="pill line rv">Not sure?</span>' +
+      '<h2 class="h2 sans"><span class="ln"><span class="up">Which plan is</span></span><span class="ln"><span class="up"><span class="serif">right for you</span></span></span></h2></div>' +
+      '<div class="cards3">' + fits.map(function (f, i) { return '<div class="glass fit tilt' + (i ? ' d' + i : '') + '"><span class="q">' + pad(i + 1) + '</span><h3>' + f[0] + '</h3><p>' + f[1] + '</p><span class="rec"><i></i>' + f[2] + '</span></div>'; }).join('') + '</div></div></section>' +
+      '<section style="padding:0 0 60px"><div class="wrap split"><div class="sticky"><span class="pill line rv" style="align-self:flex-start">FAQ</span>' +
+      '<h2 class="h2 sans"><span class="ln"><span class="up">Pricing</span></span><span class="ln"><span class="up"><span class="serif">questions</span></span></span></h2></div>' +
+      '<div>' + faqList(faqs) + '</div></div></section>' +
+      ctaBand('Pick a pack.<br><span class="serif">We’ll do the rest.</span>', 'Book a free 15-minute call — your dashboard login and first edit are ready the same week.');
+    var bar = app.querySelector('.packbar');
+    bar.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      pack = +b.getAttribute('data-n');
+      [].forEach.call(bar.children, function (x) { var on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-selected', on); });
+      document.getElementById('plans').innerHTML = planCards();
     });
   }
 
@@ -324,6 +437,24 @@
     window.addEventListener('pageshow', function (e) { if (e.persisted) document.documentElement.classList.remove('leaving', 'menu-open'); });
   }
 
+  // Lightbox: any element with data-full plays the original video with sound.
+  function initLightbox() {
+    document.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-full]'); if (!t || e.metaKey || e.ctrlKey) return;
+      e.preventDefault(); e.stopPropagation();
+      var box = document.createElement('div'); box.className = 'lb' + (t.hasAttribute('data-portrait') ? ' portrait' : '');
+      box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true');
+      box.innerHTML = '<button type="button" class="lbx" aria-label="Close video">×</button><video data-nobg controls autoplay playsinline preload="auto"></video><span class="lbt"></span>';
+      var v = box.querySelector('video'); v.src = t.getAttribute('data-full');
+      box.querySelector('.lbt').textContent = t.getAttribute('data-title') || '';
+      document.body.appendChild(box); document.documentElement.style.overflow = 'hidden'; v.play().catch(function () {});
+      function close() { v.pause(); v.removeAttribute('src'); v.load(); box.remove(); document.documentElement.style.overflow = ''; document.removeEventListener('keydown', key); }
+      function key(ev) { if (ev.key === 'Escape') close(); }
+      box.addEventListener('click', function (ev) { if (ev.target === box || ev.target.closest('.lbx')) close(); });
+      document.addEventListener('keydown', key); box.querySelector('.lbx').focus();
+    }, true);
+  }
+
   // Background videos: muted inline autoplay that also works on phones (same as home page).
   function initVideos() {
     var vids = [];
@@ -332,7 +463,7 @@
       es.forEach(function (e) { var v = e.target; v.__vis = e.isIntersecting; if (v.__vis) tryPlay(v); else v.pause(); });
     }, { threshold: 0.01 }) : null;
     function prep(v) {
-      if (v.__bg || v.closest('.hoverprev')) return; v.__bg = 1; vids.push(v);
+      if (v.__bg || v.closest('.hoverprev') || v.hasAttribute('data-nobg')) return; v.__bg = 1; vids.push(v);
       v.muted = true; v.defaultMuted = true; v.playsInline = true; v.controls = false;
       v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
       v.setAttribute('disablepictureinpicture', ''); v.setAttribute('disableremoteplayback', '');
@@ -348,7 +479,7 @@
 
   /* ---------- boot ---------- */
   document.getElementById('nav').innerHTML = navHtml();
-  ({ services: renderServices, service: renderService, work: renderWork, project: renderProject }[page] || function () {})();
+  ({ services: renderServices, service: renderService, work: renderWork, project: renderProject, pricing: renderPricing }[page] || function () {})();
   document.getElementById('foot').innerHTML = footHtml();
-  initMenu(); initFaq(); initTransitions(); initVideos();
+  initMenu(); initFaq(); initLightbox(); initTransitions(); initVideos();
 })();

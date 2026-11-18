@@ -7,6 +7,7 @@
 <meta name="description" content="Human-edited reels, shorts and YouTube videos for creators, brands and agencies. Delivered in 48–72 hours at a flat price per video.">
 <script src="./vendor/react.js"></script>
 <script src="./vendor/react-dom.js"></script>
+<script src="./site-data.js"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -108,10 +109,10 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 }
 /* Work: pinned horizontal scroller */
 .wsec{position:relative}
-.wpin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;padding:72px 0 16px;display:flex;flex-direction:column;justify-content:center;gap:clamp(22px,4.5vh,52px)}
+.wpin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;padding:136px 0 16px;display:flex;flex-direction:column;justify-content:center;gap:clamp(18px,3.5vh,44px)}
 .whead{width:100%;max-width:1240px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
 .wtrack{display:flex;gap:20px;width:max-content;padding:0 max(40px, calc((100vw - 1240px) / 2 + 40px));will-change:transform}
-.wcard{flex:0 0 auto;width:min(60vw,calc((100vh - 380px) * 1.6));width:min(60vw,calc((100svh - 380px) * 1.6));display:flex;flex-direction:column;gap:16px;color:#F2F0EC}
+.wcard{flex:0 0 auto;width:min(60vw,calc((100vh - 430px) * 1.6));width:min(60vw,calc((100svh - 430px) * 1.6));display:flex;flex-direction:column;gap:16px;color:#F2F0EC}
 .wmedia{aspect-ratio:16/10;border-radius:24px;background:#141416}
 .wmeta{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
 .wmeta b{font:600 26px/1.15 'Inter Tight',sans-serif;letter-spacing:-.03em}
@@ -123,8 +124,8 @@ a{color:#F2F0EC;text-decoration:none}a:hover{color:#FFFFFF}
 /* Footer cards sit at the very end of the page, where scroll-linked reveals can't finish: show them plainly. */
 footer .rv2{animation:none !important}
 /* Background videos: never show native controls / the iOS "play" overlay. */
-video{pointer-events:none;-webkit-touch-callout:none}
-video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit-media-controls-overlay-play-button,video::-webkit-media-controls-start-playback-button{display:none !important;-webkit-appearance:none;opacity:0}
+video:not([controls]){pointer-events:none;-webkit-touch-callout:none}
+video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-media-controls-panel,video:not([controls])::-webkit-media-controls-overlay-play-button,video:not([controls])::-webkit-media-controls-start-playback-button{display:none !important;-webkit-appearance:none;opacity:0}
 .svcrow:hover{color:#FFFFFF !important}
 .pricerow{flex-wrap:wrap;row-gap:0}
 /* mobile menu */
@@ -147,12 +148,80 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 .pgcurtain{position:fixed;inset:0;z-index:300;background:#070708;pointer-events:none;transform:translateY(101%)}
 .leaving .pgcurtain{animation:cin .5s cubic-bezier(.76,0,.24,1) both}
 @keyframes cin{from{transform:translateY(101%)}to{transform:translateY(0)}}
+/* hero (typographic) */
+.herobox{position:relative;max-width:1600px;margin:0 auto;height:min(88vh,900px);min-height:560px;border-radius:28px;overflow:hidden;border:1px solid #1E1E21;background:radial-gradient(120% 90% at 50% 115%,#2A140C 0%,#140E0C 38%,#0E0E0F 70%)}
+.heroglow{position:absolute;left:50%;bottom:-40%;width:76%;aspect-ratio:1;margin-left:-38%;border-radius:50%;background:radial-gradient(closest-side,#FF5A1F40,transparent);pointer-events:none}
+.herogrid{position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:linear-gradient(#FFFFFF08 1px,transparent 1px),linear-gradient(90deg,#FFFFFF08 1px,transparent 1px);background-size:72px 72px;-webkit-mask-image:radial-gradient(ellipse at 50% 50%,#000 20%,transparent 70%);mask-image:radial-gradient(ellipse at 50% 50%,#000 20%,transparent 70%)}
+/* full-screen showreel */
+.fsrl{position:relative;height:230vh}
+.fspin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.fsclip{position:absolute;inset:0;overflow:hidden;background:#000;clip-path:inset(14% 18% 14% 18% round 28px);will-change:clip-path}
+.fsui{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;padding:32px 40px;opacity:0;transition:opacity .5s}
+.fsrl.full .fsui{opacity:1}
+.fslabel{display:flex;align-items:center;gap:10px;font-size:13px;color:#E8E6E1}
+.fsbtn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid #FFFFFF33;background:#0B0B0C66;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#F2F0EC;font:500 14px Inter,sans-serif;cursor:pointer;transition:background .3s,border-color .3s}
+.fsbtn:hover{background:#F2F0EC;color:#0B0B0C;border-color:#F2F0EC}
+.fsbtn .mx{display:inline}.fsbtn .w1{display:none}
+.fsbtn[aria-pressed="true"] .mx{display:none}.fsbtn[aria-pressed="true"] .w1{display:inline}
+/* highlight cards -> floating nav */
+.morph{position:relative;aspect-ratio:4/5}
+.morph-in{position:absolute;inset:0;transform-origin:50% 50%;will-change:transform,opacity}
+.hlcard{position:absolute;inset:0;display:block;border-radius:22px;background:#141416;overflow:hidden;color:#F2F0EC}
+.hltag{position:absolute;left:16px;top:16px;z-index:1;min-height:30px;padding:0 12px;display:inline-flex;align-items:center;gap:6px;border-radius:999px;background:#0B0B0C99;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:12px;font-weight:500;color:#F2F0EC}
+.fnav{position:fixed;left:50%;top:78px;z-index:29;display:flex;gap:8px;padding:6px;border-radius:999px;background:#0B0B0CB8;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #1E1E21;box-shadow:0 12px 40px #0009;opacity:0;pointer-events:none;transform:translate(-50%,-12px) scale(.96);transition:opacity .45s,transform .6s cubic-bezier(.2,.8,.2,1)}
+.fnav.show{opacity:1;pointer-events:auto;transform:translate(-50%,0) scale(1)}
+.fnav a{display:inline-flex;align-items:center;min-height:44px;padding:0 22px;border-radius:999px;border:1.5px solid #2C2C31;background:#141416;color:#C9C7C2;font:500 14px Inter,sans-serif;white-space:nowrap;transition:color .3s,box-shadow .4s,border-color .3s}
+.fnav a:hover{color:#FFFFFF;border-color:#4A4A50}
+.fnav a.on{color:#FFFFFF;border-color:transparent;background:linear-gradient(#141416,#141416) padding-box,linear-gradient(100deg,#E0303B,#FF5A1F 55%,#F2A65A) border-box;box-shadow:0 0 0 3px #FF5A1F1A,0 8px 28px #FF5A1F38}
+.fnav .sm{display:none}
+/* long-form play pill */
+.playpill{position:absolute;right:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 14px;border-radius:999px;background:#F2F0EC;color:#0B0B0C;font-size:13px;font-weight:600;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.wcard:hover .playpill{transform:scale(1.06)}
+/* short-form reel tiles */
+.reeltile{position:relative;width:200px;height:356px;flex-shrink:0;border-radius:20px;overflow:hidden;background:#141416}
+.rtile{position:absolute;inset:0;display:block;color:#F2F0EC}
+.rtile video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rtile::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,#0B0B0CD9);pointer-events:none}
+.rviews{position:absolute;left:10px;top:10px;z-index:1;display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:0 10px;border-radius:999px;background:#0B0B0C99;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:12px;font-weight:600}
+.rtitle{position:absolute;left:12px;right:12px;bottom:12px;z-index:1;font-size:13px;font-weight:500;line-height:1.3}
+/* services cards */
+.svgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.svcard{position:relative;overflow:hidden;border-radius:24px;padding:12px 12px 22px;display:flex;flex-direction:column;gap:18px;color:#F2F0EC;min-height:100%}
+.svmedia{aspect-ratio:4/5;border-radius:16px}
+.svmedia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.svnum{position:absolute;left:12px;top:12px;min-height:26px;padding:0 10px;display:inline-flex;align-items:center;border-radius:999px;background:#0B0B0C99;font-size:12px;color:#E8E6E1}
+.svbody{display:flex;flex-direction:column;gap:8px;padding:0 10px;flex:1}
+.svbody h3{margin:0;font-size:24px;font-weight:600;line-height:1.1}
+.svbody p{margin:0;font-size:14px;color:#8C8A86}
+.svgo{margin-top:auto;padding-top:10px;display:inline-flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;font-weight:500;color:#F2F0EC}
+.svgo .dot{width:34px;height:34px;border-radius:50%;border:1px solid #34343A;display:grid;place-items:center;transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s,color .3s}
+.svcard:hover .svgo .dot{transform:rotate(-45deg);background:#F2F0EC;color:#0B0B0C}
+.svmore{padding:28px;gap:18px;border-color:#34343A}
+/* video lightbox */
+.lb{position:fixed;inset:0;z-index:150;background:#000000E6;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:64px 20px 24px;animation:fadein .3s ease}
+.lb video{max-width:min(1280px,100%);max-height:calc(100vh - 140px);max-height:calc(100svh - 140px);border-radius:16px;background:#000;pointer-events:auto}
+.lb.portrait video{max-width:min(440px,100%)}
+.lb .lbt{font-size:14px;color:#C9C7C2}
+.lb .lbx{position:absolute;right:18px;top:16px;width:46px;height:46px;border-radius:50%;border:1px solid #FFFFFF33;background:#0B0B0C;color:#F2F0EC;font-size:22px;cursor:pointer;display:grid;place-items:center}
+.lb .lbx:hover{background:#F2F0EC;color:#0B0B0C}
+@media (max-width:1100px){.svgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){
+  .fnav{top:70px;gap:6px;padding:5px}
+  .fnav a{min-height:40px;padding:0 16px;font-size:13px}
+  .fnav .lg{display:none}.fnav .sm{display:inline}
+  .fsrl{height:170vh}
+  .fsui{padding:20px}
+}
 @media (max-width:860px){.navlinks{display:none !important}.hidesm{display:none !important}.navcta{display:none !important}.burger{display:grid}}
 @media (max-width:1000px){
   .dashband{grid-template-columns:1fr !important;padding:44px 28px !important}
   .phones{height:460px !important;max-width:520px;width:100%;margin:0 auto}
 }
 @media (max-width:700px){
+  .reeltile{width:138px;height:245px}
+  .svgrid{grid-template-columns:1fr;gap:12px}
+  .svmedia{aspect-ratio:16/11}
+  .herobox{height:auto !important;min-height:calc(100svh - 90px) !important}
   .m-dash{padding:0 12px 110px !important}
   .dashband{padding:32px 20px !important;gap:32px !important}
   .phones{height:400px !important}
@@ -161,7 +230,7 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
   .m-big{padding:100px 0 0 !important}
   .m-wall{padding:100px 0 110px !important}
   .m-wall-h{padding:0 20px !important;margin-bottom:48px !important}
-  .tile{width:150px !important;height:150px !important;border-radius:16px !important}
+  .tile{width:138px !important;height:245px !important;border-radius:16px !important}
   .m-svc{padding:40px 20px 110px !important}
   .m-svc > div{gap:44px !important}
   .tilt{min-height:0 !important;padding:24px !important}
@@ -189,8 +258,8 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
   .pricerow .sans{font-size:52px !important}
   .whead{padding:0 20px;flex-wrap:wrap}
   .wtrack{padding:0 20px;gap:12px}
-  .wpin{padding-top:64px}
-  .wcard{width:min(80vw,calc((100vh - 340px) * .8));width:min(80vw,calc((100svh - 340px) * .8));gap:12px}
+  .wpin{padding-top:118px}
+  .wcard{width:min(80vw,calc((100vh - 380px) * .8));width:min(80vw,calc((100svh - 380px) * .8));gap:12px}
   .wmedia{aspect-ratio:4/5;border-radius:20px}
   .wmeta{flex-direction:column;gap:2px}
   .wmeta b{font-size:21px}
@@ -238,7 +307,7 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 <a class="big" href="#top"><span>Home</span></a>
 <a class="big" href="work.html"><span>Work</span></a>
 <a class="big" href="services.html"><span>Services</span></a>
-<a class="big" href="#pricing"><span>Memberships</span></a>
+<a class="big" href="pricing.html"><span>Pricing</span></a>
 <a class="big" href="#faq"><span>FAQ</span></a>
 <a class="big" href="login.html"><span>Log in</span></a>
 <div class="mfoot"><span>Delivered in 48–72 hrs</span><a class="btn" href="#book">Book a call<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a></div>
@@ -250,23 +319,34 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 <a class="pill on" href="#top">Home</a>
 <a class="pill" href="#work">Work</a>
 <a class="pill" href="#services">Services</a>
-<a class="pill" href="#pricing">Memberships</a>
+<a class="pill" href="pricing.html">Pricing</a>
 <a class="pill" href="#faq">FAQ</a>
 </div>
 <div style="display: flex; align-items: center; gap: 8px"><a class="pill navcta" href="login.html">Log in</a><a class="pill navcta" href="#book" style="border-color: #34343A; color: #F2F0EC">Book a call</a><button type="button" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span></button></div>
 </nav>
 </header>
+<nav class="fnav" id="fnav" aria-label="Our work">
+<a href="#work" data-sec="work"><span class="lg">Long-form video editing</span><span class="sm">Long-form</span></a>
+<a href="#shorts" data-sec="shorts"><span class="lg">Short-form video editing</span><span class="sm">Short-form</span></a>
+</nav>
 
 <section id="top" style="padding: 8px 20px 0">
-<div class="heroout media" ref="{{heroRef}}" style="position: relative; max-width: 1600px; margin: 0 auto; height: min(88vh, 900px); min-height: 560px; border-radius: 28px; overflow: hidden; background: #000">
-<video id="heroVid" src="./assets/video/hero.mp4" poster="./assets/video/hero.jpg" autoplay muted loop playsinline preload="auto" aria-label="Showreel" style="{{heroImg}}"></video>
-<div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, #0B0B0C33, #0B0B0CB3 80%)"></div>
+<div class="heroout herobox" ref="{{heroRef}}">
+<div aria-hidden="true" class="glowc heroglow"></div>
+<div aria-hidden="true" class="herogrid"></div>
 <div class="titlepar" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 28px; padding: 0 24px">
 <span class="pill" style="{{heroPill}}">10,000+ videos delivered</span>
-<h1 class="disp" style="margin: 0; font-size: clamp(56px, 9vw, 156px); line-height: .86; color: #FFFFFF"><span style="display: block; overflow: hidden; padding-bottom: .04em"><span style="{{heroL1}}">The Edit Society<sup style="font-size: .3em; vertical-align: top; position: relative; top: .25em; margin-left: .05em">®</sup></span></span><span style="display: block; overflow: hidden; padding-bottom: .06em"><span style="{{heroL2}}">We cut <span class="serif" style="font-size: 1.08em; letter-spacing: -.02em">scroll-stoppers</span></span></span></h1>
+<h1 class="disp" style="margin: 0; font-size: clamp(52px, 9vw, 156px); line-height: .86; color: #FFFFFF"><span style="display: block; overflow: hidden; padding-bottom: .04em"><span style="{{heroL1}}">The Edit Society<sup style="font-size: .3em; vertical-align: top; position: relative; top: .25em; margin-left: .05em">®</sup></span></span><span style="display: block; overflow: hidden; padding-bottom: .06em"><span style="{{heroL2}}">We cut <span class="serif" style="font-size: 1.08em; letter-spacing: -.02em">scroll-stoppers</span></span></span></h1>
+<div style="{{heroCta}}">
+<p style="margin: 0 auto; max-width: 520px; color: #C9C7C2; font-size: 18px">Human-edited reels, shorts and YouTube videos. First cut in 48–72 hours, flat price per video.</p>
+<div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px">
+<a class="btn" href="pricing.html">See pricing<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
+<a class="btn2" href="#showreel">Watch the showreel<span class="dot" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"></path></svg></span></a>
+</div>
+</div>
 </div>
 <div style="{{heroFoot}}">
-<span style="display: flex; align-items: center; gap: 10px"><span style="width: 7px; height: 7px; border-radius: 50%; background: #F2F0EC"></span>Reels · Shorts · YouTube</span>
+<span style="display: flex; align-items: center; gap: 10px"><span style="width: 7px; height: 7px; border-radius: 50%; background: #FF5A1F"></span>Reels · Shorts · YouTube</span>
 <span class="hidesm">First cut in 48–72 hrs</span>
 <span style="display: flex; align-items: center; gap: 10px">Scroll<span style="width: 7px; height: 7px; border-radius: 50%; background: #F2F0EC"></span></span>
 </div>
@@ -285,21 +365,41 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 </div>
 </section>
 
-<section aria-label="Highlights" style="padding: 0 20px">
-<div style="max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 14px">
-<div class="media fanl" style="aspect-ratio: 4 / 5; border-radius: 22px; background: #141416">
-<video class="par" src="./assets/video/lifestyle.mp4" poster="./assets/video/lifestyle.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Lifestyle reel" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video>
-<span style="position: absolute; left: 20px; bottom: 18px; font-size: 13px; color: #E8E6E1">Lifestyle reel · 0:42</span>
+<section id="showreel" class="fsrl" aria-label="Showreel">
+<div class="fspin">
+<div class="fsclip" id="fsclip">
+<video id="fsVid" src="./assets/work/showreel.mp4" poster="./assets/work/showreel.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The Edit Society showreel" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video>
+<div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(#0B0B0C66, transparent 28%, transparent 62%, #0B0B0CAA)"></div>
+<div class="fsui">
+<span class="fslabel"><span style="width: 7px; height: 7px; border-radius: 50%; background: #FF5A1F"></span>Showreel 2026 · Marca Creatives</span>
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<button type="button" class="fsbtn" id="fsSound" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"></path><path class="w1" d="M16.5 8.5a5 5 0 0 1 0 7"></path><path class="mx" d="M17 9l5 6M22 9l-5 6"></path></svg><span>Sound on</span></button>
+<a class="fsbtn" href="https://ik.imagekit.io/5feqwwaxb/MARCA%20WEBSITE%2001.mp4" data-full="https://ik.imagekit.io/5feqwwaxb/MARCA%20WEBSITE%2001.mp4" data-title="Showreel 2026"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"></path></svg><span>Full screen</span></a>
 </div>
+</div>
+</div>
+</div>
+</section>
+
+<section aria-label="Highlights" id="hl" style="padding: 0 20px">
+<div class="hlgrid" style="max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 14px">
+<div class="morph" id="hlL"><div class="morph-in">
+<a class="media fanl hlcard" href="https://ik.imagekit.io/omgojp17s/Copy%20of%20VASTU%20512K%20VIEWS%20IG.mp4" data-full="https://ik.imagekit.io/omgojp17s/Copy%20of%20VASTU%20512K%20VIEWS%20IG.mp4" data-title="Vastu home tour" data-portrait="1">
+<video class="par" src="./assets/work/vastu.mp4" poster="./assets/work/vastu.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Vastu home tour reel" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video>
+<span class="hltag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg> 512K views</span>
+<span style="position: absolute; left: 20px; bottom: 18px; font-size: 13px; color: #E8E6E1">Vastu home tour · Instagram</span>
+</a></div></div>
 <div class="glass fanc" style="aspect-ratio: 4 / 5; border-radius: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; padding: 32px; position: relative; overflow: hidden">
 <div aria-hidden="true" class="glowc" style="position: absolute; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, #FF5A1F24, transparent); opacity: .9"></div>
 <h2 class="disp" style="position: relative; margin: 0; font-size: clamp(38px, 3.6vw, 58px); line-height: .9">Edits that<br><span class="serif" style="font-size: 1.1em">keep them</span><br>watching</h2>
-<span style="position: relative; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #6E6C68">The Edit Society</span>
+<span style="position: relative; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #6E6C68">Long-form · Short-form</span>
 </div>
-<div class="media fanr" style="aspect-ratio: 4 / 5; border-radius: 22px; background: #141416">
-<video class="par" src="./assets/video/podcast.mp4" poster="./assets/video/podcast.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Podcast clip" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video>
-<span style="position: absolute; left: 20px; bottom: 18px; font-size: 13px; color: #E8E6E1">Podcast clip · 0:58</span>
-</div>
+<div class="morph" id="hlR"><div class="morph-in">
+<a class="media fanr hlcard" href="https://ik.imagekit.io/omgojp17s/LIME%20WASH%20150K%20VIEWS%20IG.mp4" data-full="https://ik.imagekit.io/omgojp17s/LIME%20WASH%20150K%20VIEWS%20IG.mp4" data-title="Lime wash, celebrity home" data-portrait="1">
+<video class="par" src="./assets/work/limewash.mp4" poster="./assets/work/limewash.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Lime wash reel" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video>
+<span class="hltag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg> 150K views</span>
+<span style="position: absolute; left: 20px; bottom: 18px; font-size: 13px; color: #E8E6E1">Lime wash, celebrity home · Instagram</span>
+</a></div></div>
 </div>
 </section>
 
@@ -320,7 +420,7 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 <section id="work" class="wsec" ref="{{workRef}}" style="margin-top: 120px">
 <div class="wpin">
 <div class="whead">
-<h2 class="disp" style="margin: 0; font-size: clamp(44px, 6vw, 96px); line-height: .88"><span style="display: block; overflow: hidden"><span class="up">A creative</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif" style="font-size: 1.08em">editing</span> studio</span></span></h2>
+<h2 class="disp" style="margin: 0; font-size: clamp(44px, 6vw, 96px); line-height: .88"><span style="display: block; overflow: hidden"><span class="up">Long-form</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif" style="font-size: 1.08em">that holds</span></span></span></h2>
 <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 12px">
 <span class="sans" style="font-size: 15px; color: #8C8A86; font-variant-numeric: tabular-nums"><span ref="{{workNoRef}}"></span> / {{workTotal}}</span>
 <div style="width: 140px; height: 2px; border-radius: 2px; background: #1E1E21; overflow: hidden"><div ref="{{workBarRef}}" style="height: 100%; background: #FF5A1F; transform-origin: 0 50%; transform: scaleX(0)"></div></div>
@@ -328,69 +428,73 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 </div>
 <div class="wtrack" ref="{{workTrackRef}}">
 <sc-for list="{{slides}}" as="s" hint-placeholder-count="4">
-<a class="wcard" href="{{s.href}}">
+<a class="wcard" href="{{s.full}}" data-full="{{s.full}}" data-title="{{s.title}}">
 <div class="media wmedia">
 <video src="{{s.vid}}" poster="{{s.poster}}" autoplay muted loop playsinline preload="metadata" aria-label="{{s.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video>
 <span style="position: absolute; left: 16px; top: 16px; min-height: 28px; padding: 0 12px; display: inline-flex; align-items: center; border-radius: 999px; background: #0B0B0C80; backdrop-filter: blur(8px); font-size: 12px; color: #E8E6E1">{{s.cat}}</span>
+<span class="playpill"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"></path></svg><span>Play · {{s.length}}</span></span>
 </div>
 <div class="wmeta"><b>{{s.title}}</b><span>{{s.client}}</span></div>
 </a>
 </sc-for>
 <a class="wcard wend" href="{{workUrl}}">
 <div class="media wmedia">
-<video src="./assets/video/behind.mp4" poster="./assets/video/behind.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video>
+<video src="./assets/work/long2.mp4" poster="./assets/work/long2.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video>
 <span class="btn">See our work <span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></span>
 </div>
-<div class="wmeta"><b>More edits, every week</b><span>Reels · Shorts · YouTube</span></div>
+<div class="wmeta"><b>All our work</b><span>YouTube · Brand films · Reels</span></div>
 </a>
 </div>
 </div>
 </section>
 
-<section aria-labelledby="wall-h" class="{{wallCls}} m-wall" style="padding: 160px 0 180px; overflow: hidden">
-<div class="m-wall-h" style="max-width: 900px; margin: 0 auto 80px; padding: 0 40px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px">
-<span class="pill rv" style="border-color: #2C2C31">The reel wall</span>
-<h2 id="wall-h" class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Cut by <span class="serif">the best</span></span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif">editors</span> in the game</span></span></h2>
-<p class="rv" style="margin: 0; max-width: 460px; color: #8C8A86">Every tile here is a real edit we’ve shipped — reels, shorts, ads and podcast moments.</p>
+<section id="shorts" aria-labelledby="wall-h" class="{{wallCls}} m-wall" style="padding: 160px 0 180px; overflow: hidden">
+<div class="m-wall-h" style="max-width: 900px; margin: 0 auto 72px; padding: 0 40px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px">
+<span class="pill rv" style="border-color: #2C2C31">Short-form</span>
+<h2 id="wall-h" class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">Reels that <span class="serif">actually</span></span></span><span style="display: block; overflow: hidden"><span class="up">get watched</span></span></h2>
+<p class="rv" style="margin: 0; max-width: 480px; color: #8C8A86">Real reels we’ve cut for creators and brands — and the views they pulled on Instagram. Tap any reel to watch it with sound.</p>
 </div>
-<div style="display: flex; flex-direction: column; gap: 14px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent)">
-<sc-for list="{{wall}}" as="row" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 14px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent)">
+<sc-for list="{{wall}}" as="row" hint-placeholder-count="2">
 <div class="{{row.cls}}" style="display: flex; gap: 14px; width: max-content; margin-left: -120px">
-<sc-for list="{{row.tiles}}" as="tl" hint-placeholder-count="10">
-<div class="tile" style="position: relative; width: 210px; height: 210px; flex-shrink: 0; border-radius: 20px; overflow: hidden; background: #141416">
-<img src="{{tl.img}}" alt="" style="{{tl.style}}">
+<sc-for list="{{row.tiles}}" as="tl" hint-placeholder-count="11">
+<div class="tile reeltile">
+<sc-if value="{{tl.vid}}" hint-placeholder-val="{{ false }}"><a class="rtile" href="{{tl.full}}" data-full="{{tl.full}}" data-title="{{tl.title}}" data-portrait="1"><video src="{{tl.src}}" poster="{{tl.poster}}" autoplay muted loop playsinline preload="metadata" aria-label="{{tl.title}}"></video><span class="rviews"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg><span>{{tl.views}}</span></span><span class="rtitle">{{tl.title}}</span></a></sc-if>
+<sc-if value="{{tl.isImg}}" hint-placeholder-val="{{ false }}"><img src="{{tl.img}}" alt="" style="{{tl.style}}"></sc-if>
 </div>
 </sc-for>
 </div>
 </sc-for>
 </div>
+<div class="rv" style="display: flex; justify-content: center; margin-top: 56px; padding: 0 20px"><a class="btn" href="work.html#shorts">See our work<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a></div>
 </section>
 
 <section id="services" class="m-svc" style="padding: 80px 40px 200px">
-<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 72px">
-<div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px">
-<span class="pill rv" style="border-color: #2C2C31">Services</span>
-<h2 class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">One team, <span class="serif">every</span></span></span><span style="display: block; overflow: hidden"><span class="up">format you post</span></span></h2>
+<div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<span class="pill rv" style="align-self: flex-start; border-color: #2C2C31">Services</span>
+<h2 class="sans" style="margin: 0; font-size: clamp(44px, 5vw, 80px); font-weight: 500; line-height: 1"><span style="display: block; overflow: hidden"><span class="up">What we</span></span><span style="display: block; overflow: hidden"><span class="up"><span class="serif">edit</span> for you</span></span></h2>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 16px; align-items: stretch">
-<sc-for list="{{svc}}" as="s" hint-placeholder-count="3">
-<div class="{{s.cls}}" style="{{s.card}}">
-<div aria-hidden="true" style="{{s.glow}}"></div>
-<div style="position: relative; display: flex; gap: 8px; flex-wrap: wrap">
-<sc-for list="{{s.chips}}" as="c" hint-placeholder-count="3"><span style="min-height: 32px; padding: 0 12px; display: inline-flex; align-items: center; border-radius: 999px; border: 1px solid #2C2C31; font-size: 12px; color: #C9C7C2">{{c}}</span></sc-for>
+<p class="rv" style="margin: 0; max-width: 380px; color: #8C8A86">From 15-second reels to 20-minute YouTube videos — one team, every format you post.</p>
 </div>
-<div style="position: relative; display: flex; flex-direction: column; gap: 6px; text-align: center; align-items: center; padding: 18px 0 6px">
-<span class="serif" style="font-size: 18px; color: #8C8A86">{{s.kicker}}</span>
-<h3 class="sans" style="margin: 0; font-size: 34px; font-weight: 600">{{s.title}}</h3>
-<p style="margin: 0; font-size: 15px; color: #8C8A86; max-width: 300px">{{s.desc}}</p>
-</div>
-<div style="position: relative; display: flex; flex-direction: column; gap: 10px; margin-top: auto">
-<sc-for list="{{s.items}}" as="i" hint-placeholder-count="5"><a class="svcrow" href="{{i.href}}" style="display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid #1E1E21; font-size: 15px; color: #C9C7C2">{{i.t}}<span aria-hidden="true" style="color: #4A4A50; display: inline-grid; place-items: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"></path></svg></span></a></sc-for>
-</div>
-</div>
+<div class="svgrid">
+<sc-for list="{{svcCards}}" as="c" hint-placeholder-count="3">
+<a class="{{c.cls}}" href="{{c.href}}">
+<div class="media svmedia"><video src="{{c.vid}}" poster="{{c.poster}}" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video><span class="svnum">{{c.n}}</span></div>
+<div class="svbody"><h3 class="sans">{{c.t}}</h3><p>{{c.d}}</p><span class="svgo">View service<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></span></div>
+</a>
 </sc-for>
+<a class="glass svcard svmore tilt d2" href="services.html">
+<div aria-hidden="true" class="glowc" style="position: absolute; right: -30%; top: -20%; width: 90%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, #FF5A1F26, transparent)"></div>
+<span style="position: relative; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #6E6C68">+{{svcMoreN}} more</span>
+<h3 class="sans" style="position: relative; margin: 0; font-size: 34px; font-weight: 600; line-height: 1">All <span class="serif" style="font-weight: 400">services</span></h3>
+<div style="position: relative; display: flex; flex-direction: column">
+<sc-for list="{{svcMore}}" as="m" hint-placeholder-count="4"><span style="padding: 10px 0; border-top: 1px solid #1E1E21; font-size: 15px; color: #C9C7C2">{{m}}</span></sc-for>
 </div>
-<div class="rv" style="display: flex; justify-content: center"><a class="btn2" href="services.html">Explore all services<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a></div>
+<span class="svgo" style="position: relative; margin-top: auto">Explore all services<span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></span>
+</a>
+</div>
 </div>
 </section>
 
@@ -505,7 +609,7 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 </div>
 </sc-for>
 </div>
-<p style="margin: 0; text-align: center; font-size: 13px; color: #6E6C68">Videos up to 90 sec · packs valid 60 days and auto-renew · pause or cancel anytime · prices excl. GST</p>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 14px"><a class="ulink" href="pricing.html">Compare all plans &amp; add-ons <span class="dot" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a><p style="margin: 0; text-align: center; font-size: 13px; color: #6E6C68">Videos up to 90 sec · packs valid 60 days and auto-renew · pause or cancel anytime · prices excl. GST</p></div>
 </div>
 </section>
 
@@ -586,7 +690,7 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 <div class="fpills" style="display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; max-width: 380px">
 <a class="pill" href="work.html" style="border-color: #2C2C31; min-height: 34px">Work</a>
 <a class="pill" href="services.html" style="border-color: #2C2C31; min-height: 34px">Services</a>
-<a class="pill" href="#pricing" style="border-color: #2C2C31; min-height: 34px">Memberships</a>
+<a class="pill" href="pricing.html" style="border-color: #2C2C31; min-height: 34px">Pricing</a>
 <a class="pill" href="#faq" style="border-color: #2C2C31; min-height: 34px">FAQ</a>
 <a class="pill" href="login.html" style="border-color: #2C2C31; min-height: 34px">Client login</a>
 <a class="pill" href="#book" style="border-color: #2C2C31; min-height: 34px">Editors — join us</a>
@@ -620,24 +724,21 @@ video::-webkit-media-controls,video::-webkit-media-controls-panel,video::-webkit
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"splash":{"editor":"boolean","default":true,"section":"Intro"},"$preview":{"width":1440,"height":11500}}'>
 // Splash flash cards (in order). The last one is the hero video that expands into the hero section.
+const TES = window.TES || { reels: [], longs: [], services: [], pricing: null };
+// Splash flash cards (in order): quick stills from our work, two video shots, then the showreel card expands into the hero.
 const SPLASH_FRAMES = [
-  { src: './assets/c0a00075517f2d379025e986b90f3617.jpg' },
-  { src: './assets/22de4cc7dd2e04eaccafc1de95c66d76.jpg' },
-  { src: './assets/b2e77fe76b4df7efdf97520cdc701c4a.jpg' },
-  { src: './assets/7c39ec92c982887e66872db35fb27540.jpg' },
-  { src: './assets/video/travel.mp4', vid: true },
-  { src: './assets/video/podcast-ep.mp4', vid: true },
-  { src: './assets/video/hero.mp4', vid: true, id: 'spHero' }
+  { src: './assets/work/long1.jpg' },
+  { src: './assets/work/flooring.jpg' },
+  { src: './assets/work/long3.jpg' },
+  { src: './assets/work/payal.jpg' },
+  { src: './assets/work/long2.mp4', vid: true },
+  { src: './assets/work/long4.mp4', vid: true },
+  { src: './assets/work/showreel.mp4', vid: true, id: 'spHero' }
 ];
 // How long each frame (except the last) stays on screen, in ms. Video shots hold longer so they read as motion.
 const SPLASH_HOLD = [150, 150, 150, 150, 560, 560];
-// Work section cards, and where the final "See our work" card links (set this to your portfolio / Instagram / YouTube).
-const WORK = [
-  { v: 'youtube', p: 'why-i-quit', title: 'Why I quit my 9–5', client: 'Finance YouTuber', cat: 'Long-form' },
-  { v: 'app', p: 'app-launch', title: 'App launch explainer', client: 'SaaS startup', cat: 'Motion' },
-  { v: 'podcast-ep', p: 'ep-41', title: 'Ep. 41 — the best 60 seconds', client: 'Founder podcast', cat: 'Podcast' },
-  { v: 'travel', p: 'golden-hour', title: 'Golden hour, graded', client: 'Travel creator', cat: 'Colour' }
-];
+// Long-form cards in the pinned scroller (from site-data.js).
+const WORK = TES.longs;
 const WORK_URL = 'work.html';
 
 class Component extends DCLogic {
@@ -779,6 +880,7 @@ class Component extends DCLogic {
     const heroPill = 'border-color:#FFFFFF33;color:#F2F0EC;background:#0B0B0C40;backdrop-filter:blur(10px);transition:opacity .8s ease .3s,transform .8s ' + ease + ' .3s;opacity:' + (hi ? 1 : 0) + ';transform:' + (hi ? 'none' : 'translateY(16px)');
     const heroFoot = 'position:absolute;left:28px;right:28px;bottom:26px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#D9D7D2;transition:opacity .8s ease .5s;opacity:' + (hi ? 1 : 0);
     const heroImg = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.15)';
+    const heroCta = 'transition:opacity .9s ease .45s,transform .9s ' + ease + ' .45s;opacity:' + (hi ? 1 : 0) + ';transform:' + (hi ? 'none' : 'translateY(18px)');
     const navStyle = 'position:sticky;top:0;z-index:30;background:linear-gradient(#0B0B0CF2,#0B0B0C00);transition:opacity .8s ease .2s,transform .8s ' + ease + ' .2s;opacity:' + (hi ? 1 : 0) + ';transform:' + (hi ? 'none' : 'translateY(-16px)');
 
     const INTRO = 'Really good edits, back in 48–72 hours. Human editors cut your reels, shorts and YouTube videos for retention — captioned, colour-graded and quality-checked. One flat price per video and one dashboard to brief, upload and approve. No freelancers to chase. No missed upload days.';
@@ -793,17 +895,33 @@ class Component extends DCLogic {
     const R1 = './assets/c0a00075517f2d379025e986b90f3617.jpg', R2 = './assets/22de4cc7dd2e04eaccafc1de95c66d76.jpg', R3 = './assets/537c5a2e97149b489e00bb566b4c588f.jpg', R4 = './assets/1572f795cfc989fbd8410e553b0c0ad2.jpg';
     const YT = './assets/b2e77fe76b4df7efdf97520cdc701c4a.jpg', POD = './assets/af56380b5550d32bc75f27aaca7c6a6d.jpg', AD = './assets/7c39ec92c982887e66872db35fb27540.jpg', MO = './assets/278b9e09a0f96ef8ec9a1699404fa158.jpg', AFTER = './assets/a1e3b07bbda96993863432f2eccfa315.jpg';
 
-    const SL = WORK.map((s) => ({ ...s, vid: './assets/video/' + s.v + '.mp4', poster: './assets/video/' + s.v + '.jpg', href: 'project.html?p=' + s.p }));
+    const SL = WORK.map((s) => ({ ...s, vid: './assets/work/' + s.id + '.mp4', poster: './assets/work/' + s.id + '.jpg' }));
 
     const pool = [R1, R2, R3, R4, AD, YT, POD, MO, AFTER];
-    const wall = [0, 1, 2].map((r) => ({
+    // Short-form wall: 2 rows of 9:16 tiles; real reels sit in the visible middle slots, colourful tiles fill the rest.
+    const REELS = TES.reels || [];
+    const SLOTS = [[1, 4, 7, 10], [2, 5, 8]];
+    let ri = 0;
+    const wall = [0, 1].map((r) => ({
       cls: onCanvas ? '' : (r % 2 ? 'rowr' : 'rowl'),
       tiles: Array.from({ length: 11 }, (_, i) => {
+        if (SLOTS[r].includes(i) && ri < REELS.length) {
+          const x = REELS[ri++];
+          return { vid: true, isImg: false, src: './assets/work/' + x.id + '.mp4', poster: './assets/work/' + x.id + '.jpg', full: x.full, title: x.title, views: x.views + ' views' };
+        }
         const k = (i * 4 + r * 3) % pool.length;
         const hue = ((i * 37 + r * 71) % 60) - 30;
-        return { img: pool[k], style: 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:' + ((i * 23 + r * 41) % 100) + '% ' + ((i * 31 + r * 17) % 100) + '%;transform:scale(' + (1.3 + (i % 3) * 0.25) + ');filter:hue-rotate(' + hue + 'deg) saturate(1.2)' };
+        return { vid: false, isImg: true, img: pool[k], style: 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:' + ((i * 23 + r * 41) % 100) + '% ' + ((i * 31 + r * 17) % 100) + '%;transform:scale(' + (1.3 + (i % 3) * 0.25) + ');filter:hue-rotate(' + hue + 'deg) saturate(1.2)' };
       })
     }));
+    // Home services: three featured services with real previews + an "all services" card.
+    const FEAT = [['short-form', 'flooring'], ['youtube', 'long1'], ['brand-films', 'long2']];
+    const svcCards = FEAT.map(([slug, v], i) => {
+      const sv = (TES.services || []).find((x) => x.slug === slug) || { title: slug, short: '' };
+      return { n: String(i + 1).padStart(2, '0'), t: sv.title, d: sv.short, href: 'service.html?s=' + slug, vid: './assets/work/' + v + '.mp4', poster: './assets/work/' + v + '.jpg', cls: 'glass svcard tilt' + (i ? ' d' + Math.min(i, 2) : '') };
+    });
+    const svcMore = (TES.services || []).filter((x) => !FEAT.some((f) => f[0] === x.slug)).map((x) => x.title);
+    const svcMoreN = String(svcMore.length);
     const wallCls = onCanvas ? '' : 'wallsec';
 
     const glowOn = 'position:absolute;left:50%;top:-30%;width:120%;aspect-ratio:1;margin-left:-60%;border-radius:50%;background:radial-gradient(closest-side,#FF5A1F2E,transparent);pointer-events:none';
@@ -839,12 +957,13 @@ class Component extends DCLogic {
     ];
 
     const pk = this.state.pack;
-    const packs = [['4', '4-pack'], ['8', '8-pack · save 8%'], ['12', '12-pack · save 15%']].map(([k, label]) => {
+    const PR = TES.pricing || { packs: [4, 8, 12], save: {}, simple: { 4: 2499, 8: 2299, 12: 2099 }, complex: { 4: 3999, 8: 3699, 12: 3399 }, premiumFrom: 24999 };
+    const packs = PR.packs.map((n) => [String(n), n + '-pack' + (PR.save[n] ? ' · ' + PR.save[n] : '')]).map(([k, label]) => {
       const sel = this.state.pack === k;
       return { label, sel, pick: () => this.setState({ pack: k }), style: 'min-height:42px;padding:0 18px;border-radius:999px;border:0;cursor:pointer;font:500 14px Inter,sans-serif;transition:all .3s;background:' + (sel ? '#F2F0EC' : 'transparent') + ';color:' + (sel ? '#0B0B0C' : '#8C8A86') };
     });
     // Per-video prices by pack size. [Brackets] = placeholder prices — replace with your real ones.
-    const PRICE = { simple: { 4: 2499, 8: 2299, 12: 2099 }, complex: { 4: 3999, 8: 3699, 12: 3399 } };
+    const PRICE = { simple: PR.simple, complex: PR.complex };
     const inr = (n) => '₹[' + n.toLocaleString('en-IN') + ']';
     const pkN = +pk;
     const plans = [
@@ -852,7 +971,7 @@ class Component extends DCLogic {
         items: ['Up to ' + pkN + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Cuts, captions, music & basic colour', 'Ideal for lifestyle & social-first reels', 'Guided brief in your dashboard'], cta: 'Get started', btnCls: 'btn2', href: '#book' },
       { name: 'Complex', for: 'Talking-head & retention edits', pre: '', price: inr(PRICE.complex[pkN]), unit: '/ video', total: pkN + ' videos · ' + inr(PRICE.complex[pkN] * pkN) + ' total · valid 60 days',
         items: ['Up to ' + pkN + ' edits, 90 sec each', 'First cut in 48–72 hours', '2 revision rounds per video', 'Motion graphics, zooms & sound design', 'Story restructure for retention', 'Dedicated project manager'], cta: 'Get started', btnCls: 'btn', pop: true, href: '#book' },
-      { name: 'Premium', for: 'Campaigns that need extra love', pre: 'from', price: '₹[24,999]', unit: '/ campaign', total: 'Scoped to your project on a quick call',
+      { name: 'Premium', for: 'Campaigns that need extra love', pre: 'from', price: inr(PR.premiumFrom), unit: '/ campaign', total: 'Scoped to your project on a quick call',
         items: ['Full campaign, every format', 'Scripting & hook support', 'Advanced motion, VFX & colour', 'Up to 3 videos in production at once', '3 revision rounds per video', 'Priority queue & project manager'], cta: 'Book a call', btnCls: 'btn2', href: '#book' }
     ].map((p, i) => ({ ...p, cls: 'glass tilt' + (i ? ' d' + i : ''), card: cardBase + 'min-height:640px;' + (p.pop ? 'border-color:#34343A;' : ''), glow: p.pop ? glowOn : glowOff }));
 
@@ -882,14 +1001,14 @@ class Component extends DCLogic {
 
     return {
       showSplash: ph < 5, spBg, spBrand, spFrame, spFrames, spShade, spHud, spLineWrap, spLine, spSkip, pct: String(this.state.pct).padStart(2, '0'),
-      heroL1, heroL2, heroPill, heroFoot, heroImg, navStyle, heroRef: (el) => { this.heroEl = el; },
+      heroL1, heroL2, heroPill, heroFoot, heroImg, heroCta, navStyle, heroRef: (el) => { this.heroEl = el; },
       skip: () => this.endSplash(),
       introCls: onCanvas ? '' : 'introp', introWords, marq,
       slides: SL, workUrl: WORK_URL, workTotal: String(WORK.length).padStart(2, '0'),
       workRef: (el) => { this.workSec = el; }, workTrackRef: (el) => { this.workTrack = el; },
       workBarRef: (el) => { this.workBar = el; }, workNoRef: (el) => { this.workNo = el; if (el && !el.textContent) el.textContent = '01'; },
       wall, wallCls, svc, steps,
-      statsRef: (el) => { this.statsEl = el; }, stats, packs, plans, whys, dashFeats,
+      statsRef: (el) => { this.statsEl = el; }, stats, packs, plans, whys, dashFeats, svcCards, svcMore, svcMoreN,
       qOne: [TS[qi]], qDots,
       qPrev: () => { clearInterval(this.qTimer); this.setState({ q: (qi + 2) % 3 }); },
       qNext: () => { clearInterval(this.qTimer); this.setState({ q: (qi + 1) % 3 }); },
@@ -910,7 +1029,7 @@ class Component extends DCLogic {
     es.forEach(function (e) { var v = e.target; v.__vis = e.isIntersecting; if (v.__vis) tryPlay(v); else v.pause(); });
   }, { threshold: 0.01 }) : null;
   function prep(v) {
-    if (v.__bg) return; v.__bg = 1; vids.push(v);
+    if (v.__bg || v.hasAttribute('data-nobg')) return; v.__bg = 1; vids.push(v);
     v.muted = true; v.defaultMuted = true; v.autoplay = true; v.playsInline = true;
     v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
     v.setAttribute('disablepictureinpicture', ''); v.setAttribute('disableremoteplayback', '');
@@ -925,6 +1044,108 @@ class Component extends DCLogic {
   document.addEventListener('visibilitychange', function () { if (!document.hidden) kick(); });
   new MutationObserver(scan).observe(document.documentElement, { childList: true, subtree: true });
   scan();
+})();
+// Full-screen showreel, highlight cards morphing into the floating nav, video lightbox.
+(function () {
+  var root = document.documentElement;
+  var clamp = function (x) { return x < 0 ? 0 : x > 1 ? 1 : x; };
+  var ease = function (t) { return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
+  var lerp = function (a, b, t) { return a + (b - a) * t; };
+  var el = {};
+  function get(id) { if (!el[id] || !el[id].isConnected) el[id] = document.getElementById(id); return el[id]; }
+  var ticking = false;
+  function frame() {
+    ticking = false;
+    var vh = window.innerHeight, vw = window.innerWidth, mob = vw < 861;
+
+    // 1) showreel: framed card grows to full screen as you scroll
+    var fs = get('showreel'), clip = get('fsclip');
+    if (fs && clip) {
+      var r = fs.getBoundingClientRect();
+      var p = clamp(-r.top / (vh * (mob ? .45 : .7)) + (mob ? .25 : .15));
+      var e = ease(p), iy = lerp(mob ? 18 : 14, 0, e), ix = lerp(mob ? 6 : 18, 0, e), rad = lerp(28, 0, e);
+      clip.style.clipPath = 'inset(' + iy + '% ' + ix + '% ' + iy + '% ' + ix + '% round ' + rad + 'px)';
+      fs.classList.toggle('full', p > .92);
+    }
+
+    // 2) highlight reels shrink into the floating nav pills
+    var hl = get('hl'), nav = get('fnav'), L = get('hlL'), R = get('hlR');
+    var morphDone = false;
+    if (hl && nav && L && R) {
+      var hr = hl.getBoundingClientRect();
+      var m = clamp((vh * .62 - hr.bottom) / (vh * .5));
+      morphDone = m > .9;
+      var pills = nav.querySelectorAll('a');
+      [[L, pills[0]], [R, pills[1]]].forEach(function (pair) {
+        var box = pair[0], inner = box.firstElementChild, pill = pair[1];
+        if (!inner || !pill) return;
+        if (mob || m <= 0) { inner.style.transform = ''; inner.style.opacity = ''; inner.style.borderRadius = ''; return; }
+        var a = box.getBoundingClientRect(), b = pill.getBoundingClientRect();
+        if (!b.width) { var w = pill.offsetWidth || 220; b = { left: vw / 2 - w / 2, top: 78, width: w, height: 44 }; }
+        var t = ease(m), s = lerp(1, b.height / a.height, t);
+        var dx = (b.left + b.width / 2 - (a.left + a.width / 2)) * t, dy = (b.top + b.height / 2 - (a.top + a.height / 2)) * t;
+        inner.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px) scale(' + s.toFixed(4) + ')';
+        inner.style.opacity = String(1 - clamp((m - .7) / .25));
+        var card = inner.firstElementChild; if (card) card.style.borderRadius = lerp(22, (b.height / 2) / s, t).toFixed(1) + 'px';
+      });
+    }
+
+    // 3) floating nav: visible over the long-form + short-form sections, active pill follows the section in view
+    if (nav) {
+      var work = get('work'), shorts = get('shorts'), act = '';
+      var endEl = shorts || work;
+      var visible = morphDone && endEl && endEl.getBoundingClientRect().bottom > vh * .35;
+      if (!hl) visible = false;
+      if (work && work.getBoundingClientRect().top < vh * .5 && work.getBoundingClientRect().bottom > vh * .5) act = 'work';
+      if (shorts && shorts.getBoundingClientRect().top < vh * .5 && shorts.getBoundingClientRect().bottom > vh * .3) act = 'shorts';
+      if (!act && visible) act = 'work';
+      nav.classList.toggle('show', !!visible && !root.classList.contains('menu-open'));
+      [].forEach.call(nav.querySelectorAll('a'), function (a) { a.classList.toggle('on', a.getAttribute('data-sec') === act); });
+    }
+  }
+  function req() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+  window.addEventListener('scroll', req, { passive: true });
+  window.addEventListener('resize', req);
+  setInterval(req, 1000); // catch layout changes (splash, fonts, pinned section resize)
+
+  // smooth-scroll for the floating nav
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('.fnav a'); if (!a) return;
+    var t = document.getElementById(a.getAttribute('data-sec')); if (!t) return;
+    e.preventDefault();
+    window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY + (a.getAttribute('data-sec') === 'shorts' ? 60 : 0), behavior: 'smooth' });
+  });
+
+  // showreel sound toggle
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('#fsSound'); if (!b) return;
+    var v = document.getElementById('fsVid'); if (!v) return;
+    var on = b.getAttribute('aria-pressed') !== 'true';
+    v.muted = !on; if (on) { v.currentTime = 0; v.play().catch(function () {}); }
+    b.setAttribute('aria-pressed', on); b.querySelector('span').textContent = on ? 'Sound off' : 'Sound on';
+  });
+
+  // lightbox: any element with data-full plays the original video with sound
+  function openLB(src, title, portrait) {
+    var bg = document.getElementById('fsVid'); if (bg) bg.muted = true;
+    var s = document.getElementById('fsSound'); if (s) { s.setAttribute('aria-pressed', 'false'); s.querySelector('span').textContent = 'Sound on'; }
+    var box = document.createElement('div'); box.className = 'lb' + (portrait ? ' portrait' : ''); box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-label', title || 'Video');
+    box.innerHTML = '<button type="button" class="lbx" aria-label="Close video">×</button><video data-nobg controls autoplay playsinline preload="auto"></video>' + (title ? '<span class="lbt"></span>' : '');
+    var v = box.querySelector('video'); v.src = src;
+    if (title) box.querySelector('.lbt').textContent = title;
+    document.body.appendChild(box); root.style.overflow = 'hidden';
+    v.play().catch(function () {});
+    function close() { v.pause(); v.removeAttribute('src'); v.load(); box.remove(); root.style.overflow = ''; document.removeEventListener('keydown', key); }
+    function key(e) { if (e.key === 'Escape') close(); }
+    box.addEventListener('click', function (e) { if (e.target === box || e.target.closest('.lbx')) close(); });
+    document.addEventListener('keydown', key);
+    box.querySelector('.lbx').focus();
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-full]'); if (!t || e.metaKey || e.ctrlKey) return;
+    e.preventDefault(); e.stopPropagation();
+    openLB(t.getAttribute('data-full'), t.getAttribute('data-title'), t.hasAttribute('data-portrait'));
+  }, true);
 })();
 // Mobile menu + curtain transition to the other pages.
 (function () {

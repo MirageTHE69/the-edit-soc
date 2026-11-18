@@ -1,8 +1,70 @@
-/* The Edit Society — content for the inner pages.
-   Edit text here; services.html, service.html, work.html and project.html all read from this file.
+/* The Edit Society — site content.
+   Edit text here; the home page, pricing, services, service, work and project pages all read from this file.
    Anything in [square brackets] is placeholder copy — replace it with your real numbers / names. */
 window.TES = {
   bookUrl: 'index.html#book',
+
+  // ---- Real work. "preview" = small silent loop shown on the page; "full" = original video opened on click (with sound).
+  showreel: { preview: './assets/work/showreel.mp4', poster: './assets/work/showreel.jpg', full: 'https://ik.imagekit.io/5feqwwaxb/MARCA%20WEBSITE%2001.mp4' },
+  reels: [
+    { id: 'vastu', title: 'Vastu home tour', client: 'Interior brand', views: '512K', full: 'https://ik.imagekit.io/omgojp17s/Copy%20of%20VASTU%20512K%20VIEWS%20IG.mp4' },
+    { id: 'limewash', title: 'Lime wash, celebrity home', client: 'Interior brand', views: '150K', full: 'https://ik.imagekit.io/omgojp17s/LIME%20WASH%20150K%20VIEWS%20IG.mp4' },
+    { id: 'flooring', title: 'Kota stone flooring', client: 'Interior brand', views: '111K', full: 'https://ik.imagekit.io/omgojp17s/FLOORING%20IG%20111K%20VIEWS.mp4' },
+    { id: 'payal', title: 'Payal & Zinal store launch', client: 'Fashion label', views: '85K', full: 'https://ik.imagekit.io/omgojp17s/PAYAL%20ZINAL%2085K%20IG%20VIEWS.mp4' },
+    { id: 'accent', title: 'Accent wall ideas', client: 'Interior brand', views: '25K', full: 'https://ik.imagekit.io/omgojp17s/ACCENT%20WALL%2025K%20VIEWS.mp4' },
+    { id: 'r22k', title: 'How cricketers really earn', client: 'Finance creator', views: '22K', full: 'https://ik.imagekit.io/omgojp17s/22K.mp4' },
+    { id: 'r45k', title: '₹1.5 crore home: rent or EMI?', client: 'Finance creator', views: '4.5K', full: 'https://ik.imagekit.io/omgojp17s/4.5K.mp4' }
+  ],
+  longs: [
+    { id: 'long1', title: 'A soldier’s story, told cinematic', client: 'Vedang Rathore', cat: 'YouTube · Storytelling', length: '9:39', full: 'https://res.cloudinary.com/fhwvxdg0/video/upload/v1790857297/1_Vedang_Rathore.mp4' },
+    { id: 'long2', title: 'Founder conversation & project film', client: 'MS Design Studio', cat: 'Brand film', length: '11:19', full: 'https://res.cloudinary.com/fhwvxdg0/video/upload/v1790857306/2_MS_Design_Studio.mp4' },
+    { id: 'long3', title: 'Sketch-to-real home walkthrough', client: 'MS Design Studio', cat: 'Walkthrough', length: '7:24', full: 'https://res.cloudinary.com/fhwvxdg0/video/upload/v1790860111/3_MS_Design_Studio.mp4' },
+    { id: 'long4', title: 'Home tour & behind the scenes', client: 'MS Design Studio', cat: 'YouTube · BTS', length: '8:21', full: 'https://res.cloudinary.com/fhwvxdg0/video/upload/v1790860112/4_MS_Design_Studio.mp4' }
+  ],
+
+  // ---- Pricing (per-video prices by pack size). Used by the home page and pricing.html.
+  pricing: {
+    packs: [4, 8, 12],
+    save: { 4: '', 8: 'save 8%', 12: 'save 15%' },
+    simple: { 4: 2499, 8: 2299, 12: 2099 },
+    complex: { 4: 3999, 8: 3699, 12: 3399 },
+    premiumFrom: 24999,
+    validity: '60 days',
+    // Comparison table rows: [label, Simple, Complex, Premium]. true = included, false = not included, text = detail.
+    compare: [
+      ['Editing', null],
+      ['Best for', 'Lifestyle & social-first reels', 'Talking-head, YouTube, podcasts', 'Launches & brand campaigns'],
+      ['Video length', 'Up to 90 sec', 'Up to 90 sec (long-form on request)', 'Any length'],
+      ['Cuts, pacing & hook', true, true, true],
+      ['Captions', 'Clean captions', 'Animated, brand-styled', 'Custom animated typography'],
+      ['Music & sound', 'Licensed music', 'Music + sound design & SFX', 'Custom sound design & mix'],
+      ['Colour', 'Basic correction', 'Advanced grade for mood', 'Full grade, film looks & matching'],
+      ['Motion graphics', false, 'Titles, zooms & lower-thirds', 'Custom motion packages & VFX'],
+      ['B-roll & stock', 'Simple layering', 'Strategic b-roll', 'Cinematic sequencing'],
+      ['Story restructure for retention', false, true, true],
+      ['Scripting & hook support', false, false, true],
+      ['Delivery', null],
+      ['First cut', '48–72 hours', '48–72 hours', 'Scheduled to your launch'],
+      ['Revision rounds per video', '2', '2', '3'],
+      ['Videos in production at once', '1', '1', 'Up to 3'],
+      ['Export formats', '1 ratio', '2 ratios (e.g. 9:16 + 16:9)', 'Every ratio you need'],
+      ['Two-step quality check', true, true, true],
+      ['Support', null],
+      ['Client dashboard', true, true, true],
+      ['Dedicated project manager', false, true, true],
+      ['Creative director on your project', false, false, true],
+      ['Priority queue', false, false, true],
+      ['Pack validity', '60 days, auto-renews', '60 days, auto-renews', 'Per project']
+    ],
+    addons: [
+      ['Custom thumbnail', '₹[499]', 'Designed to match your channel'],
+      ['Extra format / resize', '₹[499]', 'e.g. a 9:16 cut of a 16:9 video'],
+      ['Extra revision round', '₹[399]', 'After your included rounds are used'],
+      ['Rush delivery (24 h)', '+30%', 'For time-sensitive posts'],
+      ['Subtitles in another language', '₹[299]', 'Hindi, English and more'],
+      ['Raw footage over 60 min', '₹[999]', 'Per extra hour of footage']
+    ]
+  },
 
   services: [
     {
