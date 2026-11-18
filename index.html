@@ -153,11 +153,10 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 .heroglow{position:absolute;left:50%;bottom:-40%;width:76%;aspect-ratio:1;margin-left:-38%;border-radius:50%;background:radial-gradient(closest-side,#FF5A1F40,transparent);pointer-events:none}
 .herogrid{position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:linear-gradient(#FFFFFF08 1px,transparent 1px),linear-gradient(90deg,#FFFFFF08 1px,transparent 1px);background-size:72px 72px;-webkit-mask-image:radial-gradient(ellipse at 50% 50%,#000 20%,transparent 70%);mask-image:radial-gradient(ellipse at 50% 50%,#000 20%,transparent 70%)}
 /* full-screen showreel */
-.fsrl{position:relative;height:230vh}
-.fspin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-.fsclip{position:absolute;inset:0;overflow:hidden;background:#000;clip-path:inset(14% 18% 14% 18% round 28px);will-change:clip-path}
-.fsui{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;padding:32px 40px;opacity:0;transition:opacity .5s}
-.fsrl.full .fsui{opacity:1}
+.fsrl{position:relative;padding:0 20px 180px}
+.fspin{position:relative;max-width:1180px;margin:0 auto}
+.fsclip{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;border-radius:28px;border:1px solid #1E1E21;box-shadow:0 40px 120px #0009}
+.fsui{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;padding:28px 32px}
 .fslabel{display:flex;align-items:center;gap:10px;font-size:13px;color:#E8E6E1}
 .fsbtn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid #FFFFFF33;background:#0B0B0C66;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#F2F0EC;font:500 14px Inter,sans-serif;cursor:pointer;transition:background .3s,border-color .3s}
 .fsbtn:hover{background:#F2F0EC;color:#0B0B0C;border-color:#F2F0EC}
@@ -209,8 +208,10 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
   .fnav{top:70px;gap:6px;padding:5px}
   .fnav a{min-height:40px;padding:0 16px;font-size:13px}
   .fnav .lg{display:none}.fnav .sm{display:inline}
-  .fsrl{height:170vh}
-  .fsui{padding:20px}
+  .fsrl{padding:0 12px 110px}
+  .fsclip{border-radius:20px}
+  .fsui{padding:14px}
+  .fslabel{font-size:12px}
 }
 @media (max-width:860px){.navlinks{display:none !important}.hidesm{display:none !important}.navcta{display:none !important}.burger{display:grid}}
 @media (max-width:1000px){
@@ -367,7 +368,7 @@ video:not([controls])::-webkit-media-controls,video:not([controls])::-webkit-med
 
 <section id="showreel" class="fsrl" aria-label="Showreel">
 <div class="fspin">
-<div class="fsclip" id="fsclip">
+<div class="fsclip scalein" id="fsclip">
 <video id="fsVid" src="./assets/work/showreel.mp4" poster="./assets/work/showreel.jpg" autoplay muted loop playsinline preload="metadata" aria-label="The Edit Society showreel" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></video>
 <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(#0B0B0C66, transparent 28%, transparent 62%, #0B0B0CAA)"></div>
 <div class="fsui">
@@ -1058,15 +1059,6 @@ class Component extends DCLogic {
     ticking = false;
     var vh = window.innerHeight, vw = window.innerWidth, mob = vw < 861;
 
-    // 1) showreel: framed card grows to full screen as you scroll
-    var fs = get('showreel'), clip = get('fsclip');
-    if (fs && clip) {
-      var r = fs.getBoundingClientRect();
-      var p = clamp(-r.top / (vh * (mob ? .45 : .7)) + (mob ? .25 : .15));
-      var e = ease(p), iy = lerp(mob ? 18 : 14, 0, e), ix = lerp(mob ? 6 : 18, 0, e), rad = lerp(28, 0, e);
-      clip.style.clipPath = 'inset(' + iy + '% ' + ix + '% ' + iy + '% ' + ix + '% round ' + rad + 'px)';
-      fs.classList.toggle('full', p > .92);
-    }
 
     // 2) highlight reels shrink into the floating nav pills
     var hl = get('hl'), nav = get('fnav'), L = get('hlL'), R = get('hlR');
